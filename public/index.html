@@ -21,13 +21,13 @@
 
   <main class="container">
     <section class="hero" id="hero">
-      <h1>모든 스토어에서<br>가장 싼 디지털 상품</h1>
-      <p>게임·앱·전자책·영화·음악을 여러 스토어에서 한 번에 비교해요. 해외 가격은 원화로 환산해 보여드려요.</p>
+      <h1>파는 곳을 전부 찾아<br>가장 싼 곳부터</h1>
+      <p>상품 이름을 검색하면 공식 스토어, 앱 마켓, 리셀러, 오픈마켓까지 찾아서 가장 싼 곳을 맨 위에 보여드려요. 판매자, 평점, 거래 건수와 구매 링크도 함께 알려드려요.</p>
     </section>
 
     <form class="search" id="search-form" role="search" autocomplete="off">
       <label class="visually-hidden" for="q">상품 검색</label>
-      <input id="q" name="q" type="search" maxlength="100" placeholder="상품 이름 (예: Hades, Procreate, 해리 포터)" required>
+      <input id="q" name="q" type="search" maxlength="100" placeholder="상품 이름 (예: ChatGPT, Microsoft 365, Hades)" required>
       <button type="submit">검색</button>
     </form>
 
@@ -35,9 +35,10 @@
 
     <div class="suggestions" id="suggestions">
       <span>이런 걸 찾아보세요</span>
+      <button type="button" data-q="ChatGPT">ChatGPT</button>
+      <button type="button" data-q="Microsoft 365">Microsoft 365</button>
       <button type="button" data-q="Hades">Hades</button>
       <button type="button" data-q="Elden Ring">Elden Ring</button>
-      <button type="button" data-q="Stardew Valley">Stardew Valley</button>
       <button type="button" data-q="Procreate">Procreate</button>
       <button type="button" data-q="해리 포터">해리 포터</button>
       <button type="button" data-q="Dune">Dune</button>
@@ -49,26 +50,33 @@
       <div class="toolbar">
         <p class="summary" id="summary" aria-live="polite"></p>
         <div class="controls">
+          <div class="view-switch" role="group" aria-label="보기 방식">
+            <button type="button" id="view-ranking" aria-pressed="true">가격순 목록</button>
+            <button type="button" id="view-groups" aria-pressed="false">상품별 묶기</button>
+          </div>
           <label class="toggle">
             <input type="checkbox" id="exclude-free">
             <span>무료 제외</span>
           </label>
           <label class="visually-hidden" for="sort">정렬</label>
           <select id="sort">
-            <option value="relevance">추천순</option>
             <option value="price">최저가순</option>
-            <option value="discount">할인율순</option>
+            <option value="discount">많이 싼 순</option>
+            <option value="relevance">관련도순</option>
           </select>
         </div>
       </div>
       <ul class="sources" id="sources" aria-label="검색한 스토어"></ul>
+      <p class="reference" id="reference" hidden></p>
+      <div class="free-strip" id="free-strip" hidden></div>
       <ol class="results" id="results"></ol>
     </section>
   </main>
 
   <footer class="footer container">
     <p>가격은 각 스토어 API에서 받아온 값이며 실제 결제 금액(세금·지역 제한·환율)과 다를 수 있어요. 해외 스토어 가격은 환율로 환산한 참고 금액이에요. 구매 전 스토어에서 최종 가격을 꼭 확인하세요.</p>
-    <p>가격 데이터: Steam · CheapShark · Apple · Google Books · IsThereAnyDeal</p>
+    <p>AI 웹 검색 결과는 Claude가 검색 중에 본 페이지에서 가져온 정보예요. "가격 확인됨"은 열어 본 페이지 본문에서 같은 가격 문구를 찾았다는 뜻이고, 평점·거래 건수는 판매 페이지나 리뷰 사이트에 나온 값이에요.</p>
+    <p>가격 데이터: Steam · CheapShark · Apple · Google Books · IsThereAnyDeal · Claude 웹 검색</p>
   </footer>
 </body>
 </html>

@@ -4,6 +4,10 @@ import { createSearchService } from '../server/search.js';
 import { allProviders } from '../server/providers/index.js';
 import { resetStoreNames } from '../server/providers/cheapshark.js';
 import { fixedRates, recordingFetch } from './helpers.js';
+import { fixtureAnthropic } from '../server/demo.js';
+import { loadDirectory } from '../server/directory.js';
+
+const directory = await loadDirectory();
 
 beforeEach(() => resetStoreNames());
 
@@ -13,7 +17,9 @@ function service(options = {}) {
     providers: allProviders,
     fetchJson,
     rateService: fixedRates,
-    env: { ITAD_API_KEY: 'k', GOOGLE_BOOKS_API_KEY: 'k' },
+    env: { ITAD_API_KEY: 'k', GOOGLE_BOOKS_API_KEY: 'k', ANTHROPIC_API_KEY: 'k' },
+    anthropic: fixtureAnthropic(),
+    directory,
     strictMatch: true,
     ...options,
   });
@@ -45,7 +51,7 @@ test('the same game from several stores becomes one result with the cheapest off
 
 test('relevance sort puts the exact title before DLC and bundles', async () => {
   const { svc } = service();
-  const data = await svc.search({ query: 'elden ring', category: 'game' });
+  const data = await svc.search({ query: 'elden ring', category: 'game', sort: 'relevance' });
   assert.equal(data.results[0].title, 'ELDEN RING');
   assert.equal(data.results[1].title, 'ELDEN RING Shadow of the Erdtree');
 });
@@ -87,7 +93,7 @@ test('category "all" searches every enabled provider and reports each status', a
 test('a category only calls providers for that category', async () => {
   const { svc, calls } = service();
   const data = await svc.search({ query: 'procreate', category: 'app' });
-  assert.deepEqual(data.sources.map((s) => s.id), ['appstore']);
+  assert.deepEqual(data.sources.map((s) => s.id), ['appstore', 'aiweb'], 'AI web search joins every category');
   assert.ok(calls.every((c) => c.url.hostname === 'itunes.apple.com'));
 });
 
@@ -158,4 +164,78 @@ test('offers with unsafe links are dropped and unsafe images cleared', async () 
   const [hades] = (await svc.search({ query: 'hades' })).results;
   assert.deepEqual(hades.offers.map((o) => o.store), ['B']);
   assert.equal(hades.image, null);
+});
+
+test('ranking lists every seller of the product from cheapest to most expensive', async () => {
+  const { svc } = service();
+  const { ranking } = await svc.search({ query: 'chatgpt' });
+
+  const prices = ranking.items.map((o) => o.compareKRW);
+  assert.deepEqual(prices, [...prices].sort((a, b) => a - b), 'cheapest first');
+  assert.deepEqual(ranking.items.map((o) => o.rank), ranking.items.map((_, i) => i + 1));
+  assert.equal(ranking.items[0].store, 'Eneba');
+  assert.equal(ranking.items.at(-1).title, 'ChatGPT Pro 월 구독', 'most expensive last');
+
+  // 12개월 이용권은 한 달 가격으로 비교한다.
+  const yearly = ranking.items.find((o) => o.store === 'Bitrefill');
+  assert.equal(yearly.priceKRW, 228 * 1400);
+  assert.equal(yearly.compareKRW, Math.round((228 * 1400) / 12));
+
+  // 공식 판매처 중 가장 싼 가격(OpenAI $20 = ₩28,000)을 기준으로 얼마나 싼지 계산한다.
+  assert.deepEqual(ranking.reference, { kind: 'official', priceKRW: 28000 });
+  const eneba = ranking.items[0];
+  assert.equal(eneba.savingsKRW, 28000 - Math.round(16.49 * 1400));
+  assert.equal(eneba.savingsPercent, Math.round((eneba.savingsKRW / 28000) * 100));
+  assert.equal(ranking.items.find((o) => o.store === 'App Store').savingsKRW, 0);
+
+  // 디렉터리로 판매처 유형을 붙인다.
+  const typeOf = (store) => ranking.items.find((o) => o.store === store).sellerType;
+  assert.equal(typeOf('OpenAI'), 'official');
+  assert.equal(typeOf('App Store'), 'official');
+  assert.equal(typeOf('Eneba'), 'marketplace');
+  assert.equal(typeOf('Bitrefill'), 'authorized');
+  assert.equal(typeOf('쿠팡'), 'store');
+  assert.equal(eneba.seller, 'DemoDigital');
+  assert.equal(eneba.rating.count, 12431);
+  assert.equal(eneba.sales.count, 3210);
+});
+
+test('free downloads are listed apart from the paid ranking', async () => {
+  const { svc } = service();
+  const { ranking } = await svc.search({ query: 'notion', category: 'app' });
+  assert.ok(ranking.free.some((o) => o.title.startsWith('Notion')));
+  assert.ok(ranking.items.every((o) => o.priceKRW > 0));
+});
+
+test('discount sort ranks by how much cheaper than the reference price', async () => {
+  const { svc } = service();
+  const { ranking } = await svc.search({ query: 'chatgpt', sort: 'discount' });
+  const savings = ranking.items.map((o) => o.savingsPercent);
+  assert.deepEqual(savings, [...savings].sort((a, b) => b - a));
+});
+
+test('cheapshark offers get their seller type from the real store, not the redirect link', async () => {
+  const { svc } = service();
+  const { ranking } = await svc.search({ query: 'hades', category: 'game' });
+  const gog = ranking.items.find((o) => o.store === 'GOG' && o.source === 'cheapshark');
+  assert.equal(gog.sellerType, 'official');
+  const humble = ranking.items.find((o) => o.store === 'Humble Store');
+  assert.equal(humble.sellerType, 'authorized');
+});
+
+test('onUpdate reports partial results while slower stores are still searching', async () => {
+  const slow = { id: 'slow', name: 'Slow', categories: ['*'], search: () => new Promise((r) => setTimeout(() => r([]), 30)) };
+  const fast = {
+    id: 'fast', name: 'Fast', categories: ['*'],
+    search: async () => [{ source: 'fast', store: 'A', title: 'Hades', category: 'game', url: 'https://a.example/h', price: { amount: 1000, currency: 'KRW' } }],
+  };
+  const svc = createSearchService({ providers: [fast, slow], fetchJson: async () => ({}), rateService: fixedRates });
+  const updates = [];
+  const final = await svc.search({ query: 'hades' }, (partial) => updates.push(partial));
+
+  assert.equal(updates.length, 1);
+  assert.equal(updates[0].done, false);
+  assert.deepEqual(updates[0].sources.map((s) => s.status), ['ok', 'pending']);
+  assert.equal(updates[0].ranking.items.length, 1);
+  assert.equal(final.done, true);
 });

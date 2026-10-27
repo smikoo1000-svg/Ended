@@ -30,9 +30,22 @@ function rateLimit({ limit = 30, windowMs = 60_000, now = Date.now } = {}) {
   };
 }
 
+function parseSearchParams(query) {
+  const q = typeof query.q === 'string' ? query.q.trim() : '';
+  const category = typeof query.category === 'string' ? query.category : 'all';
+  const sort = typeof query.sort === 'string' ? query.sort : 'price';
+
+  if (!q) return { error: '검색어를 입력해 주세요.' };
+  if (q.length > MAX_QUERY_LENGTH) return { error: `검색어는 ${MAX_QUERY_LENGTH}자까지 입력할 수 있습니다.` };
+  if (!CATEGORY_IDS.has(category)) return { error: '알 수 없는 분류입니다.' };
+  if (!SORTS.includes(sort)) return { error: '알 수 없는 정렬 방식입니다.' };
+  return { query: q, category, sort, excludeFree: query.excludeFree === '1' };
+}
+
 export function createApp({ searchService, directory = null, env = {}, demo = false, rateLimitPerMinute = 30 }) {
   const app = express();
   app.disable('x-powered-by');
+  const limiter = rateLimit({ limit: rateLimitPerMinute });
   if (env.TRUST_PROXY) app.set('trust proxy', env.TRUST_PROXY);
 
   app.use((req, res, next) => {
@@ -67,22 +80,48 @@ export function createApp({ searchService, directory = null, env = {}, demo = fa
     res.json(directory);
   });
 
-  app.get('/api/search', rateLimit({ limit: rateLimitPerMinute }), async (req, res, next) => {
-    const query = typeof req.query.q === 'string' ? req.query.q.trim() : '';
-    const category = typeof req.query.category === 'string' ? req.query.category : 'all';
-    const sort = typeof req.query.sort === 'string' ? req.query.sort : 'relevance';
-
-    if (!query) return res.status(400).json({ error: '검색어를 입력해 주세요.' });
-    if (query.length > MAX_QUERY_LENGTH) return res.status(400).json({ error: `검색어는 ${MAX_QUERY_LENGTH}자까지 입력할 수 있습니다.` });
-    if (!CATEGORY_IDS.has(category)) return res.status(400).json({ error: '알 수 없는 분류입니다.' });
-    if (!SORTS.includes(sort)) return res.status(400).json({ error: '알 수 없는 정렬 방식입니다.' });
-
+  // 모든 스토어 검색이 끝난 뒤 한 번에 응답한다. AI 웹 검색이 켜져 있으면 수십 초 걸릴 수 있다.
+  app.get('/api/search', limiter, async (req, res, next) => {
+    const params = parseSearchParams(req.query);
+    if (params.error) return res.status(400).json({ error: params.error });
     try {
-      const result = await searchService.search({ query, category, sort, excludeFree: req.query.excludeFree === '1' });
+      const result = await searchService.search(params);
       res.set('cache-control', 'no-store');
       res.json({ ...result, demo });
     } catch (error) {
       next(error);
+    }
+  });
+
+  // Server-Sent Events: 스토어 하나가 끝날 때마다 지금까지 모인 결과(update)를, 마지막에 전체 결과(done)를 보낸다.
+  app.get('/api/search/stream', limiter, async (req, res) => {
+    const params = parseSearchParams(req.query);
+    if (params.error) return res.status(400).json({ error: params.error });
+
+    res.writeHead(200, {
+      'content-type': 'text/event-stream; charset=utf-8',
+      'cache-control': 'no-store',
+      connection: 'keep-alive',
+      'x-accel-buffering': 'no',
+    });
+    let closed = false;
+    res.on('close', () => {
+      closed = true;
+    });
+    const send = (event, data) => {
+      if (!closed) res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+    };
+    const heartbeat = setInterval(() => !closed && res.write(': ping\n\n'), 15_000);
+
+    try {
+      const result = await searchService.search(params, (partial) => send('update', { ...partial, demo }));
+      send('done', { ...result, demo });
+    } catch (error) {
+      console.error(error);
+      send('fail', { error: '서버 오류가 발생했습니다.' });
+    } finally {
+      clearInterval(heartbeat);
+      res.end();
     }
   });
 

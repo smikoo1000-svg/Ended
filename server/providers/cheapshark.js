@@ -11,6 +11,14 @@ const FALLBACK_STORES = {
   35: 'DreamGame',
 };
 
+// 판매처 유형(공식/공인/키샵)을 스토어 디렉터리에서 찾기 위한 스토어 주소. 링크는 CheapShark 경유라 따로 둔다.
+const STORE_HOSTS = {
+  1: 'store.steampowered.com', 2: 'gamersgate.com', 3: 'greenmangaming.com', 7: 'gog.com', 8: 'ea.com',
+  11: 'humblebundle.com', 13: 'store.ubisoft.com', 15: 'fanatical.com', 21: 'wingamestore.com', 23: 'gamebillet.com',
+  24: 'voidu.com', 25: 'store.epicgames.com', 27: 'gamesplanet.com', 29: '2game.com', 30: 'indiegala.com',
+  31: 'shop.battle.net', 32: 'allyouplay.com', 33: 'dlgamer.com', 34: 'noctre.com', 35: 'dreamgame.com',
+};
+
 // Steam은 steam provider가 한국 가격으로 따로 조회하므로 미국 가격은 빼는 게 덜 헷갈린다.
 const EXCLUDED_STORE_IDS = new Set(['1']);
 
@@ -54,6 +62,7 @@ export default {
         return {
           source: 'cheapshark',
           store: names[deal.storeID] ?? FALLBACK_STORES[deal.storeID] ?? `스토어 #${deal.storeID}`,
+          storeHost: STORE_HOSTS[deal.storeID] ?? null,
           title: deal.title,
           category: 'game',
           url: `https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID)}`,
@@ -63,6 +72,9 @@ export default {
           region: 'US',
           platform: 'PC',
           isFree: sale === 0,
+          rating: Number(deal.steamRatingCount) > 0
+            ? { value: Number(deal.steamRatingPercent), scale: 100, count: Number(deal.steamRatingCount), label: '스팀 평가' }
+            : null,
         };
       });
   },

@@ -53,6 +53,9 @@ function makeItunesProvider({ id, name, category, store, media, entity }) {
           platform: PLATFORM_BY_KIND[item.kind] ?? null,
           isFree: amount === 0,
           rental: rental !== null ? { amount: rental, currency: item.currency ?? 'KRW' } : null,
+          rating: Number.isFinite(item.averageUserRating) && item.userRatingCount > 0
+            ? { value: Math.round(item.averageUserRating * 10) / 10, scale: 5, count: item.userRatingCount, label: '사용자 평점' }
+            : null,
         }];
       });
     },

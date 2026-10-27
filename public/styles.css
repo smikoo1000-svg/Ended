@@ -356,3 +356,98 @@ body.has-query .search { margin-top: 20px; }
   .search button { padding: 10px 16px; }
   .hero { padding-top: 32px; }
 }
+
+/* ── 가격순 목록 ── */
+.source.pending { color: var(--warn); }
+.source.pending::before { animation: pulse 1s infinite ease-in-out; }
+@keyframes pulse { 50% { opacity: 0.2; } }
+@media (prefers-reduced-motion: reduce) { .source.pending::before { animation: none; } }
+
+.view-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.view-switch button {
+  border: 0;
+  padding: 6px 10px;
+  background: var(--surface);
+  font-size: 14px;
+  cursor: pointer;
+}
+.view-switch button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.view-switch button + button { border-left: 1px solid var(--border); }
+.controls { flex-wrap: wrap; }
+
+.reference { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+.free-strip {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.free-strip a { color: var(--good); }
+
+.results.ranking { gap: 0; border-top: 1px solid var(--border); }
+.rank-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: start;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.rank-row:first-child .rank-no { background: var(--accent); color: var(--accent-ink); }
+.rank-no {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.rank-main { display: grid; gap: 4px; min-width: 0; }
+.rank-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.rank-price .period { color: var(--muted); font-size: 14px; font-weight: 600; margin-left: -4px; }
+.rank-price .monthly { font-size: 13px; color: var(--muted); }
+.savings { margin: 0; color: var(--good); font-size: 14px; font-weight: 700; }
+.rank-title { margin: 2px 0 0; font-size: 16px; line-height: 1.35; overflow-wrap: anywhere; }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 4px 18px;
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+.facts div { display: flex; gap: 8px; min-width: 0; }
+.facts dt { flex: none; width: 4.2em; color: var(--muted); }
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.missing { color: var(--muted); }
+.fact-source { color: var(--muted); font-size: 12px; }
+
+.seller-type {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: 1px;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.seller-type.good { color: var(--good); }
+.seller-type.warn { color: var(--warn); background: var(--warn-bg); }
+.seller-type.bad { color: var(--bad); }
+
+.rank-meta { margin: 2px 0 0; font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.rank-meta .verified { color: var(--good); }
+.rank-meta .unverified { color: var(--warn); }
+.rank-row .buy { align-self: center; white-space: nowrap; }
+
+@media (max-width: 560px) {
+  .rank-row { grid-template-columns: 34px minmax(0, 1fr); padding: 14px 0; }
+  .rank-no { width: 28px; height: 28px; font-size: 14px; }
+  .rank-row .buy { grid-column: 2; justify-self: start; margin-top: 6px; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+}

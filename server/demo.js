@@ -23,3 +23,14 @@ export async function fixtureFetchJson(url) {
   if (!name) throw new Error(`no fixture for ${url}`);
   return JSON.parse(await readFile(path.join(FIXTURES_DIR, name), 'utf8'));
 }
+
+// AI 웹 검색 데모: Claude API 대신 저장해 둔 응답(fixtures/claude-websearch.json)을 돌려준다.
+export function fixtureAnthropic() {
+  return {
+    beta: {
+      messages: {
+        create: async () => JSON.parse(await readFile(path.join(FIXTURES_DIR, 'claude-websearch.json'), 'utf8')),
+      },
+    },
+  };
+}
