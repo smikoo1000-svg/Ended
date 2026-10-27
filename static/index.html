@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>최저가 디지털 상품</title>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#6b7280; --line:#e5e7eb; --accent:#2563eb; --good:#16a34a; --card:#f9fafb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111418; --fg:#e8eaed; --muted:#9aa0a6; --line:#2a2f36; --accent:#60a5fa; --good:#4ade80; --card:#1a1e24; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,"Noto Sans KR",sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-size:1.4rem; margin:0 0 16px; }
+  form { display:flex; gap:8px; }
+  input[type=search] { flex:1; padding:12px 14px; font-size:1rem; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--fg); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 20px; }
+  .chip { padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:none; color:var(--fg); cursor:pointer; font-size:.9rem; }
+  .chip[aria-pressed=true] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .item { display:block; width:100%; text-align:left; padding:14px; margin-bottom:8px; border:1px solid var(--line); border-radius:10px; background:var(--card); color:inherit; cursor:pointer; font:inherit; }
+  .row { display:flex; justify-content:space-between; gap:12px; align-items:baseline; }
+  .price { font-weight:700; color:var(--good); white-space:nowrap; }
+  .meta { color:var(--muted); font-size:.85rem; }
+  .offers { margin-top:10px; border-top:1px solid var(--line); padding-top:8px; }
+  .offers a { color:var(--accent); text-decoration:none; }
+  .offers .row { padding:4px 0; }
+  .empty { color:var(--muted); padding:32px 0; text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <h1>최저가 디지털 상품</h1>
+  <form id="f"><input type="search" id="q" placeholder="게임, 소프트웨어, 전자책, 구독…" autofocus aria-label="검색"></form>
+  <div class="chips" id="chips"></div>
+  <div id="list"></div>
+</main>
+<script>
+const won = n => n.toLocaleString("ko-KR") + "원";
+const esc = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https?:\/\//.test(u) ? u : "#";
+let category = "";
+
+async function load() {
+  const p = new URLSearchParams({ q: q.value, category });
+  const items = await (await fetch("/api/search?" + p)).json();
+  list.innerHTML = items.length ? "" : '<div class="empty">검색 결과가 없습니다</div>';
+  for (const it of items) {
+    const b = document.createElement("button");
+    b.className = "item";
+    b.innerHTML = `<div class="row"><strong>${esc(it.name)}</strong><span class="price">${won(it.best_price)}</span></div>
+      <div class="meta">${esc(it.best_store)} 최저가 · ${it.store_count}개 스토어 비교</div>`;
+    b.onclick = () => toggle(b, it.id);
+    list.append(b);
+  }
+}
+
+async function toggle(btn, id) {
+  const old = btn.querySelector(".offers");
+  if (old) return old.remove();
+  const d = await (await fetch("/api/products/" + id)).json();
+  const div = document.createElement("div");
+  div.className = "offers";
+  div.innerHTML = d.offers.map((o, i) => `<div class="row">
+    <a href="${safeUrl(o.url)}" target="_blank" rel="noopener nofollow" onclick="event.stopPropagation()">${esc(o.store)}</a>
+    <span class="${i ? "" : "price"}">${won(o.price)}</span></div>
+    <div class="meta">갱신 ${new Date(o.updated_at * 1000).toLocaleDateString("ko-KR")}</div>`).join("");
+  btn.append(div);
+}
+
+f.onsubmit = e => { e.preventDefault(); load(); };
+q.oninput = (() => { let t; return () => { clearTimeout(t); t = setTimeout(load, 250); }; })();
+
+(async () => {
+  const cats = [{ id: "", label: "전체" }, ...await (await fetch("/api/categories")).json()];
+  for (const c of cats) {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = c.label; b.setAttribute("aria-pressed", c.id === "");
+    b.onclick = () => { category = c.id; chips.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b)); load(); };
+    chips.append(b);
+  }
+  load();
+})();
+</script>
+</body>
+</html>
