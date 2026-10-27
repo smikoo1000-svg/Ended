@@ -1,0 +1,14 @@
+{
+  "result": "success",
+  "provider": "https://www.exchangerate-api.com",
+  "time_last_update_unix": 1761523201,
+  "base_code": "USD",
+  "rates": {
+    "USD": 1,
+    "KRW": 1400,
+    "EUR": 0.875,
+    "GBP": 0.75,
+    "JPY": 150,
+    "CAD": 1.4
+  }
+}

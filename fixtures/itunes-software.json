@@ -1,0 +1,85 @@
+{
+  "resultCount": 5,
+  "results": [
+    {
+      "wrapperType": "software",
+      "kind": "software",
+      "trackId": 425073498,
+      "trackName": "Procreate",
+      "sellerName": "Savage Interactive Pty Ltd",
+      "artistName": "Savage Interactive Pty Ltd",
+      "price": 19000.0,
+      "formattedPrice": "₩19,000",
+      "currency": "KRW",
+      "trackViewUrl": "https://apps.apple.com/kr/app/id425073498?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/425073498/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/425073498/100x100bb.jpg",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/425073498/512x512bb.jpg",
+      "genres": [
+        "Productivity"
+      ]
+    },
+    {
+      "wrapperType": "software",
+      "kind": "software",
+      "trackId": 1232780281,
+      "trackName": "Notion: Notes, Tasks, AI",
+      "sellerName": "Notion Labs, Incorporated",
+      "artistName": "Notion Labs, Incorporated",
+      "price": 0.0,
+      "formattedPrice": "무료",
+      "currency": "KRW",
+      "trackViewUrl": "https://apps.apple.com/kr/app/id1232780281?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1232780281/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1232780281/100x100bb.jpg",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1232780281/512x512bb.jpg",
+      "genres": [
+        "Productivity"
+      ]
+    },
+    {
+      "wrapperType": "software",
+      "kind": "software",
+      "trackId": 1444383602,
+      "trackName": "Goodnotes 6",
+      "sellerName": "Goodnotes Limited",
+      "artistName": "Goodnotes Limited",
+      "price": 0.0,
+      "formattedPrice": "무료",
+      "currency": "KRW",
+      "trackViewUrl": "https://apps.apple.com/kr/app/id1444383602?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1444383602/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1444383602/100x100bb.jpg",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1444383602/512x512bb.jpg",
+      "genres": [
+        "Productivity"
+      ]
+    },
+    {
+      "wrapperType": "software",
+      "kind": "mac-software",
+      "trackId": 904280696,
+      "trackName": "Things 3",
+      "sellerName": "Cultured Code GmbH & Co. KG",
+      "artistName": "Cultured Code GmbH & Co. KG",
+      "price": 79000.0,
+      "formattedPrice": "₩79,000",
+      "currency": "KRW",
+      "trackViewUrl": "https://apps.apple.com/kr/app/id904280696?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/904280696/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/904280696/100x100bb.jpg",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/904280696/512x512bb.jpg",
+      "genres": [
+        "Productivity"
+      ]
+    },
+    {
+      "wrapperType": "software",
+      "kind": "software",
+      "trackId": 1,
+      "trackName": "Unpriced Sample App",
+      "currency": "KRW",
+      "trackViewUrl": "https://apps.apple.com/kr/app/id1"
+    }
+  ]
+}

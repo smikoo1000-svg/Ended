@@ -1,0 +1,26 @@
+{
+  "resultCount": 2,
+  "results": [
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistName": "Hans Zimmer",
+      "collectionId": 1580000001,
+      "collectionName": "Dune (Original Motion Picture Soundtrack)",
+      "collectionPrice": 12900.0,
+      "currency": "KRW",
+      "collectionViewUrl": "https://music.apple.com/kr/album/id1580000001?uo=4",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1580000001/100x100bb.jpg"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistName": "Unavailable",
+      "collectionId": 1580000002,
+      "collectionName": "Not For Sale",
+      "collectionPrice": -1,
+      "currency": "KRW",
+      "collectionViewUrl": "https://music.apple.com/kr/album/id1580000002"
+    }
+  ]
+}

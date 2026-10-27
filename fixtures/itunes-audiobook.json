@@ -1,0 +1,17 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "wrapperType": "audiobook",
+      "artistId": 2,
+      "collectionId": 1440000001,
+      "artistName": "Frank Herbert",
+      "collectionName": "Dune",
+      "collectionPrice": 25000.0,
+      "currency": "KRW",
+      "collectionViewUrl": "https://books.apple.com/kr/audiobook/id1440000001?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1440000001/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1440000001/100x100bb.jpg"
+    }
+  ]
+}

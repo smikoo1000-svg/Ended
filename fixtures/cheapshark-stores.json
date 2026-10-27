@@ -1,0 +1,8 @@
+[
+  { "storeID": "1", "storeName": "Steam", "isActive": 1, "images": { "banner": "/img/stores/banners/0.png", "logo": "/img/stores/logos/0.png", "icon": "/img/stores/icons/0.png" } },
+  { "storeID": "3", "storeName": "GreenManGaming", "isActive": 1, "images": { "banner": "/img/stores/banners/2.png", "logo": "/img/stores/logos/2.png", "icon": "/img/stores/icons/2.png" } },
+  { "storeID": "7", "storeName": "GOG", "isActive": 1, "images": { "banner": "/img/stores/banners/6.png", "logo": "/img/stores/logos/6.png", "icon": "/img/stores/icons/6.png" } },
+  { "storeID": "11", "storeName": "Humble Store", "isActive": 1, "images": { "banner": "/img/stores/banners/10.png", "logo": "/img/stores/logos/10.png", "icon": "/img/stores/icons/10.png" } },
+  { "storeID": "15", "storeName": "Fanatical", "isActive": 1, "images": { "banner": "/img/stores/banners/14.png", "logo": "/img/stores/logos/14.png", "icon": "/img/stores/icons/14.png" } },
+  { "storeID": "25", "storeName": "Epic Games Store", "isActive": 1, "images": { "banner": "/img/stores/banners/24.png", "logo": "/img/stores/logos/24.png", "icon": "/img/stores/icons/24.png" } }
+]

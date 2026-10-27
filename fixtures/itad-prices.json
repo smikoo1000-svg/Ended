@@ -1,0 +1,145 @@
+[
+  {
+    "id": "018d937f-07b4-71a7-8f43-sample00001",
+    "historyLow": {
+      "all": {
+        "amount": 6750,
+        "amountInt": 675000,
+        "currency": "KRW"
+      },
+      "y1": {
+        "amount": 10800,
+        "amountInt": 1080000,
+        "currency": "KRW"
+      },
+      "m3": {
+        "amount": 10800,
+        "amountInt": 1080000,
+        "currency": "KRW"
+      }
+    },
+    "deals": [
+      {
+        "shop": {
+          "id": 61,
+          "name": "Steam"
+        },
+        "price": {
+          "amount": 10800,
+          "amountInt": 1080000,
+          "currency": "KRW"
+        },
+        "regular": {
+          "amount": 27000,
+          "amountInt": 2700000,
+          "currency": "KRW"
+        },
+        "cut": 60,
+        "voucher": null,
+        "storeLow": {
+          "amount": 6750,
+          "amountInt": 675000,
+          "currency": "KRW"
+        },
+        "flag": null,
+        "drm": [
+          {
+            "id": 61,
+            "name": "Steam"
+          }
+        ],
+        "platforms": [
+          {
+            "id": 1,
+            "name": "Windows"
+          },
+          {
+            "id": 2,
+            "name": "Mac"
+          }
+        ],
+        "timestamp": "2026-10-20T17:00:00+02:00",
+        "expiry": null,
+        "url": "https://itad.link/sample-hades-steam/"
+      },
+      {
+        "shop": {
+          "id": 35,
+          "name": "GOG"
+        },
+        "price": {
+          "amount": 8.99,
+          "amountInt": 899,
+          "currency": "USD"
+        },
+        "regular": {
+          "amount": 24.99,
+          "amountInt": 2499,
+          "currency": "USD"
+        },
+        "cut": 64,
+        "voucher": null,
+        "storeLow": {
+          "amount": 7.49,
+          "amountInt": 749,
+          "currency": "USD"
+        },
+        "flag": null,
+        "drm": [],
+        "platforms": [
+          {
+            "id": 1,
+            "name": "Windows"
+          }
+        ],
+        "timestamp": "2026-10-20T17:00:00+02:00",
+        "expiry": null,
+        "url": "https://itad.link/sample-hades-gog/"
+      },
+      {
+        "shop": {
+          "id": 6,
+          "name": "Fanatical"
+        },
+        "price": {
+          "amount": 8.24,
+          "amountInt": 824,
+          "currency": "USD"
+        },
+        "regular": {
+          "amount": 24.99,
+          "amountInt": 2499,
+          "currency": "USD"
+        },
+        "cut": 67,
+        "voucher": "SAVE10",
+        "storeLow": null,
+        "flag": "S",
+        "drm": [
+          {
+            "id": 61,
+            "name": "Steam"
+          }
+        ],
+        "platforms": [
+          {
+            "id": 1,
+            "name": "Windows"
+          }
+        ],
+        "timestamp": "2026-10-20T17:00:00+02:00",
+        "expiry": "2026-11-01T00:00:00+00:00",
+        "url": "https://itad.link/sample-hades-fanatical/"
+      }
+    ]
+  },
+  {
+    "id": "018d937f-07b4-71a7-8f43-sample00002",
+    "historyLow": {
+      "all": null,
+      "y1": null,
+      "m3": null
+    },
+    "deals": []
+  }
+]

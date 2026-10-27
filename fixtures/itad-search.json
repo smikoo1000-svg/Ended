@@ -1,0 +1,21 @@
+[
+  {
+    "id": "018d937f-07b4-71a7-8f43-sample00001",
+    "slug": "hades",
+    "title": "Hades",
+    "type": "game",
+    "mature": false,
+    "assets": {
+      "boxart": "https://assets.isthereanydeal.com/sample/hades/boxart.jpg",
+      "banner300": "https://assets.isthereanydeal.com/sample/hades/banner300.jpg"
+    }
+  },
+  {
+    "id": "018d937f-07b4-71a7-8f43-sample00002",
+    "slug": "hades-ii",
+    "title": "Hades II",
+    "type": "game",
+    "mature": false,
+    "assets": {}
+  }
+]

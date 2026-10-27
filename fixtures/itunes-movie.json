@@ -1,0 +1,32 @@
+{
+  "resultCount": 2,
+  "results": [
+    {
+      "wrapperType": "track",
+      "kind": "feature-movie",
+      "trackId": 1720000001,
+      "artistName": "Denis Villeneuve",
+      "trackName": "듄: 파트 2",
+      "trackPrice": 11000.0,
+      "trackRentalPrice": 5500.0,
+      "collectionPrice": 11000.0,
+      "currency": "KRW",
+      "trackViewUrl": "https://tv.apple.com/kr/movie/id1720000001?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1720000001/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1720000001/100x100bb.jpg"
+    },
+    {
+      "wrapperType": "track",
+      "kind": "feature-movie",
+      "trackId": 1720000002,
+      "artistName": "Denis Villeneuve",
+      "trackName": "Dune",
+      "trackPrice": 8800.0,
+      "trackRentalPrice": 3300.0,
+      "collectionPrice": 8800.0,
+      "currency": "KRW",
+      "trackViewUrl": "https://tv.apple.com/kr/movie/id1720000002?uo=4",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1720000002/100x100bb.jpg"
+    }
+  ]
+}

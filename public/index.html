@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ended · 디지털 상품 최저가 검색</title>
+  <meta name="description" content="게임, 앱, 전자책, 영화, 음악을 여러 스토어에서 한 번에 검색해 가장 싼 가격을 보여드려요.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Ended 홈">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-name">Ended</span>
+      <span class="brand-tag">디지털 최저가</span>
+    </a>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="hero">
+      <h1>모든 스토어에서<br>가장 싼 디지털 상품</h1>
+      <p>게임·앱·전자책·영화·음악을 여러 스토어에서 한 번에 비교해요. 해외 가격은 원화로 환산해 보여드려요.</p>
+    </section>
+
+    <form class="search" id="search-form" role="search" autocomplete="off">
+      <label class="visually-hidden" for="q">상품 검색</label>
+      <input id="q" name="q" type="search" maxlength="100" placeholder="상품 이름 (예: Hades, Procreate, 해리 포터)" required>
+      <button type="submit">검색</button>
+    </form>
+
+    <div class="chips" id="categories" role="radiogroup" aria-label="분류"></div>
+
+    <div class="suggestions" id="suggestions">
+      <span>이런 걸 찾아보세요</span>
+      <button type="button" data-q="Hades">Hades</button>
+      <button type="button" data-q="Elden Ring">Elden Ring</button>
+      <button type="button" data-q="Stardew Valley">Stardew Valley</button>
+      <button type="button" data-q="Procreate">Procreate</button>
+      <button type="button" data-q="해리 포터">해리 포터</button>
+      <button type="button" data-q="Dune">Dune</button>
+    </div>
+
+    <div class="notices" id="notices"></div>
+
+    <section class="results-area" id="results-area" hidden>
+      <div class="toolbar">
+        <p class="summary" id="summary" aria-live="polite"></p>
+        <div class="controls">
+          <label class="toggle">
+            <input type="checkbox" id="exclude-free">
+            <span>무료 제외</span>
+          </label>
+          <label class="visually-hidden" for="sort">정렬</label>
+          <select id="sort">
+            <option value="relevance">추천순</option>
+            <option value="price">최저가순</option>
+            <option value="discount">할인율순</option>
+          </select>
+        </div>
+      </div>
+      <ul class="sources" id="sources" aria-label="검색한 스토어"></ul>
+      <ol class="results" id="results"></ol>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>가격은 각 스토어 API에서 받아온 값이며 실제 결제 금액(세금·지역 제한·환율)과 다를 수 있어요. 해외 스토어 가격은 환율로 환산한 참고 금액이에요. 구매 전 스토어에서 최종 가격을 꼭 확인하세요.</p>
+    <p>가격 데이터: Steam · CheapShark · Apple · Google Books · IsThereAnyDeal</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 5,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "sampleHP1",
+      "volumeInfo": {
+        "title": "해리 포터와 마법사의 돌",
+        "authors": [
+          "J.K. 롤링"
+        ],
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=sampleHP1&printsec=frontcover&img=1&zoom=5",
+          "thumbnail": "http://books.google.com/books/content?id=sampleHP1&printsec=frontcover&img=1&zoom=1"
+        },
+        "infoLink": "http://books.google.co.kr/books?id=sampleHP1",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=sampleHP1"
+      },
+      "saleInfo": {
+        "country": "KR",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "retailPrice": {
+          "amount": 8820,
+          "currencyCode": "KRW"
+        },
+        "listPrice": {
+          "amount": 9800,
+          "currencyCode": "KRW"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=sampleHP1&rdid=book-sampleHP1&rdot=1&source=gbs_api"
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "sampleDune",
+      "volumeInfo": {
+        "title": "Dune",
+        "authors": [
+          "Frank Herbert"
+        ],
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=sampleDune&printsec=frontcover&img=1&zoom=5",
+          "thumbnail": "http://books.google.com/books/content?id=sampleDune&printsec=frontcover&img=1&zoom=1"
+        },
+        "infoLink": "http://books.google.co.kr/books?id=sampleDune",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=sampleDune"
+      },
+      "saleInfo": {
+        "country": "KR",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "retailPrice": {
+          "amount": 11900,
+          "currencyCode": "KRW"
+        },
+        "listPrice": {
+          "amount": 12500,
+          "currencyCode": "KRW"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=sampleDune&rdid=book-sampleDune&rdot=1&source=gbs_api"
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "sampleAlice",
+      "volumeInfo": {
+        "title": "Alice's Adventures in Wonderland",
+        "authors": [
+          "Lewis Carroll"
+        ],
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=sampleAlice&printsec=frontcover&img=1&zoom=5",
+          "thumbnail": "http://books.google.com/books/content?id=sampleAlice&printsec=frontcover&img=1&zoom=1"
+        },
+        "infoLink": "http://books.google.co.kr/books?id=sampleAlice",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=sampleAlice"
+      },
+      "saleInfo": {
+        "country": "KR",
+        "saleability": "FREE",
+        "isEbook": true,
+        "buyLink": "https://play.google.com/store/books/details?id=sampleAlice&rdid=book-sampleAlice&rdot=1&source=gbs_api"
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "sampleAtomic",
+      "volumeInfo": {
+        "title": "Atomic Habits",
+        "authors": [
+          "James Clear"
+        ],
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=sampleAtomic&printsec=frontcover&img=1&zoom=5",
+          "thumbnail": "http://books.google.com/books/content?id=sampleAtomic&printsec=frontcover&img=1&zoom=1"
+        },
+        "infoLink": "http://books.google.co.kr/books?id=sampleAtomic",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=sampleAtomic",
+        "subtitle": "An Easy & Proven Way to Build Good Habits & Break Bad Ones"
+      },
+      "saleInfo": {
+        "country": "KR",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "retailPrice": {
+          "amount": 17500,
+          "currencyCode": "KRW"
+        },
+        "listPrice": {
+          "amount": 17500,
+          "currencyCode": "KRW"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=sampleAtomic&rdid=book-sampleAtomic&rdot=1&source=gbs_api"
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "sampleNFS",
+      "volumeInfo": {
+        "title": "Not For Sale Book",
+        "authors": [
+          "Nobody"
+        ],
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=sampleNFS&printsec=frontcover&img=1&zoom=5",
+          "thumbnail": "http://books.google.com/books/content?id=sampleNFS&printsec=frontcover&img=1&zoom=1"
+        },
+        "infoLink": "http://books.google.co.kr/books?id=sampleNFS",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=sampleNFS"
+      },
+      "saleInfo": {
+        "country": "KR",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": true
+      }
+    }
+  ]
+}

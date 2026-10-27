@@ -1,0 +1,57 @@
+{
+  "resultCount": 4,
+  "results": [
+    {
+      "wrapperType": "ebook",
+      "kind": "ebook",
+      "trackId": 1095436300,
+      "trackName": "해리 포터와 마법사의 돌",
+      "artistName": "J.K. 롤링",
+      "price": 9800.0,
+      "formattedPrice": "₩9,800",
+      "currency": "KRW",
+      "trackViewUrl": "https://books.apple.com/kr/book/id1095436300?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436300/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436300/100x100bb.jpg"
+    },
+    {
+      "wrapperType": "ebook",
+      "kind": "ebook",
+      "trackId": 1095436301,
+      "trackName": "해리 포터와 비밀의 방",
+      "artistName": "J.K. 롤링",
+      "price": 9800.0,
+      "formattedPrice": "₩9,800",
+      "currency": "KRW",
+      "trackViewUrl": "https://books.apple.com/kr/book/id1095436301?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436301/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436301/100x100bb.jpg"
+    },
+    {
+      "wrapperType": "ebook",
+      "kind": "ebook",
+      "trackId": 1095436302,
+      "trackName": "Dune",
+      "artistName": "Frank Herbert",
+      "price": 12500.0,
+      "formattedPrice": "₩12,500",
+      "currency": "KRW",
+      "trackViewUrl": "https://books.apple.com/kr/book/id1095436302?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436302/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436302/100x100bb.jpg"
+    },
+    {
+      "wrapperType": "ebook",
+      "kind": "ebook",
+      "trackId": 1095436303,
+      "trackName": "Atomic Habits",
+      "artistName": "James Clear",
+      "price": 16900.0,
+      "formattedPrice": "₩16,900",
+      "currency": "KRW",
+      "trackViewUrl": "https://books.apple.com/kr/book/id1095436303?uo=4",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436303/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple/v4/sample/1095436303/100x100bb.jpg"
+    }
+  ]
+}
