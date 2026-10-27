@@ -1,0 +1,163 @@
+# 형식: 이름 | URL | 지역 | 유형 | 메모
+# 유형: official(공식) authorized(공인 판매처) keyshop(비공인 키샵) marketplace(개인 거래 마켓) compare(가격 비교) community(핫딜 커뮤니티) free(무료) store(일반 판매처)
+
+## game-official | 게임 · 공식 스토어/런처
+Steam | https://store.steampowered.com | GLOBAL | official | PC 게임 최대 스토어, 한국 가격
+Epic Games Store | https://store.epicgames.com | GLOBAL | official | 매주 무료 게임
+GOG | https://www.gog.com | GLOBAL | official | DRM-free
+EA app | https://www.ea.com/ea-app | GLOBAL | official |
+Ubisoft Store | https://store.ubisoft.com | GLOBAL | official |
+Battle.net | https://shop.battle.net | GLOBAL | official | 블리자드
+Xbox 스토어 | https://www.xbox.com/games/store | GLOBAL | official | PC·콘솔
+Rockstar Store | https://store.rockstargames.com | GLOBAL | official |
+Riot Games | https://www.riotgames.com | GLOBAL | official |
+Minecraft | https://www.minecraft.net | GLOBAL | official |
+Roblox | https://www.roblox.com | GLOBAL | official | 로벅스
+itch.io | https://itch.io | GLOBAL | official | 인디 게임·번들
+Game Jolt | https://gamejolt.com | GLOBAL | official | 인디 게임
+Prime Gaming | https://gaming.amazon.com | GLOBAL | official | 프라임 회원 무료 게임
+Square Enix Store | https://store.na.square-enix-games.com | US | official |
+Gameforge | https://gameforge.com | EU | official |
+Wargaming | https://wargaming.net | GLOBAL | official |
+Big Fish Games | https://www.bigfishgames.com | GLOBAL | official | 캐주얼 게임
+Legacy Games | https://legacygames.com | US | official | 캐주얼 게임
+ZOOM Platform | https://www.zoom-platform.com | GLOBAL | official | DRM-free
+Meta Quest Store | https://www.meta.com/experiences/ | GLOBAL | official | VR
+VIVEPORT | https://www.viveport.com | GLOBAL | official | VR
+PlayStation Store | https://store.playstation.com | GLOBAL | official |
+Nintendo eShop (미국) | https://www.nintendo.com/us/store/ | US | official |
+마이 닌텐도 스토어 (한국) | https://store.nintendo.co.kr | KR | official |
+マイニンテンドーストア (일본) | https://store-jp.nintendo.com | JP | official |
+Google Play 게임 | https://play.google.com/store/games | GLOBAL | official |
+STOVE (스마일게이트) | https://www.onstove.com | KR | official | 인디 게임 포함
+넥슨 | https://www.nexon.com | KR | official |
+PLAYNC (엔씨소프트) | https://www.plaync.com | KR | official |
+넷마블 | https://www.netmarble.com | KR | official |
+카카오게임즈 | https://www.kakaogames.com | KR | official |
+한게임 | https://www.hangame.com | KR | official |
+WeGame | https://www.wegame.com.cn | CN | official | 텐센트
+DMM GAMES | https://games.dmm.com | JP | official |
+DLsite | https://www.dlsite.com | JP | official | 동인 게임·만화 (성인물 포함)
+Board Game Arena | https://boardgamearena.com | GLOBAL | official | 온라인 보드게임
+Chess.com | https://www.chess.com | GLOBAL | official |
+Roll20 | https://roll20.net | GLOBAL | official | TRPG
+D&D Beyond | https://www.dndbeyond.com | GLOBAL | official | TRPG
+Foundry VTT | https://foundryvtt.com | GLOBAL | official | TRPG
+Nexus Mods | https://www.nexusmods.com | GLOBAL | free | 게임 모드
+CurseForge | https://www.curseforge.com | GLOBAL | free | 게임 모드
+Mod DB | https://www.moddb.com | GLOBAL | free | 게임 모드
+
+## game-sub | 게임 · 구독/클라우드 게임
+Xbox Game Pass | https://www.xbox.com/xbox-game-pass | GLOBAL | official |
+PlayStation Plus | https://www.playstation.com/ps-plus/ | GLOBAL | official |
+Nintendo Switch Online | https://www.nintendo.com/us/switch/online/ | GLOBAL | official |
+Apple Arcade | https://www.apple.com/apple-arcade/ | GLOBAL | official |
+Ubisoft+ | https://www.ubisoft.com/ubisoft-plus | GLOBAL | official |
+EA Play | https://www.ea.com/ea-play | GLOBAL | official |
+GeForce NOW | https://www.nvidia.com/geforce-now/ | GLOBAL | official | 클라우드 게임
+Boosteroid | https://boosteroid.com | GLOBAL | official | 클라우드 게임
+Shadow | https://shadow.tech | EU | official | 클라우드 PC
+Antstream Arcade | https://www.antstream.com | GLOBAL | official | 레트로 게임 구독
+Humble Choice | https://www.humblebundle.com/membership | GLOBAL | official | 월간 게임 구독
+
+## game-authorized | 게임 · 공인 리셀러 (퍼블리셔 정식 키)
+Humble Bundle | https://www.humblebundle.com | GLOBAL | authorized | 번들·기부
+Fanatical | https://www.fanatical.com | GLOBAL | authorized |
+Green Man Gaming | https://www.greenmangaming.com | GLOBAL | authorized |
+GamersGate | https://www.gamersgate.com | GLOBAL | authorized |
+Gamesplanet | https://www.gamesplanet.com | EU | authorized | 미국·영국·독일·프랑스 지역 스토어
+WinGameStore | https://www.wingamestore.com | US | authorized |
+MacGameStore | https://www.macgamestore.com | US | authorized | Mac 게임
+GameBillet | https://www.gamebillet.com | GLOBAL | authorized |
+DLGamer | https://www.dlgamer.com | EU | authorized |
+IndieGala | https://www.indiegala.com | GLOBAL | authorized |
+2Game | https://2game.com | GLOBAL | authorized |
+Nuuvem | https://www.nuuvem.com | BR | authorized | 남미 가격
+Voidu | https://www.voidu.com | EU | authorized |
+Noctre | https://www.noctre.com | EU | authorized |
+DreamGame | https://www.dreamgame.com | EU | authorized |
+AllYouPlay | https://www.allyouplay.com | EU | authorized |
+JoyBuggy | https://www.joybuggy.com | GLOBAL | authorized |
+다이렉트 게임즈 | https://directg.net | KR | authorized | 국내 정식 유통 PC 게임 스토어
+Sonkwo (杉果) | https://www.sonkwo.com | CN | authorized |
+Newegg | https://www.newegg.com | US | authorized | 디지털 게임 코드
+GameStop | https://www.gamestop.com | US | authorized |
+Best Buy | https://www.bestbuy.com | US | authorized |
+Play-Asia | https://www.play-asia.com | SEA | authorized | 아시아 디지털 코드
+ShopTo | https://www.shopto.net | UK | authorized |
+GAME | https://www.game.co.uk | UK | authorized |
+The Game Collection | https://www.thegamecollection.net | UK | authorized |
+Muve | https://muve.pl | PL | authorized |
+Micromania | https://www.micromania.fr | FR | authorized |
+MediaMarkt | https://www.mediamarkt.de | DE | authorized | 디지털 코드 판매
+EB Games | https://www.ebgames.com.au | AU | authorized |
+JB Hi-Fi | https://www.jbhifi.com.au | AU | authorized |
+Buka | https://buka.ru | RU | authorized |
+
+## game-keyshop | 게임 · 키샵 (비공인 리셀러)
+Instant Gaming | https://www.instant-gaming.com | EU | keyshop | 직접 판매형 키샵
+Loaded (구 CDKeys) | https://www.loaded.com | UK | keyshop | CDKeys가 Loaded로 이름 변경
+HRK Game | https://www.hrkgame.com | EU | keyshop |
+MMOGA | https://www.mmoga.com | DE | keyshop |
+CJS CDKeys | https://www.cjs-cdkeys.com | UK | keyshop |
+Gamers-Outlet | https://www.gamers-outlet.net | EU | keyshop |
+Electronic First | https://www.electronicfirst.com | UK | keyshop |
+365games | https://www.365games.co.uk | UK | keyshop |
+LDShop | https://www.ldshop.gg | GLOBAL | keyshop | 키·충전
+SteamBuy | https://steambuy.com | RU | keyshop |
+Zaka-zaka | https://zaka-zaka.com | RU | keyshop |
+GabeStore | https://gabestore.ru | RU | keyshop |
+SteamPay | https://steampay.com | RU | keyshop |
+Kupikod | https://kupikod.com | RU | keyshop | 스팀 충전
+ByNoGame | https://www.bynogame.com | TR | keyshop | 터키 E-pin·키
+Oyunfor | https://www.oyunfor.com | TR | keyshop | 터키 E-pin·키
+Gamesultan | https://www.gamesultan.com | TR | keyshop | 터키 E-pin
+
+## game-marketplace | 게임 · 마켓플레이스 (개인 판매자, 위험 높음)
+G2A | https://www.g2a.com | GLOBAL | marketplace |
+Kinguin | https://www.kinguin.net | GLOBAL | marketplace |
+Eneba | https://www.eneba.com | GLOBAL | marketplace |
+GAMIVO | https://www.gamivo.com | GLOBAL | marketplace |
+K4G | https://k4g.com | GLOBAL | marketplace |
+Driffle | https://driffle.com | GLOBAL | marketplace |
+G2Play | https://www.g2play.net | GLOBAL | marketplace |
+Difmark | https://www.difmark.com | GLOBAL | marketplace |
+Gameseal | https://www.gameseal.com | GLOBAL | marketplace |
+Gameflip | https://gameflip.com | US | marketplace | 키·아이템 거래
+Plati.market | https://plati.market | RU | marketplace |
+GGSEL | https://ggsel.net | RU | marketplace |
+FunPay | https://funpay.com | RU | marketplace | 게임머니·아이템
+G2G | https://www.g2g.com | GLOBAL | marketplace | 게임머니·아이템·계정
+PlayerAuctions | https://www.playerauctions.com | GLOBAL | marketplace | 게임머니·아이템·계정
+Eldorado.gg | https://www.eldorado.gg | GLOBAL | marketplace | 게임머니·아이템
+Z2U | https://www.z2u.com | GLOBAL | marketplace |
+U7BUY | https://www.u7buy.com | GLOBAL | marketplace |
+아이템매니아 | https://www.itemmania.com | KR | marketplace | 게임 아이템·상품권 거래
+아이템베이 | https://www.itembay.com | KR | marketplace | 게임 아이템·상품권 거래
+Itemku | https://www.itemku.com | ID | marketplace |
+VCGamers | https://www.vcgamers.com | ID | marketplace |
+
+## game-compare | 게임 가격 비교
+IsThereAnyDeal | https://isthereanydeal.com | GLOBAL | compare | 공인 판매처만, 역대 최저가
+GG.deals | https://gg.deals | GLOBAL | compare | 공식 스토어+키샵 함께 비교
+AllKeyShop | https://www.allkeyshop.com | GLOBAL | compare | 키샵 위주
+CheapShark | https://www.cheapshark.com | GLOBAL | compare |
+SteamDB | https://steamdb.info | GLOBAL | compare | 스팀 가격 기록·국가별 가격
+DLCompare | https://www.dlcompare.com | GLOBAL | compare |
+Keyforsteam | https://www.keyforsteam.de | DE | compare |
+GoCleCD | https://www.goclecd.fr | FR | compare |
+GoCDKeys | https://www.gocdkeys.com | ES | compare |
+Bestgameprice | https://bestgameprice.net | GLOBAL | compare | 공식·공인 판매처
+Gamescompare | https://gamescompare.net | GLOBAL | compare |
+NEXARDA | https://www.nexarda.com | GLOBAL | compare |
+CDKeyCompares | https://cdkeycompares.com | GLOBAL | compare |
+GameGeeker | https://gamegeeker.com | GLOBAL | compare | 키샵 안전도 순위
+PSPrices | https://psprices.com | GLOBAL | compare | 플레이스테이션·스위치·엑스박스
+Deku Deals | https://www.dekudeals.com | GLOBAL | compare | 닌텐도
+XB Deals | https://xbdeals.net | GLOBAL | compare | 엑스박스
+eShop Prices | https://eshop-prices.com | GLOBAL | compare | 닌텐도 국가별 가격
+GamerPower | https://www.gamerpower.com | GLOBAL | compare | 무료 게임·경품 모음
+小黑盒 (Heybox) | https://www.xiaoheihe.cn | CN | compare |
+Barter.vg | https://barter.vg | GLOBAL | community | 게임 교환
+r/GameDeals | https://www.reddit.com/r/GameDeals/ | GLOBAL | community |
+r/FreeGameFindings | https://www.reddit.com/r/FreeGameFindings/ | GLOBAL | community | 무료 게임 정보

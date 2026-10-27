@@ -2,6 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createApp } from '../server/app.js';
 import { createSearchService } from '../server/search.js';
+import { loadDirectory } from '../server/directory.js';
 import { allProviders } from '../server/providers/index.js';
 import { fixedRates, recordingFetch } from './helpers.js';
 
@@ -11,7 +12,8 @@ let base;
 before(async () => {
   const { fetchJson } = recordingFetch();
   const searchService = createSearchService({ providers: allProviders, fetchJson, rateService: fixedRates, strictMatch: true });
-  const app = createApp({ searchService, demo: true, rateLimitPerMinute: 8 });
+  const directory = await loadDirectory();
+  const app = createApp({ searchService, directory, demo: true, rateLimitPerMinute: 8 });
   server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${server.address().port}`;
@@ -34,6 +36,18 @@ test('meta lists categories and which sources need keys', async () => {
   assert.ok(meta.categories.some((c) => c.id === 'game'));
   assert.equal(meta.sources.find((s) => s.id === 'itad').enabled, false);
   assert.equal(meta.sources.find((s) => s.id === 'steam').enabled, true);
+});
+
+test('store directory is served as JSON and as a page', async () => {
+  const res = await fetch(`${base}/api/stores`);
+  assert.equal(res.status, 200);
+  const data = await res.json();
+  assert.ok(data.stores.length >= 1000);
+  assert.ok(data.types.official.label);
+
+  const page = await fetch(`${base}/stores`);
+  assert.equal(page.status, 200);
+  assert.match(await page.text(), /디지털 스토어 디렉터리/);
 });
 
 test('search returns grouped results', async () => {

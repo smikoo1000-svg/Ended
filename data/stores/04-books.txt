@@ -1,0 +1,134 @@
+## ebook | 전자책
+리디 | https://ridibooks.com | KR | official | 전자책·웹툰·웹소설
+밀리의 서재 | https://www.millie.co.kr | KR | official | 전자책 구독
+예스24 | https://www.yes24.com | KR | official | eBook·크레마클럽
+교보문고 | https://www.kyobobook.co.kr | KR | official | eBook·sam 구독
+알라딘 | https://www.aladin.co.kr | KR | official | eBook
+영풍문고 | https://www.ypbooks.co.kr | KR | official |
+인터파크 도서 | https://book.interpark.com | KR | official |
+북큐브 | https://www.bookcube.com | KR | official |
+Amazon Kindle | https://www.amazon.com/Kindle-eBooks/b?node=154606011 | GLOBAL | official |
+Apple Books | https://www.apple.com/apple-books/ | GLOBAL | official |
+Google Play 도서 | https://play.google.com/store/books | GLOBAL | official |
+Kobo | https://www.kobo.com | GLOBAL | official |
+Barnes & Noble Nook | https://www.barnesandnoble.com/b/nook-books/_/N-8qa | US | official |
+Smashwords | https://www.smashwords.com | GLOBAL | official | 독립 출판
+eBooks.com | https://www.ebooks.com | GLOBAL | official |
+Everand | https://www.everand.com | GLOBAL | official | 전자책·오디오북 구독
+Scribd | https://www.scribd.com | GLOBAL | official |
+Perlego | https://www.perlego.com | GLOBAL | official | 전공서 구독
+Bookshop.org | https://bookshop.org | US | official |
+Hive | https://www.hive.co.uk | UK | official |
+StoryBundle | https://storybundle.com | GLOBAL | authorized | DRM-free 전자책 번들
+Bundle of Holding | https://bundleofholding.com | GLOBAL | authorized | TRPG 전자책 번들
+DriveThruRPG | https://www.drivethrurpg.com | GLOBAL | official | TRPG
+DriveThruFiction | https://www.drivethrufiction.com | GLOBAL | official |
+Leanpub | https://leanpub.com | GLOBAL | official | 기술서
+O'Reilly | https://www.oreilly.com | GLOBAL | official | 기술서 구독
+Manning | https://www.manning.com | GLOBAL | official | 기술서
+Packt | https://www.packtpub.com | GLOBAL | official | 기술서
+No Starch Press | https://nostarch.com | US | official | 기술서
+Pragmatic Bookshelf | https://pragprog.com | US | official | 기술서
+InformIT | https://www.informit.com | US | official | 기술서
+Springer Link | https://link.springer.com | GLOBAL | official | 학술서
+Wiley | https://www.wiley.com | GLOBAL | official | 학술서
+VitalSource | https://www.vitalsource.com | GLOBAL | official | 전자 교재
+RedShelf | https://www.redshelf.com | US | official | 전자 교재
+Chegg | https://www.chegg.com | US | official | 전자 교재
+Thalia | https://www.thalia.de | DE | official |
+Hugendubel | https://www.hugendubel.de | DE | official |
+ebook.de | https://www.ebook.de | DE | official |
+Fnac | https://www.fnac.com | FR | official |
+Cultura | https://www.cultura.com | FR | official |
+bol.com | https://www.bol.com | NL | official |
+Casa del Libro | https://www.casadellibro.com | ES | official |
+laFeltrinelli | https://www.lafeltrinelli.it | IT | official |
+IBS.it | https://www.ibs.it | IT | official |
+Empik | https://www.empik.com | PL | official |
+Legimi | https://www.legimi.pl | PL | official | 전자책 구독
+Ebookpoint | https://ebookpoint.pl | PL | official |
+Woblink | https://woblink.com | PL | official |
+Litres | https://www.litres.ru | RU | official |
+BOOK☆WALKER (일본) | https://bookwalker.jp | JP | official |
+BOOK☆WALKER Global | https://global.bookwalker.jp | GLOBAL | official | 영문 라이트노벨·만화
+honto | https://honto.jp | JP | official |
+紀伊國屋書店 | https://www.kinokuniya.co.jp | JP | official |
+楽天ブックス | https://books.rakuten.co.jp | JP | official |
+ebookjapan | https://ebookjapan.yahoo.co.jp | JP | official |
+BookLive! | https://booklive.jp | JP | official |
+コミックシーモア | https://www.cmoa.jp | JP | official |
+まんが王国 | https://comic.k-manga.jp | JP | official |
+Renta! | https://renta.papy.co.jp | JP | official | 만화 대여
+DMMブックス | https://book.dmm.com | JP | official |
+微信读书 | https://weread.qq.com | CN | official |
+豆瓣阅读 | https://read.douban.com | CN | official |
+Readmoo | https://readmoo.com | TW | official |
+Pubu | https://www.pubu.com.tw | TW | official |
+博客來 | https://www.books.com.tw | TW | official |
+BookBub | https://www.bookbub.com | GLOBAL | compare | 전자책 할인 알림
+Project Gutenberg | https://www.gutenberg.org | GLOBAL | free | 저작권 만료 전자책
+Standard Ebooks | https://standardebooks.org | GLOBAL | free |
+Open Library | https://openlibrary.org | GLOBAL | free | 전자책 대출
+ManyBooks | https://manybooks.net | GLOBAL | free |
+OverDrive (Libby) | https://www.overdrive.com | GLOBAL | free | 도서관 전자책 대출
+hoopla | https://www.hoopladigital.com | US | free | 도서관 전자책·오디오북
+
+## comics | 웹툰 · 만화 · 웹소설
+네이버웹툰 | https://comic.naver.com | KR | official |
+카카오웹툰 | https://webtoon.kakao.com | KR | official |
+카카오페이지 | https://page.kakao.com | KR | official |
+네이버 시리즈 | https://series.naver.com | KR | official |
+레진코믹스 | https://www.lezhin.com | KR | official |
+봄툰 | https://www.bomtoon.com | KR | official |
+미스터블루 | https://www.mrblue.com | KR | official |
+투믹스 | https://www.toomics.com | KR | official |
+문피아 | https://www.munpia.com | KR | official | 웹소설
+조아라 | https://www.joara.com | KR | official | 웹소설
+노벨피아 | https://novelpia.com | KR | official | 웹소설
+북팔 | https://www.bookpal.co.kr | KR | official | 웹소설
+WEBTOON | https://www.webtoons.com | GLOBAL | official |
+Tapas | https://tapas.io | GLOBAL | official |
+Tappytoon | https://www.tappytoon.com | GLOBAL | official |
+Manta | https://manta.net | GLOBAL | official |
+Pocket Comics | https://www.pocketcomics.com | GLOBAL | official |
+INKR | https://inkr.com | GLOBAL | official |
+GlobalComix | https://globalcomix.com | GLOBAL | official |
+MANGA Plus | https://mangaplus.shueisha.co.jp | GLOBAL | official | 슈에이샤 공식, 최신화 무료
+VIZ | https://www.viz.com | US | official |
+K MANGA | https://kmanga.kodansha.com | US | official |
+Kodansha | https://kodansha.us | US | official |
+Yen Press | https://yenpress.com | US | official |
+Marvel Unlimited | https://www.marvel.com/unlimited | US | official |
+DC Universe Infinite | https://www.dcuniverseinfinite.com | US | official |
+Dark Horse Digital | https://digital.darkhorse.com | US | official |
+Image Comics | https://imagecomics.com | US | official |
+DriveThruComics | https://www.drivethrucomics.com | GLOBAL | official |
+Webnovel | https://www.webnovel.com | GLOBAL | official | 웹소설
+Wattpad | https://www.wattpad.com | GLOBAL | official | 웹소설
+ピッコマ | https://piccoma.com | JP | official |
+LINEマンガ | https://manga.line.me | JP | official |
+
+## audiobook | 오디오북 · 잡지 · 뉴스 구독
+윌라 | https://www.welaaa.com | KR | official | 오디오북
+Audible | https://www.audible.com | GLOBAL | official |
+Libro.fm | https://libro.fm | US | official | 동네 서점 지원
+Chirp | https://www.chirpbooks.com | US | official | 오디오북 할인
+Audiobooks.com | https://www.audiobooks.com | US | official |
+AudiobooksNow | https://www.audiobooksnow.com | US | official |
+Audiobook Store | https://www.audiobookstore.com | CA | official |
+Storytel | https://www.storytel.com | EU | official |
+BookBeat | https://www.bookbeat.com | EU | official |
+Nextory | https://www.nextory.com | EU | official |
+Blinkist | https://www.blinkist.com | GLOBAL | official | 책 요약
+Pocket FM | https://www.pocketfm.com | IN | official | 오디오 시리즈
+Kuku FM | https://kukufm.com | IN | official |
+LibriVox | https://librivox.org | GLOBAL | free | 무료 오디오북
+Readly | https://gb.readly.com | GLOBAL | official | 잡지 구독
+Zinio | https://www.zinio.com | GLOBAL | official | 디지털 잡지
+PressReader | https://www.pressreader.com | GLOBAL | official | 신문·잡지
+Magzter | https://www.magzter.com | GLOBAL | official | 디지털 잡지
+Issuu | https://issuu.com | GLOBAL | official |
+Medium | https://medium.com | GLOBAL | official |
+Substack | https://substack.com | GLOBAL | official | 뉴스레터 구독
+롱블랙 | https://www.longblack.co | KR | official |
+네이버 프리미엄콘텐츠 | https://contents.premium.naver.com | KR | official |

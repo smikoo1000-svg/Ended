@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>스토어 디렉터리 · Ended</title>
+  <meta name="description" content="게임·앱·소프트웨어·전자책·음악·영화·강의를 파는 사이트와 리셀러, 가격 비교 사이트 1,000여 곳을 모은 목록">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/stores.css">
+  <script src="/stores.js" type="module"></script>
+</head>
+<body>
+<!-- page:start -->
+<div class="page">
+  <header class="masthead">
+    <a class="back site-only" href="/">← Ended 최저가 검색</a>
+    <h1>디지털 스토어 디렉터리</h1>
+    <p class="lede"><strong id="total">1,000여</strong>곳을 모았어요. 게임·앱·소프트웨어·전자책·음악·영화·강의·디자인 에셋을 파는 공식 스토어와 리셀러, 가격 비교 사이트까지 들어 있어요. 이름을 누르면 그 사이트가 새 탭에서 열려요.</p>
+  </header>
+
+  <div class="controls">
+    <label class="visually-hidden" for="q">사이트 검색</label>
+    <input id="q" type="search" autocomplete="off" placeholder="이름·주소·메모로 찾기 (예: steam, 웹툰, VPN, 일본)">
+    <label class="visually-hidden" for="region">지역</label>
+    <select id="region"><option value="all">모든 지역</option></select>
+  </div>
+
+  <div class="types" id="types" role="group" aria-label="판매처 유형"></div>
+
+  <div class="layout">
+    <nav class="cats" id="cats" aria-label="분류"></nav>
+    <div class="results" id="results" aria-live="polite">
+      <p class="empty">목록을 불러오는 중…</p>
+    </div>
+  </div>
+
+  <section class="legend" aria-labelledby="legend-title">
+    <h2 id="legend-title">판매처 유형 읽는 법</h2>
+    <dl id="legend"></dl>
+    <p>키샵과 개인 거래 사이트는 같은 게임을 훨씬 싸게 팔기도 하지만, 퍼블리셔가 정식으로 넘긴 키가 아닐 수 있어요. 나중에 키가 회수되거나, 한국에서 등록이 안 되거나, 이미 쓴 키를 받을 수 있어요. 결제 전에 지역 제한과 환불 규정을 꼭 확인하세요.</p>
+  </section>
+
+  <footer class="foot">
+    <p>2026년 10월에 웹 검색과 공개 정보로 정리한 목록이에요. 각 링크가 지금도 열리는지는 하나하나 확인하지 못했어요. 문을 닫았거나 주소가 바뀐 곳이 있을 수 있어요.</p>
+  </footer>
+</div>
+<!-- page:end -->
+</body>
+</html>

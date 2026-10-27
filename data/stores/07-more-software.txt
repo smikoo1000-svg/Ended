@@ -1,0 +1,96 @@
+## software | 소프트웨어 · 제조사 직판
+반디캠 · 반디집 (반디소프트) | https://www.bandisoft.com | KR | official |
+곰랩 (곰플레이어·곰캠) | https://www.gomlab.com | KR | official |
+폴라리스오피스 | https://www.polarisoffice.com | KR | official |
+미리캔버스 | https://www.miricanvas.com | KR | official | 디자인 툴
+망고보드 | https://www.mangoboard.net | KR | official | 디자인 툴
+Vrew | https://vrew.ai | KR | official | AI 영상 편집
+Disk Drill | https://www.cleverfiles.com | GLOBAL | official | 데이터 복구
+Stellar | https://www.stellarinfo.com | GLOBAL | official | 데이터 복구
+WinRAR | https://www.win-rar.com | GLOBAL | official |
+7-Zip | https://www.7-zip.org | GLOBAL | free |
+Total Commander | https://www.ghisler.com | GLOBAL | official |
+Directory Opus | https://www.gpsoft.com.au | GLOBAL | official |
+Sublime Text | https://www.sublimetext.com | GLOBAL | official |
+Beyond Compare | https://www.scootersoftware.com | GLOBAL | official |
+Navicat | https://www.navicat.com | GLOBAL | official |
+TablePlus | https://tableplus.com | GLOBAL | official |
+Postman | https://www.postman.com | GLOBAL | official |
+Docker | https://www.docker.com | GLOBAL | official |
+VirtualBox | https://www.virtualbox.org | GLOBAL | free |
+Alfred | https://www.alfredapp.com | GLOBAL | official | Mac
+Raycast | https://www.raycast.com | GLOBAL | official | Mac
+CleanMyMac (MacPaw) | https://macpaw.com | GLOBAL | official | Mac
+Bartender | https://www.macbartender.com | GLOBAL | official | Mac
+BetterTouchTool | https://folivora.ai | GLOBAL | official | Mac
+Fantastical | https://flexibits.com | GLOBAL | official |
+Things | https://culturedcode.com | GLOBAL | official |
+OmniGroup | https://www.omnigroup.com | GLOBAL | official |
+Scrivener | https://www.literatureandlatte.com | GLOBAL | official |
+Ulysses | https://ulysses.app | GLOBAL | official |
+Bear | https://bear.app | GLOBAL | official |
+Craft | https://www.craft.do | GLOBAL | official |
+Day One | https://dayoneapp.com | GLOBAL | official |
+Readwise | https://readwise.io | GLOBAL | official |
+PDF Expert | https://pdfexpert.com | GLOBAL | official |
+Foxit | https://www.foxit.com | GLOBAL | official | PDF
+Nitro PDF | https://www.gonitro.com | GLOBAL | official | PDF
+ABBYY FineReader | https://pdf.abbyy.com | GLOBAL | official | PDF·OCR
+Smallpdf | https://smallpdf.com | GLOBAL | official | PDF
+iLovePDF | https://www.ilovepdf.com | GLOBAL | official | PDF
+Zotero | https://www.zotero.org | GLOBAL | free | 논문 관리
+EndNote | https://endnote.com | GLOBAL | official | 논문 관리
+MathWorks (MATLAB) | https://www.mathworks.com | GLOBAL | official |
+Wolfram (Mathematica) | https://www.wolfram.com | GLOBAL | official |
+Minitab | https://www.minitab.com | GLOBAL | official |
+Tableau | https://www.tableau.com | GLOBAL | official |
+OriginLab | https://www.originlab.com | GLOBAL | official |
+CapCut | https://www.capcut.com | GLOBAL | official | 영상 편집
+VEGAS | https://www.vegascreativesoftware.com | GLOBAL | official | 영상 편집
+Lightworks | https://lwks.com | GLOBAL | official | 영상 편집
+Descript | https://www.descript.com | GLOBAL | official | 영상·팟캐스트 편집
+Kapwing | https://www.kapwing.com | GLOBAL | official | 영상 편집
+Picsart | https://picsart.com | GLOBAL | official | 사진 편집
+VSCO | https://www.vsco.co | GLOBAL | official | 사진 편집
+Photopea | https://www.photopea.com | GLOBAL | free | 웹 포토샵 대체
+Moises | https://moises.ai | GLOBAL | official | 음원 분리
+Yousician | https://yousician.com | GLOBAL | official | 악기 학습
+Simply Piano | https://www.hellosimply.com | GLOBAL | official | 피아노 학습
+flowkey | https://www.flowkey.com | GLOBAL | official | 피아노 학습
+Melodics | https://melodics.com | GLOBAL | official | 악기 학습
+Trello | https://trello.com | GLOBAL | official |
+Asana | https://asana.com | GLOBAL | official |
+ClickUp | https://clickup.com | GLOBAL | official |
+Miro | https://miro.com | GLOBAL | official |
+Airtable | https://www.airtable.com | GLOBAL | official |
+Slack | https://slack.com | GLOBAL | official |
+Loom | https://www.loom.com | GLOBAL | official |
+AdGuard | https://adguard.com | GLOBAL | official | 광고 차단
+PrivadoVPN | https://privadovpn.com | GLOBAL | official | VPN
+
+## ai | AI · 생산성 구독
+Microsoft Copilot | https://copilot.microsoft.com | GLOBAL | official |
+Grok | https://grok.com | GLOBAL | official |
+Le Chat (Mistral) | https://chat.mistral.ai | GLOBAL | official |
+Poe | https://poe.com | GLOBAL | official | 여러 AI 모델 한 번에
+Character.AI | https://character.ai | GLOBAL | official |
+Leonardo.Ai | https://leonardo.ai | GLOBAL | official | 이미지 생성
+Ideogram | https://ideogram.ai | GLOBAL | official | 이미지 생성
+Pika | https://pika.art | GLOBAL | official | 영상 생성
+Luma AI | https://lumalabs.ai | GLOBAL | official | 영상 생성
+Kling AI | https://klingai.com | GLOBAL | official | 영상 생성
+Gamma | https://gamma.app | GLOBAL | official | AI 프레젠테이션
+QuillBot | https://quillbot.com | GLOBAL | official | 문장 교정
+ProWritingAid | https://prowritingaid.com | GLOBAL | official | 문장 교정
+Otter.ai | https://otter.ai | GLOBAL | official | 회의 녹취
+뤼튼 | https://wrtn.ai | KR | official |
+클로바노트 | https://clovanote.naver.com | KR | official | 음성 기록
+타입캐스트 | https://typecast.ai | KR | official | AI 음성
+
+## game-sub | 게임 · 구독/클라우드 게임
+Discord Nitro | https://discord.com/nitro | GLOBAL | official |
+Twitch | https://www.twitch.tv | GLOBAL | official | 구독·비츠
+
+## game-official | 게임 · 공식 스토어/런처
+Supercell Store | https://store.supercell.com | GLOBAL | official | 웹 결제 전용 할인·보너스
+Pokémon GO 웹 스토어 | https://store.pokemongolive.com | GLOBAL | official | 웹 결제 보너스

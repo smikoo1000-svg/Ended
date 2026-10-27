@@ -1,0 +1,206 @@
+## app | 앱 스토어 · 소프트웨어 다운로드
+Google Play | https://play.google.com/store/apps | GLOBAL | official |
+App Store | https://www.apple.com/app-store/ | GLOBAL | official | iPhone·iPad·Mac
+Microsoft Store | https://apps.microsoft.com | GLOBAL | official |
+Galaxy Store | https://galaxystore.samsung.com | GLOBAL | official |
+원스토어 | https://onestore.co.kr | KR | official | 국내 앱 마켓·도서
+Huawei AppGallery | https://appgallery.huawei.com | GLOBAL | official |
+Xiaomi GetApps | https://global.app.mi.com | GLOBAL | official |
+Setapp | https://setapp.com | GLOBAL | official | Mac 앱 구독
+Chrome 웹 스토어 | https://chromewebstore.google.com | GLOBAL | official |
+Firefox 부가기능 | https://addons.mozilla.org | GLOBAL | official |
+Edge 부가기능 | https://microsoftedge.microsoft.com/addons | GLOBAL | official |
+Opera 부가기능 | https://addons.opera.com | GLOBAL | official |
+VS Code Marketplace | https://marketplace.visualstudio.com | GLOBAL | official |
+Garmin Connect IQ | https://apps.garmin.com | GLOBAL | official |
+Shopify App Store | https://apps.shopify.com | GLOBAL | official |
+LINE STORE | https://store.line.me | GLOBAL | official | 스티커·테마
+카카오 이모티콘샵 | https://e.kakao.com | KR | official |
+AltStore | https://altstore.io | EU | store | EU 대체 iOS 앱 마켓
+Aptoide | https://www.aptoide.com | GLOBAL | store |
+TapTap | https://www.taptap.io | GLOBAL | store |
+QooApp | https://www.qoo-app.com | GLOBAL | store |
+APKPure | https://apkpure.com | GLOBAL | store | 비공식 APK, 주의
+MacUpdate | https://www.macupdate.com | GLOBAL | store |
+F-Droid | https://f-droid.org | GLOBAL | free | 오픈소스 앱
+APKMirror | https://www.apkmirror.com | GLOBAL | free |
+Uptodown | https://www.uptodown.com | GLOBAL | free |
+Snap Store | https://snapcraft.io/store | GLOBAL | free | 리눅스
+Flathub | https://flathub.org | GLOBAL | free | 리눅스
+Softonic | https://www.softonic.com | GLOBAL | free |
+FileHorse | https://www.filehorse.com | GLOBAL | free |
+Softpedia | https://www.softpedia.com | GLOBAL | free |
+MajorGeeks | https://www.majorgeeks.com | GLOBAL | free |
+Ninite | https://ninite.com | GLOBAL | free | 무료 프로그램 일괄 설치
+Chocolatey | https://community.chocolatey.org | GLOBAL | free |
+AlternativeTo | https://alternativeto.net | GLOBAL | compare | 대체 소프트웨어 찾기
+
+## software | 소프트웨어 · 제조사 직판
+Microsoft 365 | https://www.microsoft.com/microsoft-365 | GLOBAL | official |
+Adobe | https://www.adobe.com | GLOBAL | official |
+Autodesk | https://www.autodesk.com | GLOBAL | official |
+Corel | https://www.corel.com | GLOBAL | official |
+Parallels | https://www.parallels.com | GLOBAL | official |
+JetBrains | https://www.jetbrains.com | GLOBAL | official |
+Affinity | https://affinity.serif.com | GLOBAL | official |
+Canva | https://www.canva.com | GLOBAL | official |
+Figma | https://www.figma.com | GLOBAL | official |
+Sketch | https://www.sketch.com | GLOBAL | official |
+Notion | https://www.notion.com | GLOBAL | official |
+Evernote | https://evernote.com | GLOBAL | official |
+Todoist | https://www.todoist.com | GLOBAL | official |
+Obsidian | https://obsidian.md | GLOBAL | official |
+한컴오피스 | https://www.hancom.com | KR | official |
+한컴독스 | https://www.hancomdocs.com | KR | official |
+알툴즈 | https://www.altools.co.kr | KR | official | 이스트소프트
+WPS Office | https://www.wps.com | GLOBAL | official |
+SoftMaker Office | https://www.softmaker.com | EU | official |
+ONLYOFFICE | https://www.onlyoffice.com | GLOBAL | official |
+LibreOffice | https://www.libreoffice.org | GLOBAL | free |
+Acronis | https://www.acronis.com | GLOBAL | official |
+EaseUS | https://www.easeus.com | GLOBAL | official |
+MiniTool | https://www.minitool.com | GLOBAL | official |
+AOMEI | https://www.aomeitech.com | GLOBAL | official |
+Macrium | https://www.macrium.com | GLOBAL | official |
+CCleaner | https://www.ccleaner.com | GLOBAL | official |
+IObit | https://www.iobit.com | GLOBAL | official |
+Wondershare | https://www.wondershare.com | GLOBAL | official |
+Tenorshare | https://www.tenorshare.com | GLOBAL | official |
+iMyFone | https://www.imyfone.com | GLOBAL | official |
+CyberLink | https://www.cyberlink.com | GLOBAL | official |
+Movavi | https://www.movavi.com | GLOBAL | official |
+TechSmith (Camtasia·Snagit) | https://www.techsmith.com | GLOBAL | official |
+Blackmagic Design (DaVinci Resolve) | https://www.blackmagicdesign.com | GLOBAL | official |
+Topaz Labs | https://www.topazlabs.com | GLOBAL | official |
+Skylum (Luminar) | https://skylum.com | GLOBAL | official |
+Capture One | https://www.captureone.com | GLOBAL | official |
+DxO | https://www.dxo.com | GLOBAL | official |
+ON1 | https://www.on1.com | GLOBAL | official |
+Clip Studio Paint | https://www.clipstudio.net | GLOBAL | official |
+Procreate | https://procreate.com | GLOBAL | official |
+Toon Boom | https://www.toonboom.com | GLOBAL | official |
+Rhino | https://www.rhino3d.com | GLOBAL | official |
+SketchUp | https://www.sketchup.com | GLOBAL | official |
+Maxon (Cinema 4D·ZBrush) | https://www.maxon.net | GLOBAL | official |
+SideFX (Houdini) | https://www.sidefx.com | GLOBAL | official |
+Foundry | https://www.foundry.com | GLOBAL | official |
+Unity | https://unity.com | GLOBAL | official |
+Blender | https://www.blender.org | GLOBAL | free |
+GIMP | https://www.gimp.org | GLOBAL | free |
+Krita | https://krita.org | GLOBAL | free |
+Audacity | https://www.audacityteam.org | GLOBAL | free |
+OBS Studio | https://obsproject.com | GLOBAL | free |
+VLC | https://www.videolan.org | GLOBAL | free |
+
+## ai | AI · 생산성 구독
+ChatGPT | https://chatgpt.com | GLOBAL | official |
+Claude | https://claude.ai | GLOBAL | official |
+Gemini | https://gemini.google.com | GLOBAL | official |
+Perplexity | https://www.perplexity.ai | GLOBAL | official |
+Midjourney | https://www.midjourney.com | GLOBAL | official |
+GitHub Copilot | https://github.com/features/copilot | GLOBAL | official |
+Cursor | https://cursor.com | GLOBAL | official |
+ElevenLabs | https://elevenlabs.io | GLOBAL | official |
+Runway | https://runwayml.com | GLOBAL | official |
+Suno | https://suno.com | GLOBAL | official |
+Grammarly | https://www.grammarly.com | GLOBAL | official |
+DeepL | https://www.deepl.com | GLOBAL | official |
+Zoom | https://zoom.us | GLOBAL | official |
+
+## security | 보안 · VPN · 비밀번호 관리
+NordVPN | https://nordvpn.com | GLOBAL | official |
+ExpressVPN | https://www.expressvpn.com | GLOBAL | official |
+Surfshark | https://surfshark.com | GLOBAL | official |
+Proton VPN | https://protonvpn.com | GLOBAL | official | 무료 요금제 있음
+Mullvad | https://mullvad.net | GLOBAL | official |
+Private Internet Access | https://www.privateinternetaccess.com | GLOBAL | official |
+CyberGhost | https://www.cyberghostvpn.com | GLOBAL | official |
+IPVanish | https://www.ipvanish.com | GLOBAL | official |
+Windscribe | https://windscribe.com | GLOBAL | official |
+PureVPN | https://www.purevpn.com | GLOBAL | official |
+Hotspot Shield | https://www.hotspotshield.com | GLOBAL | official |
+TunnelBear | https://www.tunnelbear.com | GLOBAL | official |
+hide.me | https://hide.me | GLOBAL | official |
+IVPN | https://www.ivpn.net | GLOBAL | official |
+AirVPN | https://airvpn.org | GLOBAL | official |
+Astrill | https://www.astrill.com | GLOBAL | official |
+VyprVPN | https://www.vyprvpn.com | GLOBAL | official |
+1Password | https://1password.com | GLOBAL | official |
+Bitwarden | https://bitwarden.com | GLOBAL | official |
+Dashlane | https://www.dashlane.com | GLOBAL | official |
+NordPass | https://nordpass.com | GLOBAL | official |
+Keeper | https://www.keepersecurity.com | GLOBAL | official |
+Kaspersky | https://www.kaspersky.com | GLOBAL | official |
+Norton | https://us.norton.com | GLOBAL | official |
+McAfee | https://www.mcafee.com | GLOBAL | official |
+Bitdefender | https://www.bitdefender.com | GLOBAL | official |
+ESET | https://www.eset.com | GLOBAL | official |
+Avast | https://www.avast.com | GLOBAL | official |
+AVG | https://www.avg.com | GLOBAL | official |
+Avira | https://www.avira.com | GLOBAL | official |
+Malwarebytes | https://www.malwarebytes.com | GLOBAL | official |
+Trend Micro | https://www.trendmicro.com | GLOBAL | official |
+F-Secure | https://www.f-secure.com | GLOBAL | official |
+Sophos Home | https://home.sophos.com | GLOBAL | official |
+안랩 (V3) | https://www.ahnlab.com | KR | official |
+
+## cloud | 클라우드 저장소 · 이메일
+Dropbox | https://www.dropbox.com | GLOBAL | official |
+Google One | https://one.google.com | GLOBAL | official |
+pCloud | https://www.pcloud.com | GLOBAL | official | 평생 요금제
+Sync.com | https://www.sync.com | GLOBAL | official |
+MEGA | https://mega.io | GLOBAL | official |
+Box | https://www.box.com | GLOBAL | official |
+Icedrive | https://icedrive.net | GLOBAL | official |
+Koofr | https://koofr.eu | EU | official |
+Backblaze | https://www.backblaze.com | GLOBAL | official | 백업
+IDrive | https://www.idrive.com | GLOBAL | official | 백업
+네이버 MYBOX | https://mybox.naver.com | KR | official |
+Proton (메일·드라이브) | https://proton.me | GLOBAL | official |
+Tuta | https://tuta.com | EU | official | 암호화 메일
+Fastmail | https://www.fastmail.com | GLOBAL | official |
+
+## software-resale | 소프트웨어 번들 · 할인 · 리셀러
+StackSocial | https://www.stacksocial.com | US | authorized | 소프트웨어 할인 번들
+AppSumo | https://appsumo.com | GLOBAL | authorized | 평생 이용권 딜
+BundleHunt | https://bundlehunt.com | GLOBAL | authorized | Mac 앱 번들
+SharewareOnSale | https://sharewareonsale.com | GLOBAL | authorized | 무료·할인 라이선스
+Giveaway of the Day | https://www.giveawayoftheday.com | GLOBAL | free | 매일 무료 소프트웨어
+DealMirror | https://dealmirror.com | GLOBAL | authorized |
+DealFuel | https://www.dealfuel.com | GLOBAL | authorized |
+PitchGround | https://pitchground.com | GLOBAL | authorized |
+Softwarekeep | https://www.softwarekeep.com | US | keyshop |
+Godeal24 | https://www.godeal24.com | GLOBAL | keyshop | 윈도우·오피스 저가 키 (회수 위험)
+VIP-SCDKey | https://www.vip-scdkey.com | GLOBAL | keyshop | 윈도우·오피스 저가 키 (회수 위험)
+SCDKey | https://www.scdkey.com | GLOBAL | keyshop |
+RoyalCDKeys | https://royalcdkeys.com | GLOBAL | keyshop | 윈도우·오피스 저가 키 (회수 위험)
+URcdkey | https://www.urcdkey.com | GLOBAL | keyshop |
+Mr Key Shop | https://www.mrkeyshop.com | EU | keyshop |
+Lizengo | https://www.lizengo.de | DE | keyshop |
+
+## audio-software | 음악 제작 소프트웨어 · 플러그인 · 샘플
+Ableton | https://www.ableton.com | GLOBAL | official |
+Image-Line (FL Studio) | https://www.image-line.com | GLOBAL | official |
+Steinberg (Cubase) | https://www.steinberg.net | GLOBAL | official |
+Native Instruments | https://www.native-instruments.com | GLOBAL | official |
+Avid (Pro Tools) | https://www.avid.com | GLOBAL | official |
+REAPER | https://www.reaper.fm | GLOBAL | official |
+Bitwig | https://www.bitwig.com | GLOBAL | official |
+PreSonus | https://www.presonus.com | GLOBAL | official |
+Waves | https://www.waves.com | GLOBAL | official | 상시 할인 많음
+iZotope | https://www.izotope.com | GLOBAL | official |
+Arturia | https://www.arturia.com | GLOBAL | official |
+Spectrasonics | https://www.spectrasonics.net | GLOBAL | official |
+Xfer Records (Serum) | https://xferrecords.com | GLOBAL | official |
+FabFilter | https://www.fabfilter.com | GLOBAL | official |
+Plugin Alliance | https://www.plugin-alliance.com | GLOBAL | official |
+Plugin Boutique | https://www.pluginboutique.com | GLOBAL | authorized |
+KVR Marketplace | https://www.kvraudio.com/marketplace | GLOBAL | authorized |
+Audio Plugin Deals | https://audioplugin.deals | GLOBAL | authorized |
+Best Service | https://www.bestservice.com | DE | authorized |
+VSTBuzz | https://vstbuzz.com | GLOBAL | authorized |
+ADSR Sounds | https://www.adsrsounds.com | GLOBAL | authorized |
+Sweetwater | https://www.sweetwater.com | US | authorized |
+Thomann | https://www.thomann.de | DE | authorized |
+Splice | https://splice.com | GLOBAL | official | 샘플 구독
+Loopmasters | https://www.loopmasters.com | GLOBAL | official | 샘플

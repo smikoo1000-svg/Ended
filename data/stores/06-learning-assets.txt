@@ -1,0 +1,181 @@
+## course | 온라인 강의 · 어학
+인프런 | https://www.inflearn.com | KR | official | 개발·IT
+클래스101 | https://class101.net | KR | official | 취미·창작
+패스트캠퍼스 | https://fastcampus.co.kr | KR | official |
+탈잉 | https://taling.me | KR | official |
+콜로소 | https://coloso.co.kr | KR | official | 디자인·영상
+노마드코더 | https://nomadcoders.co | KR | official | 개발
+코드잇 | https://www.codeit.kr | KR | official | 개발
+엘리스 | https://elice.io | KR | official | 개발
+프로그래머스 | https://programmers.co.kr | KR | official | 개발
+스파르타코딩클럽 | https://spartacodingclub.kr | KR | official | 개발
+멀티캠퍼스 | https://www.multicampus.com | KR | official |
+러닝스푼즈 | https://learningspoons.com | KR | official |
+해커스 | https://www.hackers.co.kr | KR | official | 어학·자격증
+에듀윌 | https://www.eduwill.net | KR | official | 자격증·공무원
+공단기 | https://gong.conects.com | KR | official | 공무원
+야나두 | https://www.yanadoo.co.kr | KR | official | 영어
+시원스쿨 | https://www.siwonschool.com | KR | official | 어학
+링글 | https://www.ringleplus.com | KR | official | 영어 화상
+메가스터디 | https://www.megastudy.net | KR | official | 수능
+대성마이맥 | https://www.mimacstudy.com | KR | official | 수능
+이투스 | https://www.etoos.com | KR | official | 수능
+EBSi | https://www.ebsi.co.kr | KR | free | 수능 무료 강의
+K-MOOC | https://www.kmooc.kr | KR | free | 대학 공개 강의
+생활코딩 | https://opentutorials.org | KR | free | 개발 무료 강의
+Udemy | https://www.udemy.com | GLOBAL | official | 상시 할인 많음
+Coursera | https://www.coursera.org | GLOBAL | official |
+edX | https://www.edx.org | GLOBAL | official |
+Skillshare | https://www.skillshare.com | GLOBAL | official |
+Domestika | https://www.domestika.org | GLOBAL | official | 디자인·창작
+MasterClass | https://www.masterclass.com | GLOBAL | official |
+LinkedIn Learning | https://www.linkedin.com/learning | GLOBAL | official |
+Pluralsight | https://www.pluralsight.com | GLOBAL | official | IT
+DataCamp | https://www.datacamp.com | GLOBAL | official | 데이터
+Codecademy | https://www.codecademy.com | GLOBAL | official | 개발
+Brilliant | https://brilliant.org | GLOBAL | official | 수학·과학
+Frontend Masters | https://frontendmasters.com | GLOBAL | official | 개발
+egghead | https://egghead.io | GLOBAL | official | 개발
+Educative | https://www.educative.io | GLOBAL | official | 개발
+Zero To Mastery | https://zerotomastery.io | GLOBAL | official | 개발
+Scrimba | https://scrimba.com | GLOBAL | official | 개발
+Treehouse | https://teamtreehouse.com | GLOBAL | official | 개발
+Laracasts | https://laracasts.com | GLOBAL | official | 개발
+CBT Nuggets | https://www.cbtnuggets.com | GLOBAL | official | IT 자격증
+Udacity | https://www.udacity.com | GLOBAL | official |
+FutureLearn | https://www.futurelearn.com | GLOBAL | official |
+The Great Courses | https://www.thegreatcourses.com | US | official |
+CreativeLive | https://www.creativelive.com | GLOBAL | official |
+Craftsy | https://www.craftsy.com | US | official |
+Schoolism | https://www.schoolism.com | GLOBAL | official | 그림
+Proko | https://www.proko.com | GLOBAL | official | 그림
+The Gnomon Workshop | https://www.thegnomonworkshop.com | GLOBAL | official | CG
+CG Master Academy | https://www.cgmasteracademy.com | GLOBAL | official | CG
+Wingfox | https://www.wingfox.com | GLOBAL | official | CG
+School of Motion | https://www.schoolofmotion.com | GLOBAL | official | 모션그래픽
+Unacademy | https://unacademy.com | IN | official |
+Duolingo | https://www.duolingo.com | GLOBAL | official | 어학
+Babbel | https://www.babbel.com | GLOBAL | official | 어학
+Rosetta Stone | https://www.rosettastone.com | GLOBAL | official | 어학
+Busuu | https://www.busuu.com | GLOBAL | official | 어학
+Memrise | https://www.memrise.com | GLOBAL | official | 어학
+Pimsleur | https://www.pimsleur.com | GLOBAL | official | 어학
+italki | https://www.italki.com | GLOBAL | marketplace | 1:1 어학 튜터
+Preply | https://preply.com | GLOBAL | marketplace | 1:1 어학 튜터
+Cambly | https://www.cambly.com | GLOBAL | official | 영어 화상
+Khan Academy | https://www.khanacademy.org | GLOBAL | free |
+freeCodeCamp | https://www.freecodecamp.org | GLOBAL | free |
+MIT OpenCourseWare | https://ocw.mit.edu | GLOBAL | free |
+Class Central | https://www.classcentral.com | GLOBAL | compare | 온라인 강의 검색·비교
+
+## assets | 디자인 에셋 · 폰트 · 스톡 · 3D · 템플릿
+Envato Elements | https://elements.envato.com | GLOBAL | official | 무제한 다운로드 구독
+ThemeForest | https://themeforest.net | GLOBAL | marketplace | 웹 테마
+CodeCanyon | https://codecanyon.net | GLOBAL | marketplace | 스크립트·플러그인
+VideoHive | https://videohive.net | GLOBAL | marketplace | 영상 템플릿
+AudioJungle | https://audiojungle.net | GLOBAL | marketplace | 음원
+GraphicRiver | https://graphicriver.net | GLOBAL | marketplace | 그래픽
+PhotoDune | https://photodune.net | GLOBAL | marketplace | 사진
+3DOcean | https://3docean.net | GLOBAL | marketplace | 3D
+Creative Market | https://creativemarket.com | GLOBAL | marketplace |
+Creative Fabrica | https://www.creativefabrica.com | GLOBAL | marketplace |
+Design Cuts | https://www.designcuts.com | GLOBAL | authorized | 디자인 번들
+TemplateMonster | https://www.templatemonster.com | GLOBAL | marketplace |
+UI8 | https://ui8.net | GLOBAL | marketplace | UI 키트
+Craftwork | https://craftwork.design | GLOBAL | official | UI 키트
+LS Graphics | https://www.ls.graphics | GLOBAL | official | 목업
+Freepik | https://www.freepik.com | GLOBAL | official |
+Vecteezy | https://www.vecteezy.com | GLOBAL | official |
+Motion Array | https://motionarray.com | GLOBAL | official |
+Shutterstock | https://www.shutterstock.com | GLOBAL | official |
+Adobe Stock | https://stock.adobe.com | GLOBAL | official |
+Getty Images | https://www.gettyimages.com | GLOBAL | official |
+iStock | https://www.istockphoto.com | GLOBAL | official |
+Depositphotos | https://depositphotos.com | GLOBAL | official |
+123RF | https://www.123rf.com | GLOBAL | official |
+Dreamstime | https://www.dreamstime.com | GLOBAL | official |
+Alamy | https://www.alamy.com | GLOBAL | official |
+Pond5 | https://www.pond5.com | GLOBAL | official | 영상·음원
+Storyblocks | https://www.storyblocks.com | GLOBAL | official | 영상 구독
+게티이미지뱅크 | https://www.gettyimagesbank.com | KR | official |
+크라우드픽 | https://www.crowdpic.net | KR | official |
+Unsplash | https://unsplash.com | GLOBAL | free | 무료 사진 (유료 Unsplash+ 있음)
+Pexels | https://www.pexels.com | GLOBAL | free |
+Pixabay | https://pixabay.com | GLOBAL | free |
+Artlist | https://artlist.io | GLOBAL | official | 영상용 음원
+Epidemic Sound | https://www.epidemicsound.com | GLOBAL | official | 영상용 음원
+Musicbed | https://www.musicbed.com | GLOBAL | official |
+Soundstripe | https://www.soundstripe.com | GLOBAL | official |
+PremiumBeat | https://www.premiumbeat.com | GLOBAL | official |
+Uppbeat | https://uppbeat.io | GLOBAL | official | 무료 요금제 있음
+ZapSplat | https://www.zapsplat.com | GLOBAL | official | 효과음
+BOOM Library | https://www.boomlibrary.com | GLOBAL | official | 효과음
+A Sound Effect | https://www.asoundeffect.com | GLOBAL | marketplace | 효과음
+Freesound | https://freesound.org | GLOBAL | free | 효과음
+The Noun Project | https://thenounproject.com | GLOBAL | official | 아이콘
+Iconfinder | https://www.iconfinder.com | GLOBAL | marketplace | 아이콘
+Flaticon | https://www.flaticon.com | GLOBAL | official | 아이콘
+Icons8 | https://icons8.com | GLOBAL | official | 아이콘
+MyFonts | https://www.myfonts.com | GLOBAL | official | 폰트
+Fontspring | https://www.fontspring.com | GLOBAL | official | 폰트
+Adobe Fonts | https://fonts.adobe.com | GLOBAL | official | 폰트
+Monotype | https://www.monotype.com | GLOBAL | official | 폰트
+Typography.com (Hoefler&Co.) | https://www.typography.com | US | official | 폰트
+YouWorkForThem | https://www.youworkforthem.com | GLOBAL | official | 폰트
+Pangram Pangram | https://pangrampangram.com | GLOBAL | official | 폰트
+Fontfabric | https://www.fontfabric.com | GLOBAL | official | 폰트
+산돌구름 | https://www.sandollcloud.com | KR | official | 한글 폰트
+폰코 (윤디자인) | https://www.font.co.kr | KR | official | 한글 폰트
+Google Fonts | https://fonts.google.com | GLOBAL | free | 폰트
+Font Squirrel | https://www.fontsquirrel.com | GLOBAL | free | 상업용 무료 폰트
+Fontshare | https://www.fontshare.com | GLOBAL | free | 폰트
+눈누 | https://noonnu.cc | KR | free | 상업용 무료 한글 폰트 모음
+TurboSquid | https://www.turbosquid.com | GLOBAL | marketplace | 3D
+CGTrader | https://www.cgtrader.com | GLOBAL | marketplace | 3D
+Sketchfab | https://sketchfab.com | GLOBAL | marketplace | 3D
+Fab | https://www.fab.com | GLOBAL | marketplace | 에픽 통합 에셋 마켓 (언리얼·퀵셀)
+Unity Asset Store | https://assetstore.unity.com | GLOBAL | marketplace |
+ArtStation Marketplace | https://www.artstation.com/marketplace | GLOBAL | marketplace |
+Superhive (구 Blender Market) | https://superhivemarket.com | GLOBAL | marketplace | 블렌더 애드온
+Daz 3D | https://www.daz3d.com | GLOBAL | official | 3D
+Renderosity | https://www.renderosity.com | GLOBAL | marketplace | 3D
+KitBash3D | https://kitbash3d.com | GLOBAL | official | 3D
+Synty Store | https://syntystore.com | GLOBAL | official | 게임 에셋
+GameDev Market | https://www.gamedevmarket.net | GLOBAL | marketplace | 게임 에셋
+Cults3D | https://cults3d.com | GLOBAL | marketplace | 3D 프린팅
+MyMiniFactory | https://www.myminifactory.com | GLOBAL | marketplace | 3D 프린팅
+CLIP STUDIO ASSETS | https://assets.clip-studio.com | GLOBAL | marketplace | 클립스튜디오 소재
+Poly Haven | https://polyhaven.com | GLOBAL | free | 3D·텍스처·HDRI
+Kenney | https://kenney.nl | GLOBAL | free | 게임 에셋
+OpenGameArt | https://opengameart.org | GLOBAL | free | 게임 에셋
+Printables | https://www.printables.com | GLOBAL | free | 3D 프린팅
+Thingiverse | https://www.thingiverse.com | GLOBAL | free | 3D 프린팅
+Elegant Themes | https://www.elegantthemes.com | GLOBAL | official | 워드프레스
+Elementor | https://elementor.com | GLOBAL | official | 워드프레스
+WordPress 플러그인 | https://wordpress.org/plugins/ | GLOBAL | free |
+Shopify Theme Store | https://themes.shopify.com | GLOBAL | official |
+Webflow Templates | https://webflow.com/templates | GLOBAL | marketplace |
+Framer Marketplace | https://www.framer.com/marketplace/ | GLOBAL | marketplace |
+
+## creator | 크리에이터 · 디지털 상품 마켓
+Gumroad | https://gumroad.com | GLOBAL | marketplace |
+Payhip | https://payhip.com | GLOBAL | marketplace |
+Sellfy | https://sellfy.com | GLOBAL | marketplace |
+Lemon Squeezy | https://www.lemonsqueezy.com | GLOBAL | marketplace |
+Ko-fi | https://ko-fi.com | GLOBAL | marketplace |
+Patreon | https://www.patreon.com | GLOBAL | marketplace | 후원·구독
+Etsy | https://www.etsy.com | GLOBAL | marketplace | 디지털 다운로드 상품 많음
+Fiverr | https://www.fiverr.com | GLOBAL | marketplace | 디지털 서비스 외주
+Kickstarter | https://www.kickstarter.com | GLOBAL | marketplace | 크라우드펀딩
+Indiegogo | https://www.indiegogo.com | GLOBAL | marketplace | 크라우드펀딩
+크몽 | https://kmong.com | KR | marketplace | 전자책·디지털 서비스
+포스타입 | https://www.postype.com | KR | marketplace | 창작물 판매
+텀블벅 | https://tumblbug.com | KR | marketplace | 크라우드펀딩
+와디즈 | https://www.wadiz.kr | KR | marketplace | 크라우드펀딩
+BOOTH | https://booth.pm | JP | marketplace | 일러스트·3D 모델·동인
+pixivFANBOX | https://www.fanbox.cc | JP | marketplace |
+Fantia | https://fantia.jp | JP | marketplace |
+Ci-en | https://ci-en.dlsite.com | JP | marketplace |
+Skeb | https://skeb.jp | JP | marketplace | 일러스트 커미션
+メロンブックス | https://www.melonbooks.co.jp | JP | store | 동인지 (디지털 포함)
+とらのあな | https://ecs.toranoana.jp | JP | store | 동인지 (디지털 포함)

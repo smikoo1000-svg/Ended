@@ -18,6 +18,15 @@
 키가 없는 출처는 자동으로 꺼지고, 나머지 스토어만으로 검색합니다.
 환율은 [open.er-api.com](https://open.er-api.com)에서 6시간마다 가져오며, 실패하면 내장 기본 환율을 쓰고 화면에 알려줍니다.
 
+## 스토어 디렉터리 (`/stores`)
+
+게임·앱·소프트웨어·전자책·음악·영화·강의·디자인 에셋·eSIM 등을 파는 사이트 **1,024곳**(서로 다른 도메인 1,009개)을 26개 분류로 모은 목록입니다.
+공식 스토어부터 공인 리셀러, 비공인 키샵, 개인 거래 마켓, 가격 비교·핫딜 커뮤니티까지 유형별로 표시하고, 이름·주소·메모 검색과 지역·유형 필터를 지원합니다.
+
+- 데이터: `data/stores/*.txt` (`이름 | URL | 지역 | 유형 | 메모` 형식, 한 줄에 한 곳)
+- API: `GET /api/stores`
+- 2026년 10월에 웹 검색과 공개 정보로 정리했으며, 각 링크가 지금도 열리는지는 하나하나 확인하지 않았습니다.
+
 ## 실행
 
 Node.js 20 이상이 필요합니다.
@@ -49,10 +58,12 @@ server/
   index.js            서버 시작
   app.js              Express 라우트 (/api/search, /api/meta), 보안 헤더, 요청 제한
   search.js           여러 스토어 동시 검색 → 원화 환산 → 같은 상품 묶기 → 정렬
+  directory.js        스토어 디렉터리 읽기·검증 (data/stores/*.txt)
   currency.js         환율 조회와 원화 환산
   text.js             제목 정규화, 검색어 일치도
   providers/          스토어별 연동 (steam, cheapshark, itad, itunes, googlebooks)
-public/               화면 (빌드 없는 HTML/CSS/JS)
+public/               화면 (빌드 없는 HTML/CSS/JS), stores.html = 스토어 디렉터리
+data/stores/          스토어 디렉터리 원본 데이터
 fixtures/             각 API 응답 형식의 샘플 (테스트·데모용)
 test/                 node:test 테스트
 ```

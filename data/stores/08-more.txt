@@ -1,0 +1,40 @@
+## game-authorized | 게임 · 공인 리셀러 (퍼블리셔 정식 키)
+Hype Games | https://www.hype.games | BR | authorized | 소니·MS·닌텐도 공식 리셀러
+KaBuM! | https://www.kabum.com.br | BR | authorized | 디지털 코드 판매
+JioGames Store | https://store.jiogames.com | IN | authorized |
+
+## deals | 핫딜 커뮤니티 · 가격 비교
+Promobit | https://www.promobit.com.br | BR | community |
+
+## esim | eSIM · 해외 데이터
+KT M모바일 | https://www.ktmmobile.com | KR | official | 해외 데이터 eSIM
+
+## video | 영화 · 동영상 (구매 · 대여 · 구독)
+Kanopy | https://www.kanopy.com | GLOBAL | free | 도서관 회원 무료 영화
+Plex | https://www.plex.tv | GLOBAL | official | 무료·대여
+YouTube TV | https://tv.youtube.com | US | official |
+Sling TV | https://www.sling.com | US | official |
+Philo | https://www.philo.com | US | official |
+fuboTV | https://www.fubo.tv | US | official | 스포츠
+BritBox | https://www.britbox.com | GLOBAL | official | 영국 드라마
+Acorn TV | https://acorn.tv | GLOBAL | official | 영국 드라마
+AMC+ | https://www.amcplus.com | US | official |
+Starz | https://www.starz.com | US | official |
+MGM+ | https://www.mgmplus.com | US | official |
+discovery+ | https://www.discoveryplus.com | US | official |
+HIDIVE | https://www.hidive.com | GLOBAL | official | 애니메이션
+Nebula | https://nebula.tv | GLOBAL | official | 크리에이터 영상
+Dropout | https://www.dropout.tv | GLOBAL | official | 코미디
+
+## music | 음악 · 다운로드 · 스트리밍 · 악보
+nugs.net | https://www.nugs.net | GLOBAL | official | 라이브 공연 음원
+
+## ebook | 전자책
+Booktopia | https://www.booktopia.com.au | AU | official |
+Indigo | https://www.indigo.ca | CA | official | 코보 전자책
+
+## course | 온라인 강의 · 어학
+Outschool | https://outschool.com | GLOBAL | official | 어린이 온라인 수업
+Simplilearn | https://www.simplilearn.com | GLOBAL | official | IT 자격증
+upGrad | https://www.upgrad.com | IN | official |
+Alison | https://alison.com | GLOBAL | free | 무료 자격증 강의

@@ -30,7 +30,7 @@ function rateLimit({ limit = 30, windowMs = 60_000, now = Date.now } = {}) {
   };
 }
 
-export function createApp({ searchService, env = {}, demo = false, rateLimitPerMinute = 30 }) {
+export function createApp({ searchService, directory = null, env = {}, demo = false, rateLimitPerMinute = 30 }) {
   const app = express();
   app.disable('x-powered-by');
   if (env.TRUST_PROXY) app.set('trust proxy', env.TRUST_PROXY);
@@ -59,6 +59,12 @@ export function createApp({ searchService, env = {}, demo = false, rateLimitPerM
         enabled: isEnabled(p, env),
       })),
     });
+  });
+
+  app.get('/api/stores', (req, res) => {
+    if (!directory) return res.status(404).json({ error: '스토어 목록이 없습니다.' });
+    res.set('cache-control', 'public, max-age=3600');
+    res.json(directory);
   });
 
   app.get('/api/search', rateLimit({ limit: rateLimitPerMinute }), async (req, res, next) => {

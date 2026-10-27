@@ -1,5 +1,6 @@
 import { createApp } from './app.js';
 import { createRateService } from './currency.js';
+import { loadDirectory } from './directory.js';
 import { fixtureFetchJson } from './demo.js';
 import { fetchJson } from './http.js';
 import { allProviders } from './providers/index.js';
@@ -18,7 +19,8 @@ const searchService = createSearchService({
   strictMatch: demo,
 });
 
-const app = createApp({ searchService, env, demo, rateLimitPerMinute: Number(env.RATE_LIMIT_PER_MINUTE) || 30 });
+const directory = await loadDirectory();
+const app = createApp({ searchService, directory, env, demo, rateLimitPerMinute: Number(env.RATE_LIMIT_PER_MINUTE) || 30 });
 const port = Number(env.PORT) || 3000;
 
 app.listen(port, () => {

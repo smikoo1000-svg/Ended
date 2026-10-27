@@ -75,6 +75,11 @@ button, input, select { font: inherit; color: inherit; }
   padding: 18px 16px 0;
 }
 
+.topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+
+.directory-link { font-size: 14px; color: var(--muted); text-decoration: none; }
+.directory-link:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
 .brand {
   display: inline-flex;
   align-items: center;

@@ -1,0 +1,162 @@
+## topup | 게임 충전 · 기프트카드 · 상품권
+Codashop | https://www.codashop.com | SEA | authorized | 모바일 게임 충전
+SEAGM | https://www.seagm.com | SEA | authorized |
+UniPin | https://www.unipin.com | SEA | authorized |
+Midasbuy | https://www.midasbuy.com | GLOBAL | official | 텐센트 공식 (PUBG 모바일 등)
+Razer Gold | https://gold.razer.com | GLOBAL | official |
+Kiosgamer | https://kiosgamer.co.id | ID | official | 가레나 공식 충전
+MooGold | https://moogold.com | GLOBAL | keyshop |
+Lapakgaming | https://www.lapakgaming.com | ID | keyshop |
+OffGamers | https://www.offgamers.com | GLOBAL | keyshop |
+LootBar | https://lootbar.gg | GLOBAL | keyshop |
+TOPUPlive | https://www.topuplive.com | GLOBAL | keyshop |
+Smile.one | https://www.smile.one | BR | keyshop |
+GGTopup | https://ggtopup.com | GLOBAL | keyshop |
+Gamejus | https://gamejus.com | GLOBAL | keyshop |
+Jollymax | https://www.jollymax.com | GLOBAL | keyshop |
+Recharge.com | https://www.recharge.com | GLOBAL | authorized | 기프트카드·충전
+Dundle | https://dundle.com | GLOBAL | authorized | 기프트카드
+Bitrefill | https://www.bitrefill.com | GLOBAL | authorized | 암호화폐로 기프트카드 구매
+Coinsbee | https://www.coinsbee.com | GLOBAL | keyshop | 암호화폐로 기프트카드 구매
+Cryptorefills | https://www.cryptorefills.com | GLOBAL | keyshop |
+Gamecardsdirect | https://www.gamecardsdirect.com | EU | authorized |
+Prepaid Gamer Card | https://prepaidgamercard.com | GLOBAL | keyshop |
+MyGiftCardSupply | https://www.mygiftcardsupply.com | US | keyshop |
+Raise | https://www.raise.com | US | marketplace | 기프트카드 할인 재판매
+CardCash | https://www.cardcash.com | US | marketplace | 기프트카드 할인 재판매
+Gift Card Granny | https://www.giftcardgranny.com | US | compare | 기프트카드 할인 비교
+Gift Card Mall | https://www.giftcardmall.com | US | authorized |
+GiftCards.com | https://www.giftcards.com | US | authorized |
+Gyft | https://www.gyft.com | US | authorized |
+paysafecard | https://www.paysafecard.com | EU | official | 선불 결제 카드
+Neosurf | https://www.neosurf.com | EU | official | 선불 결제 카드
+Apple 기프트카드 | https://www.apple.com/shop/gift-cards | GLOBAL | official |
+Google Play 기프트카드 | https://play.google.com/about/giftcards/ | GLOBAL | official |
+컬쳐랜드 | https://www.cultureland.co.kr | KR | official | 문화상품권
+북앤라이프 | https://www.booknlife.com | KR | official | 도서문화상품권
+틴캐시 | https://www.teencash.co.kr | KR | official | 게임 선불카드
+기프티쇼 | https://www.giftishow.com | KR | authorized | 모바일 상품권
+카카오톡 선물하기 | https://gift.kakao.com | KR | authorized | 모바일 상품권·이용권
+PAYCO | https://www.payco.com | KR | authorized | 쿠폰·상품권
+
+## deals | 핫딜 커뮤니티 · 가격 비교
+다나와 | https://www.danawa.com | KR | compare |
+에누리 | https://www.enuri.com | KR | compare |
+네이버 쇼핑 | https://shopping.naver.com | KR | compare |
+뽐뿌 | https://www.ppomppu.co.kr | KR | community | 핫딜
+루리웹 핫딜 | https://bbs.ruliweb.com/market/board/1020 | KR | community | 게임 할인 정보 많음
+퀘이사존 핫딜 | https://quasarzone.com/bbs/qb_saleinfo | KR | community |
+클리앙 알뜰구매 | https://www.clien.net/service/board/jirum | KR | community |
+에펨코리아 핫딜 | https://www.fmkorea.com/hotdeal | KR | community |
+아카라이브 핫딜 | https://arca.live/b/hotdeal | KR | community |
+쿨엔조이 | https://coolenjoy.net | KR | community |
+Google Shopping | https://shopping.google.com | GLOBAL | compare |
+Slickdeals | https://slickdeals.net | US | community |
+HotUKDeals | https://www.hotukdeals.com | UK | community |
+mydealz | https://www.mydealz.de | DE | community |
+Dealabs | https://www.dealabs.com | FR | community |
+Pepper.pl | https://www.pepper.pl | PL | community |
+Chollometro | https://www.chollometro.com | ES | community |
+OzBargain | https://www.ozbargain.com.au | AU | community |
+RedFlagDeals | https://forums.redflagdeals.com | CA | community |
+Promodescuentos | https://www.promodescuentos.com | MX | community |
+DesiDime | https://www.desidime.com | IN | community |
+Pelando | https://www.pelando.com.br | BR | community |
+camelcamelcamel | https://camelcamelcamel.com | US | compare | 아마존 가격 추적
+Keepa | https://keepa.com | GLOBAL | compare | 아마존 가격 추적
+PriceRunner | https://www.pricerunner.com | UK | compare |
+PriceSpy | https://pricespy.co.uk | UK | compare |
+idealo | https://www.idealo.de | DE | compare |
+Geizhals | https://geizhals.de | DE | compare |
+価格.com | https://kakaku.com | JP | compare |
+Ceneo | https://www.ceneo.pl | PL | compare |
+Heureka | https://www.heureka.cz | CZ | compare |
+Tweakers Pricewatch | https://tweakers.net/pricewatch/ | NL | compare |
+
+## marketplace | 종합 쇼핑몰 · 오픈마켓 (디지털 코드·이용권 판매)
+쿠팡 | https://www.coupang.com | KR | store |
+11번가 | https://www.11st.co.kr | KR | store |
+G마켓 | https://www.gmarket.co.kr | KR | store |
+옥션 | https://www.auction.co.kr | KR | store |
+SSG.COM | https://www.ssg.com | KR | store |
+롯데ON | https://www.lotteon.com | KR | store |
+Amazon (미국) | https://www.amazon.com | US | store | 킨들·기프트카드·소프트웨어
+Amazon (일본) | https://www.amazon.co.jp | JP | store |
+Amazon (영국) | https://www.amazon.co.uk | UK | store |
+Amazon (독일) | https://www.amazon.de | DE | store |
+Amazon (프랑스) | https://www.amazon.fr | FR | store |
+Amazon (이탈리아) | https://www.amazon.it | IT | store |
+Amazon (스페인) | https://www.amazon.es | ES | store |
+Amazon (네덜란드) | https://www.amazon.nl | NL | store |
+Amazon (스웨덴) | https://www.amazon.se | SE | store |
+Amazon (폴란드) | https://www.amazon.pl | PL | store |
+Amazon (벨기에) | https://www.amazon.com.be | BE | store |
+Amazon (캐나다) | https://www.amazon.ca | CA | store |
+Amazon (멕시코) | https://www.amazon.com.mx | MX | store |
+Amazon (브라질) | https://www.amazon.com.br | BR | store |
+Amazon (호주) | https://www.amazon.com.au | AU | store |
+Amazon (인도) | https://www.amazon.in | IN | store |
+Amazon (싱가포르) | https://www.amazon.sg | SG | store |
+Amazon (UAE) | https://www.amazon.ae | AE | store |
+Amazon (사우디) | https://www.amazon.sa | SA | store |
+Amazon (튀르키예) | https://www.amazon.com.tr | TR | store |
+Amazon (이집트) | https://www.amazon.eg | EG | store |
+eBay | https://www.ebay.com | GLOBAL | marketplace |
+Walmart | https://www.walmart.com | US | store |
+Target | https://www.target.com | US | store |
+楽天市場 | https://www.rakuten.co.jp | JP | store |
+Yahoo!ショッピング | https://shopping.yahoo.co.jp | JP | store |
+ヨドバシ.com | https://www.yodobashi.com | JP | store | 다운로드 소프트웨어 판매
+ビックカメラ.com | https://www.biccamera.com | JP | store |
+AliExpress | https://www.aliexpress.com | GLOBAL | marketplace | 디지털 키는 위험
+Lazada | https://www.lazada.com | SEA | store |
+Shopee | https://shopee.com | SEA | store |
+Tokopedia | https://www.tokopedia.com | ID | store |
+Flipkart | https://www.flipkart.com | IN | store |
+Mercado Libre | https://www.mercadolibre.com | MX | store | 중남미
+Allegro | https://allegro.pl | PL | marketplace |
+Qoo10 | https://www.qoo10.com | SEA | marketplace |
+Cdiscount | https://www.cdiscount.com | FR | store |
+Currys | https://www.currys.co.uk | UK | store |
+JD.com (京东) | https://www.jd.com | CN | store |
+淘宝 (Taobao) | https://www.taobao.com | CN | marketplace |
+天猫 (Tmall) | https://www.tmall.com | CN | store |
+
+## esim | eSIM · 해외 데이터
+Airalo | https://www.airalo.com | GLOBAL | official |
+Holafly | https://esim.holafly.com | GLOBAL | official | 무제한 데이터
+Nomad | https://www.getnomad.app | GLOBAL | official |
+Ubigi | https://cellulardata.ubigi.com | GLOBAL | official |
+Saily | https://saily.com | GLOBAL | official | NordVPN 운영사
+Jetpac | https://www.jetpacglobal.com | GLOBAL | official |
+Roamify | https://www.getroamify.com | GLOBAL | official |
+Yesim | https://yesim.app | GLOBAL | official |
+GigSky | https://www.gigsky.com | GLOBAL | official |
+aloSIM | https://www.alosim.com | GLOBAL | official |
+Roamless | https://roamless.com | GLOBAL | official |
+GoMoWorld | https://www.gomoworld.com | GLOBAL | official |
+Maya Mobile | https://maya.net | GLOBAL | official |
+Keepgo | https://www.keepgo.com | GLOBAL | official |
+BNESIM | https://www.bnesim.com | GLOBAL | official |
+Flexiroam | https://www.flexiroam.com | GLOBAL | official |
+Simly | https://www.simly.io | GLOBAL | official |
+Cellesim | https://cellesim.com | GLOBAL | official |
+MobiMatter | https://mobimatter.com | GLOBAL | marketplace | 여러 통신사 eSIM 모음
+말톡 | https://shop.maaltalk.com | KR | official | 국내 업체
+eSIMDB | https://esimdb.com | GLOBAL | compare | eSIM 요금 비교
+eSIMpass | https://www.esimpass.com | GLOBAL | compare |
+
+## domain | 도메인
+Namecheap | https://www.namecheap.com | GLOBAL | official |
+Porkbun | https://porkbun.com | GLOBAL | official |
+Cloudflare Registrar | https://www.cloudflare.com/products/registrar/ | GLOBAL | official | 원가 판매
+GoDaddy | https://www.godaddy.com | GLOBAL | official |
+Dynadot | https://www.dynadot.com | GLOBAL | official |
+Name.com | https://www.name.com | GLOBAL | official |
+Spaceship | https://www.spaceship.com | GLOBAL | official |
+Hover | https://www.hover.com | GLOBAL | official |
+Gandi | https://www.gandi.net | EU | official |
+Squarespace Domains | https://domains.squarespace.com | GLOBAL | official |
+가비아 | https://www.gabia.com | KR | official |
+후이즈 | https://whois.co.kr | KR | official |
+TLD-List | https://tld-list.com | GLOBAL | compare | 도메인 가격 비교

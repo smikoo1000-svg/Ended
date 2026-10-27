@@ -1,0 +1,111 @@
+## music | 음악 · 다운로드 · 스트리밍 · 악보
+멜론 | https://www.melon.com | KR | official |
+지니뮤직 | https://www.genie.co.kr | KR | official |
+벅스 | https://music.bugs.co.kr | KR | official | 고음질 다운로드
+FLO | https://www.music-flo.com | KR | official |
+VIBE | https://vibe.naver.com | KR | official |
+YouTube Music | https://music.youtube.com | GLOBAL | official |
+Spotify | https://www.spotify.com | GLOBAL | official |
+Apple Music | https://www.apple.com/apple-music/ | GLOBAL | official |
+iTunes Store | https://www.apple.com/itunes/ | GLOBAL | official | 음원 구매
+Amazon Music | https://music.amazon.com | GLOBAL | official |
+Tidal | https://tidal.com | GLOBAL | official |
+Deezer | https://www.deezer.com | GLOBAL | official |
+Qobuz | https://www.qobuz.com | GLOBAL | official | 고음질 스트리밍·다운로드
+SoundCloud | https://soundcloud.com | GLOBAL | official |
+Pandora | https://www.pandora.com | US | official |
+Audiomack | https://audiomack.com | GLOBAL | official |
+Mixcloud | https://www.mixcloud.com | GLOBAL | official |
+IDAGIO | https://www.idagio.com | GLOBAL | official | 클래식
+KKBOX | https://www.kkbox.com | TW | official |
+JOOX | https://www.joox.com | SEA | official |
+Anghami | https://www.anghami.com | AE | official |
+Boomplay | https://www.boomplay.com | GLOBAL | official | 아프리카
+JioSaavn | https://www.jiosaavn.com | IN | official |
+Gaana | https://gaana.com | IN | official |
+网易云音乐 | https://music.163.com | CN | official |
+QQ音乐 | https://y.qq.com | CN | official |
+Яндекс Музыка | https://music.yandex.ru | RU | official |
+mora | https://mora.jp | JP | official | 고음질 다운로드
+OTOTOY | https://ototoy.jp | JP | official | 고음질 다운로드
+レコチョク | https://recochoku.jp | JP | official |
+Bandcamp | https://bandcamp.com | GLOBAL | official | 아티스트 직접 판매, DRM-free
+HDtracks | https://www.hdtracks.com | GLOBAL | official | 고음질 다운로드
+ProStudioMasters | https://www.prostudiomasters.com | GLOBAL | official | 고음질 다운로드
+7digital | https://www.7digital.com | GLOBAL | official |
+Beatport | https://www.beatport.com | GLOBAL | official | 전자음악
+Traxsource | https://www.traxsource.com | GLOBAL | official | 전자음악
+Juno Download | https://www.junodownload.com | UK | official | 전자음악
+Bleep | https://bleep.com | UK | official |
+Boomkat | https://boomkat.com | UK | official |
+Presto Music | https://www.prestomusic.com | UK | official | 클래식
+NativeDSD | https://www.nativedsd.com | GLOBAL | official | DSD
+eClassical | https://www.eclassical.com | GLOBAL | official | 클래식
+Linn Records | https://www.linnrecords.com | UK | official |
+Hyperion Records | https://www.hyperion-records.co.uk | UK | official | 클래식
+Chandos | https://www.chandos.net | UK | official | 클래식
+2L | https://www.2l.no | EU | official | 고음질
+Acoustic Sounds | https://www.acousticsounds.com | US | official |
+Musicnotes | https://www.musicnotes.com | GLOBAL | official | 디지털 악보
+Sheet Music Plus | https://www.sheetmusicplus.com | GLOBAL | official | 디지털 악보
+Sheet Music Direct | https://www.sheetmusicdirect.com | GLOBAL | official | 디지털 악보
+MuseScore | https://musescore.com | GLOBAL | official | 악보
+악보바다 | https://www.akbobada.com | KR | official | 디지털 악보
+
+## video | 영화 · 동영상 (구매 · 대여 · 구독)
+넷플릭스 | https://www.netflix.com | GLOBAL | official |
+디즈니+ | https://www.disneyplus.com | GLOBAL | official |
+티빙 | https://www.tving.com | KR | official |
+웨이브 | https://www.wavve.com | KR | official |
+쿠팡플레이 | https://www.coupangplay.com | KR | official |
+왓챠 | https://watcha.com | KR | official |
+라프텔 | https://laftel.net | KR | official | 애니메이션
+YouTube Premium | https://www.youtube.com/premium | GLOBAL | official |
+Apple TV | https://tv.apple.com | GLOBAL | official | 영화 구매·대여
+Google Play 영화 | https://play.google.com/store/movies | GLOBAL | official | 영화 구매·대여
+Prime Video | https://www.primevideo.com | GLOBAL | official | 구독·구매·대여
+Fandango at Home (구 Vudu) | https://athome.fandango.com | US | official | 영화 구매·대여
+Movies Anywhere | https://moviesanywhere.com | US | official | 구매 영화 통합
+Rakuten TV | https://www.rakuten.tv | EU | official | 영화 구매·대여
+Sky Store | https://www.skystore.com | UK | official | 영화 구매·대여
+NOW | https://www.nowtv.com | UK | official |
+HBO Max | https://www.hbomax.com | GLOBAL | official |
+Hulu | https://www.hulu.com | US | official |
+Paramount+ | https://www.paramountplus.com | GLOBAL | official |
+Peacock | https://www.peacocktv.com | US | official |
+Crunchyroll | https://www.crunchyroll.com | GLOBAL | official | 애니메이션
+MUBI | https://mubi.com | GLOBAL | official | 예술영화
+Criterion Channel | https://www.criterionchannel.com | US | official |
+Shudder | https://www.shudder.com | GLOBAL | official | 공포
+CuriosityStream | https://curiositystream.com | GLOBAL | official | 다큐멘터리
+DAZN | https://www.dazn.com | GLOBAL | official | 스포츠
+ESPN+ | https://plus.espn.com | US | official | 스포츠
+Tubi | https://tubitv.com | GLOBAL | free | 광고형 무료
+Pluto TV | https://pluto.tv | GLOBAL | free | 광고형 무료
+Viki | https://www.viki.com | GLOBAL | official | 아시아 드라마
+iQIYI | https://www.iq.com | GLOBAL | official |
+WeTV | https://wetv.vip | GLOBAL | official |
+Viu | https://www.viu.com | SEA | official |
+Vidio | https://www.vidio.com | ID | official |
+CATCHPLAY+ | https://www.catchplay.com | SEA | official |
+JioHotstar | https://www.hotstar.com | IN | official |
+SonyLIV | https://www.sonyliv.com | IN | official |
+ZEE5 | https://www.zee5.com | IN | official |
+Shahid | https://shahid.mbc.net | AE | official |
+OSN+ | https://www.osnplus.com | AE | official |
+Globoplay | https://globoplay.globo.com | BR | official |
+U-NEXT | https://video.unext.jp | JP | official |
+ABEMA | https://abema.tv | JP | official |
+dアニメストア | https://animestore.docomo.ne.jp | JP | official | 애니메이션
+Hulu (일본) | https://www.hulu.jp | JP | official |
+DMM TV | https://tv.dmm.com | JP | official |
+Lemino | https://lemino.docomo.ne.jp | JP | official |
+FOD | https://fod.fujitv.co.jp | JP | official |
+腾讯视频 | https://v.qq.com | CN | official |
+优酷 | https://www.youku.com | CN | official |
+哔哩哔哩 | https://www.bilibili.com | CN | official |
+Кинопоиск | https://www.kinopoisk.ru | RU | official |
+Okko | https://okko.tv | RU | official |
+ivi | https://www.ivi.ru | RU | official |
+JustWatch | https://www.justwatch.com | GLOBAL | compare | 어디서 볼 수 있는지·가격 비교
+키노라이츠 | https://m.kinolights.com | KR | compare | 국내 OTT 작품 찾기
