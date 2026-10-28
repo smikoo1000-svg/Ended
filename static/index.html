@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ended - 최저가 알리미</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#6b7280;--bd:#e5e7eb;--ac:#2563eb;--ok:#16a34a}
+@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8e8ea;--mut:#9ca3af;--bd:#2a2e37;--ac:#60a5fa;--ok:#4ade80}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}h1{font-size:20px}h2{font-size:15px;margin-top:28px}
+.row{display:flex;gap:8px;flex-wrap:wrap}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg)}
+input[type=text]{flex:1;min-width:160px}button{cursor:pointer}button.p{background:var(--ac);border-color:var(--ac);color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:12px}td,th{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:500;font-size:13px}.num{text-align:right;white-space:nowrap}.mut{color:var(--mut);font-size:13px}
+.tag{font-size:12px;padding:1px 6px;border-radius:99px;border:1px solid var(--bd)}.sc{color:var(--ok);font-weight:600}
+a{color:var(--ac)}.wrap{overflow-x:auto}
+dialog{border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--fg);width:min(640px,92vw)}
+dialog::backdrop{background:#0006}svg text{fill:var(--mut);font-size:11px}
+.l1{stroke:var(--ac)}.l2{stroke:var(--mut);stroke-dasharray:4 3}a.pk{cursor:pointer;color:var(--ac);text-decoration:underline dotted}
+</style>
+</head>
+<body><main>
+<h1>Ended <span class="mut">비공식 마켓 최저가 · 신규 · 가성비</span></h1>
+<div class="row">
+  <input type="text" id="q" placeholder="검색어 (예: Netflix, ChatGPT Plus)">
+  <select id="sort"><option value="price">최저가순</option><option value="new">신규순</option><option value="value">가성비순</option></select>
+  <button class="p" id="go">검색</button><button id="rf" title="모든 사이트 즉시 재수집">새로고침</button>
+</div>
+<div class="wrap"><table><thead><tr><th>상품</th><th>사이트</th><th>판매자</th><th class="num">가격</th><th class="num">신뢰도</th><th class="num">점수</th></tr></thead><tbody id="rs"></tbody></table></div>
+<p class="mut" id="info"></p>
+
+<h2>알림 규칙</h2>
+<div class="row" style="margin-bottom:8px"><input type="password" id="tok" placeholder="관리자 토큰 (서버에 ADMIN_TOKEN 설정 시)" style="max-width:320px"></div>
+<div class="row">
+  <input type="text" id="wk" placeholder="키워드">
+  <input type="number" id="wp" placeholder="최대가(원)" style="width:130px">
+  <input type="number" id="ws" placeholder="최소 점수" style="width:110px">
+  <button class="p" id="wadd">추가</button>
+</div>
+<div id="ws-list"></div>
+<h2>최근 알림</h2><div id="al" class="mut">없음</div>
+<h2>수집 상태</h2><div id="st" class="mut"></div>
+</main>
+<dialog id="dlg"><div class="row" style="justify-content:space-between"><b id="dt"></b><button id="dx">닫기</button></div>
+<div id="dc" style="margin-top:8px"></div><p class="mut" id="dn"></p></dialog>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safe=u=>/^https?:\/\//i.test(u)?u:'#';
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const tok=$('tok');try{tok.value=localStorage.getItem('tok')||''}catch(e){}
+tok.onchange=()=>{try{localStorage.setItem('tok',tok.value)}catch(e){}};
+async function api(p,o={}){o.headers={...(o.headers||{}),'X-Admin-Token':tok.value};const r=await fetch(p,o);if(!r.ok)throw new Error(await r.text());return r.json()}
+async function search(){
+  const q=$('q').value.trim();if(!q)return;
+  const d=await api(`/api/search?q=${encodeURIComponent(q)}&sort=${$('sort').value}`);
+  $('info').textContent=`${d.count}개 매물`;
+  $('rs').innerHTML=d.items.map(r=>`<tr><td><a href="${esc(safe(r.url))}" target="_blank" rel="noopener noreferrer nofollow">${esc(r.title)}</a>
+  ${r.product_key?`<div class="mut"><a class="pk" data-pk="${esc(r.product_key)}">📈 ${esc(r.product_key.replace(/\|-\|/,'|'))}</a>${r.duration_months&&r.duration_months>1?` · 월 ${won(r.unit_price_krw)}`:''} · 비교 ${r.group_size}건</div>`:''}</td>
+  <td><span class="tag">${esc(r.source)}</span></td><td>${esc(r.seller||'-')}<div class="mut">${r.seller_rating??'-'}★ · 리뷰 ${r.seller_reviews??'?'} · 판매 ${r.seller_sales??'?'}</div></td>
+  <td class="num">${won(r.price_krw)}</td><td class="num">${Math.round(r.trust*100)}%</td><td class="num sc">${r.score}</td></tr>`).join('')||'<tr><td colspan=6 class="mut">결과 없음</td></tr>';
+  document.querySelectorAll('[data-pk]').forEach(a=>a.onclick=()=>chart(a.dataset.pk));
+}
+function draw(rows){
+  const W=600,H=220,L=62,R=10,T=10,B=26;
+  if(rows.length<2)return '<p class="mut">추이를 그리려면 수집이 2회 이상 필요합니다. (현재 '+rows.length+'회)</p>';
+  const t=rows.map(r=>new Date(r.ts).getTime()),t0=Math.min(...t),t1=Math.max(...t);
+  const ys=rows.flatMap(r=>[r.min_price_krw,r.median_price_krw]),y0=Math.min(...ys)*0.95,y1=Math.max(...ys)*1.05;
+  const X=v=>L+(t1===t0?0:(v-t0)/(t1-t0))*(W-L-R),Y=v=>T+(1-(v-y0)/(y1-y0||1))*(H-T-B);
+  const line=(k,c)=>`<polyline class="${c}" fill="none" stroke-width="2" points="${rows.map((r,i)=>X(t[i])+','+Y(r[k])).join(' ')}"/>`;
+  const fmt=v=>new Date(v).toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'numeric'});
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="가격 추이">
+  ${[0,.5,1].map(f=>{const v=y0+(y1-y0)*f;return `<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--bd)"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${Math.round(v).toLocaleString()}</text>`}).join('')}
+  ${line('median_price_krw','l2')}${line('min_price_krw','l1')}
+  <text x="${L}" y="${H-6}">${fmt(t0)}</text><text x="${W-R}" y="${H-6}" text-anchor="end">${fmt(t1)}</text></svg>
+  <p class="mut"><span style="color:var(--ac)">━</span> 최저가 &nbsp; <span>┅</span> 중앙값</p>`;
+}
+async function chart(pk){
+  $('dt').textContent=pk.replace('|-|','|');$('dc').innerHTML='불러오는 중…';$('dlg').showModal();
+  const h=await api('/api/history?product_key='+encodeURIComponent(pk)+'&days=30');
+  $('dc').innerHTML=draw(h);
+  const last=h[h.length-1];$('dn').textContent=last?`현재 최저 ${won(last.min_price_krw)} · 중앙값 ${won(last.median_price_krw)} · ${last.n}개 매물`:'';
+}
+$('dx').onclick=()=>$('dlg').close();
+async function watches(){
+  const w=await api('/api/watches');
+  $('ws-list').innerHTML=w.map(x=>`<div class="row" style="margin:6px 0;align-items:center"><b>${esc(x.keyword)}</b>
+  <span class="mut">${x.max_price_krw?won(x.max_price_krw)+' 이하':'가격제한 없음'}${x.min_score?' · 점수 '+x.min_score+'+':''}</span>
+  <button data-d="${x.id}">삭제</button></div>`).join('')||'<div class="mut">알림 규칙이 없습니다.</div>';
+  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=async()=>{await api('/api/watches/'+b.dataset.d,{method:'DELETE'});watches()});
+}
+async function side(){
+  const a=await api('/api/alerts');
+  const lbl={new:'🆕 신규',cheapest:'💰 최저가',best_value:'⭐ 가성비'};
+  $('al').innerHTML=a.map(x=>`<div>${lbl[x.kind]} [${esc(x.keyword)}] <a href="${esc(safe(x.url))}" target="_blank" rel="noopener noreferrer nofollow">${esc(x.title)}</a> · ${won(x.price_krw)} · ${esc(x.source)}</div>`).join('')||'없음';
+  const s=await api('/api/sources');
+  $('st').innerHTML=s.map(x=>`<span class="tag" style="margin:2px;display:inline-block" title="${esc(x.error||'')}">${x.ok?'🟢':'🔴'} ${esc(x.source)} ${x.count}</span>`).join('')||'아직 수집 전';
+}
+$('go').onclick=search;$('q').onkeydown=e=>e.key==='Enter'&&search();
+$('rf').onclick=async()=>{$('rf').disabled=true;try{const q=$('q').value.trim();await api('/api/refresh'+(q?'?q='+encodeURIComponent(q):''),{method:'POST'});await search();side()}finally{$('rf').disabled=false}};
+$('wadd').onclick=async()=>{const k=$('wk').value.trim();if(!k)return;
+  await api('/api/watches',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({keyword:k,max_price_krw:+$('wp').value||null,min_score:+$('ws').value||null})});
+  $('wk').value='';watches()};
+watches();side();setInterval(side,30000);
+</script>
+</body></html>

@@ -1,0 +1,11 @@
+services:
+  ended:
+    build: .
+    restart: unless-stopped
+    ports: ["8000:8000"]
+    env_file: .env
+    volumes:
+      - ended-data:/data
+      - ./sources.yaml:/app/sources.yaml:ro   # edit sites without rebuilding; restart to apply
+volumes:
+  ended-data:
