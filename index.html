@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>매물레이더</title>
+<meta name="description" content="게임 키·구독·계정·기프트카드 매물을 가격순으로 비교하고, 평점·별점·신뢰도를 한눈에 확인하는 모바일 시세 레이더">
+<meta name="theme-color" content="#121B2B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: navy price-ticker header with search + tabs, then one ruled list sheet per panel; price column docks right on wide screens, under the title on phones. */
+:root {
+  --bg: #EDF0F5;
+  --surface: #FFFFFF;
+  --surface-2: #F5F7FA;
+  --ink: #111A28;
+  --muted: #5C687B;
+  --line: #DAE0E8;
+  --accent: #EE4F16;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #FFE7DC;
+  --star: #E5A000;
+  --star-empty: #CDD4DE;
+  --head-bg: #121B2B;
+  --head-ink: #F2F5F9;
+  --head-muted: #98A6BB;
+  --head-field: #1D293D;
+  --head-line: #2B3A52;
+  --t-s: #0E8452;
+  --t-a: #2860C4;
+  --t-b: #A86F12;
+  --t-c: #CC5119;
+  --t-d: #C42F38;
+  --font-display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 12px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1018; --surface: #131A26; --surface-2: #19212F; --ink: #E6EBF2; --muted: #94A1B4; --line: #253045;
+    --accent: #FF6A34; --accent-ink: #160B05; --accent-soft: #3B1F13; --star: #F3B83A; --star-empty: #36435A;
+    --head-bg: #070B12; --head-ink: #E6EBF2; --head-muted: #8794A8; --head-field: #141C2A; --head-line: #222D40;
+    --t-s: #3DC98A; --t-a: #74A2F7; --t-b: #E2AA4E; --t-c: #F2834F; --t-d: #F2707A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1018; --surface: #131A26; --surface-2: #19212F; --ink: #E6EBF2; --muted: #94A1B4; --line: #253045;
+  --accent: #FF6A34; --accent-ink: #160B05; --accent-soft: #3B1F13; --star: #F3B83A; --star-empty: #36435A;
+  --head-bg: #070B12; --head-ink: #E6EBF2; --head-muted: #8794A8; --head-field: #141C2A; --head-line: #222D40;
+  --t-s: #3DC98A; --t-a: #74A2F7; --t-b: #E2AA4E; --t-c: #F2834F; --t-d: #F2707A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.55 var(--font-body);
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  background: var(--head-bg); z-index: 30;
+}
+img { max-width: 100%; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap {
+  max-width: 900px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- header ---------- */
+.top {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--head-bg); color: var(--head-ink);
+  padding-top: env(safe-area-inset-top, 0px);
+  border-bottom: 1px solid var(--head-line);
+}
+.top .wrap { padding-block: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; overflow: hidden; }
+.brand h1 { margin: 0; font: 400 25px/1 var(--font-display); letter-spacing: .5px; white-space: nowrap; }
+.brand h1 b { font-weight: 400; color: var(--accent); }
+.brand small { color: var(--head-muted); font-size: 12px; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.live { display: inline-flex; align-items: center; gap: 6px; font: 500 11.5px/1 var(--font-mono); color: var(--head-muted); white-space: nowrap; }
+.live i { width: 8px; height: 8px; border-radius: 50%; background: var(--head-muted); }
+.live[data-state="on"] i { background: var(--t-s); box-shadow: 0 0 0 0 var(--t-s); animation: ping 2.2s infinite; }
+.live[data-state="err"] i { background: var(--t-d); }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--t-s) 70%, transparent); } 80%,100% { box-shadow: 0 0 0 7px transparent; } }
+
+.search { display: flex; gap: 8px; }
+.search .field { position: relative; flex: 1; min-width: 0; }
+.search input {
+  width: 100%; height: 46px; padding: 0 40px 0 14px;
+  border-radius: 10px; border: 1px solid var(--head-line);
+  background: var(--head-field); color: var(--head-ink);
+  font-size: 16px; outline: none;
+}
+.search input::placeholder { color: var(--head-muted); }
+.search input:focus { border-color: var(--accent); }
+.search input::-webkit-search-cancel-button { display: none; }
+.clear {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent;
+  color: var(--head-muted); font-size: 20px; line-height: 1; cursor: pointer;
+}
+.go {
+  height: 46px; padding: 0 18px; border: 0; border-radius: 10px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none; padding: 10px 12px 11px; border: 0; background: none; cursor: pointer;
+  color: var(--head-muted); font-weight: 600; font-size: 14.5px;
+  border-bottom: 3px solid transparent;
+}
+.tab[aria-selected="true"] { color: var(--head-ink); border-bottom-color: var(--accent); }
+.tab .n { font: 500 11.5px var(--font-mono); margin-left: 4px; color: var(--head-muted); }
+
+/* ---------- common ---------- */
+main.wrap { padding-block: 14px 40px; }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seg { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.seg button {
+  border: 0; background: none; padding: 7px 14px; border-radius: 7px; cursor: pointer;
+  font-weight: 600; font-size: 14px; color: var(--muted);
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 7px 12px; border-radius: 999px; font-size: 13.5px; font-weight: 500; cursor: pointer; white-space: nowrap;
+}
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); }
+.chip .n { font: 500 11.5px var(--font-mono); color: var(--muted); margin-left: 3px; }
+select.sel {
+  border: 1px solid var(--line); background: var(--surface); padding: 7px 10px; border-radius: 10px; font-size: 13.5px; cursor: pointer;
+}
+.spacer { flex: 1; }
+.chips-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+
+.summary {
+  display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline;
+  padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  font-size: 13.5px; color: var(--muted);
+}
+.summary b { color: var(--ink); font-weight: 600; }
+.summary .big { font: 400 18px/1.2 var(--font-display); color: var(--ink); }
+.summary .lo { color: var(--t-s); }
+.summary .hi { color: var(--accent); }
+.note { font-size: 12.5px; color: var(--muted); }
+.note a { color: var(--ink); }
+
+.sheet { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.sheet > li + li { border-top: 1px solid var(--line); }
+
+.stars { --v: 0; position: relative; display: inline-block; line-height: 1; font-size: 13px; letter-spacing: 1px; color: var(--star-empty); white-space: nowrap; vertical-align: -1px; }
+.stars::before { content: "★★★★★"; }
+.stars::after { content: "★★★★★"; position: absolute; left: 0; top: 0; width: calc(var(--v) / 5 * 100%); overflow: hidden; color: var(--star); }
+
+.trust { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.trust .sc { font: 500 12px var(--font-mono); padding: 1px 6px; border-radius: 6px; color: var(--surface); }
+.t-s { --tc: var(--t-s); } .t-a { --tc: var(--t-a); } .t-b { --tc: var(--t-b); } .t-c { --tc: var(--t-c); } .t-d { --tc: var(--t-d); }
+.trust { color: var(--tc); }
+.trust .sc { background: var(--tc); }
+
+/* ---------- deals ---------- */
+.deal {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-areas: "thumb main" "price price";
+  gap: 10px 12px; padding: 12px 14px;
+}
+.deal .thumb { grid-area: thumb; display: block; position: relative; align-self: start; }
+.deal .thumb img { display: block; width: 104px; aspect-ratio: 120 / 45; object-fit: cover; border-radius: 6px; background: var(--surface-2); }
+.deal .rank {
+  position: absolute; left: -6px; top: -6px; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 11px;
+  background: var(--ink); color: var(--surface); font: 500 11px/22px var(--font-mono); text-align: center;
+}
+.deal .main { grid-area: main; min-width: 0; display: grid; gap: 4px; }
+.deal .title { font-weight: 600; font-size: 15px; line-height: 1.35; text-wrap: balance; overflow-wrap: anywhere; }
+.deal .title a { text-decoration: none; }
+.deal .title a:hover { text-decoration: underline; }
+.deal .store { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 13px; color: var(--muted); }
+.deal .store img { width: 16px; height: 16px; border-radius: 3px; }
+.deal .store .nm { color: var(--ink); font-weight: 500; }
+.deal .rate { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; font-size: 12.5px; color: var(--muted); }
+.deal .rate b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.deal .rate .meta { font: 500 11.5px var(--font-mono); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.deal .rate .dr { font: 500 11.5px var(--font-mono); }
+.deal .price {
+  grid-area: price; display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap;
+  padding-top: 8px; border-top: 1px dashed var(--line);
+}
+.deal .now { font: 400 22px/1 var(--font-display); letter-spacing: .3px; font-variant-numeric: tabular-nums; }
+.deal .now.free { color: var(--t-s); }
+.deal .alt { font: 500 12px var(--font-mono); color: var(--muted); }
+.deal s { font: 400 12.5px var(--font-mono); color: var(--muted); }
+.deal .cut { font: 500 12px var(--font-mono); background: var(--accent); color: var(--accent-ink); padding: 2px 6px; border-radius: 5px; }
+.deal .lowest { font-size: 11.5px; font-weight: 700; color: var(--t-s); border: 1px solid var(--t-s); padding: 1px 6px; border-radius: 5px; white-space: nowrap; }
+.deal .buy {
+  margin-left: auto; text-decoration: none; font-weight: 700; font-size: 14px;
+  padding: 9px 16px; border-radius: 9px; background: var(--ink); color: var(--surface); white-space: nowrap;
+}
+.deal .buy:hover { background: var(--accent); color: var(--accent-ink); }
+.deal .ago { font-size: 11.5px; color: var(--muted); }
+@media (min-width: 680px) {
+  .deal { grid-template-columns: 136px minmax(0, 1fr) 210px; grid-template-areas: "thumb main price"; align-items: center; }
+  .deal .thumb img { width: 136px; }
+  .deal .price { border-top: 0; padding-top: 0; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+  .deal .buy { margin-left: 0; margin-top: 4px; }
+}
+
+.more { justify-self: center; border: 1px solid var(--line); background: var(--surface); padding: 10px 22px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.state { padding: 28px 18px; text-align: center; color: var(--muted); display: grid; gap: 10px; justify-items: center; }
+.state strong { color: var(--ink); font-size: 16px; }
+.state .btn { border: 0; background: var(--accent); color: var(--accent-ink); padding: 9px 16px; border-radius: 9px; font-weight: 700; cursor: pointer; text-decoration: none; }
+.skel { height: 96px; background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%); background-size: 200% 100%; animation: sk 1.2s infinite linear; }
+@keyframes sk { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* ---------- markets ---------- */
+.mk { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 12px 14px; }
+.mk.hit { background: var(--accent-soft); }
+.mk .hd { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.mk .nm { font-weight: 700; font-size: 15.5px; }
+.mk .cat { font-size: 11.5px; font-weight: 600; color: var(--muted); border: 1px solid var(--line); padding: 0 7px; border-radius: 999px; }
+.mk .rg { font-size: 12px; color: var(--muted); }
+.mk .dm { font: 400 12px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.mk .tr { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.mk .meter { width: 90px; height: 6px; border-radius: 3px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+.mk .meter i { display: block; height: 100%; background: var(--tc); }
+.mk .act { display: flex; flex-wrap: wrap; gap: 6px; }
+.mk .act a {
+  text-decoration: none; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); white-space: nowrap;
+}
+.mk .act a.pri { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.mk .act a.pri:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+@media (min-width: 680px) {
+  .mk { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 16px; }
+  .mk .act { grid-column: 2; grid-row: 1 / span 3; justify-content: flex-end; }
+}
+
+/* ---------- guide ---------- */
+.prose { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 14px; }
+.prose h2 { margin: 0; font: 400 19px/1.3 var(--font-display); letter-spacing: .3px; text-wrap: balance; }
+.prose p, .prose ul { margin: 0; max-width: 65ch; }
+.prose ul { padding-left: 20px; display: grid; gap: 4px; }
+.tbl { overflow-x: auto; }
+.tbl table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 13.5px; }
+.tbl th, .tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl th { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+
+footer.wrap { padding-block: 0 32px; font-size: 12px; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="brand">
+        <h1>매물<b>레이더</b></h1>
+        <small>게임 키 · 구독 · 계정 · 기프트카드</small>
+      </div>
+      <span class="live" id="live" data-state="idle"><i></i><span id="liveText">연결 중</span></span>
+    </div>
+    <form class="search" id="searchForm" role="search">
+      <div class="field">
+        <input id="q" type="search" enterkeyhint="search" autocomplete="off" aria-label="매물 검색"
+               placeholder="예: 엘든링, 넷플릭스, 스팀 기프트카드">
+        <button type="button" class="clear" id="clearQ" aria-label="검색어 지우기" hidden>×</button>
+      </div>
+      <button class="go" type="submit">검색</button>
+    </form>
+    <nav class="tabs" role="tablist" aria-label="보기 전환">
+      <button class="tab" role="tab" id="tab-deals" aria-controls="panel-deals" aria-selected="true">실시간 매물<span class="n" id="nDeals"></span></button>
+      <button class="tab" role="tab" id="tab-markets" aria-controls="panel-markets" aria-selected="false">마켓 전체<span class="n" id="nMarkets"></span></button>
+      <button class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" aria-selected="false">신뢰도 기준</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 실시간 매물 -->
+  <section class="panel" id="panel-deals" role="tabpanel" aria-labelledby="tab-deals">
+    <div class="controls">
+      <div class="seg" id="modeSeg" role="group" aria-label="목록 종류">
+        <button type="button" data-mode="cheap" aria-pressed="true">싼 매물</button>
+        <button type="button" data-mode="pricey" aria-pressed="false">비싼 매물</button>
+      </div>
+      <select class="sel" id="sort" aria-label="정렬">
+        <option value="price-asc">가격 낮은순</option>
+        <option value="price-desc">가격 높은순</option>
+        <option value="rating">평점 높은순</option>
+        <option value="trust">신뢰도 높은순</option>
+        <option value="savings">할인율 높은순</option>
+      </select>
+      <button type="button" class="chip" id="fGood" aria-pressed="false">평점 80%+</button>
+      <button type="button" class="chip" id="fOfficial" aria-pressed="false">공식 스토어만</button>
+      <span class="spacer"></span>
+      <button type="button" class="chip" id="fCur" aria-pressed="false">₩ 원화</button>
+    </div>
+    <div class="summary" id="dealSummary"></div>
+    <ol class="sheet" id="dealList" aria-live="polite"></ol>
+    <button type="button" class="more" id="moreBtn" hidden>더 보기</button>
+    <p class="note" id="dealNote"></p>
+  </section>
+
+  <!-- 마켓 전체 -->
+  <section class="panel" id="panel-markets" role="tabpanel" aria-labelledby="tab-markets" hidden>
+    <div class="summary" id="mkSummary"></div>
+    <div class="chips-scroll" id="catChips" role="group" aria-label="분류"></div>
+    <div class="controls">
+      <select class="sel" id="mkSort" aria-label="마켓 정렬">
+        <option value="trust-desc">신뢰도 높은순</option>
+        <option value="trust-asc">신뢰도 낮은순</option>
+        <option value="name">이름순</option>
+      </select>
+      <select class="sel" id="mkRegion" aria-label="지역"></select>
+    </div>
+    <ul class="sheet" id="mkList"></ul>
+    <p class="note">각 마켓의 <b>검색</b> 버튼은 그 사이트의 검색 결과를 바로 엽니다. 가격순 정렬을 지원하는 사이트는 낮은 가격순으로 열립니다. 자체 검색 주소를 알 수 없는 곳은 Google의 사이트 한정 검색으로 엽니다.</p>
+  </section>
+
+  <!-- 신뢰도 기준 -->
+  <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
+    <article class="prose">
+      <h2>신뢰도 점수는 이렇게 매겼습니다</h2>
+      <p>공식 판매 여부, 판매 방식(직판 · 오픈마켓 · 개인 간 거래), 구매자 보호와 환불 정책, 운영 기간과 알려진 사고 이력을 기준으로 한 자체 평가입니다. 실제 이용자 별점은 각 마켓의 <b>이용자 별점</b> 버튼(Trustpilot)에서 바로 확인할 수 있습니다.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>등급</th><th>점수</th><th>해당하는 곳</th></tr></thead>
+          <tbody>
+            <tr><td><span class="trust t-s"><span class="sc">S</span>매우 높음</span></td><td>90–100</td><td>플랫폼 공식 스토어, 브랜드 공식 구독, 대형 공인 리셀러, 대형 종합몰</td></tr>
+            <tr><td><span class="trust t-a"><span class="sc">A</span>높음</span></td><td>80–89</td><td>퍼블리셔 인증 키 판매처, 정식 기프트카드 · 충전 판매처</td></tr>
+            <tr><td><span class="trust t-b"><span class="sc">B</span>보통</span></td><td>65–79</td><td>구매자 보호가 있는 키 · 스킨 마켓, 중고 거래 플랫폼</td></tr>
+            <tr><td><span class="trust t-c"><span class="sc">C</span>주의</span></td><td>50–64</td><td>개인 판매자 중심 키 마켓, 구독 공유 서비스. 지역 제한 · 키 회수 위험</td></tr>
+            <tr><td><span class="trust t-d"><span class="sc">D</span>위험</span></td><td>0–49</td><td>계정 · 아이템 개인 거래. 대부분 게임 · 서비스 약관 위반이며 원래 주인이 계정을 되찾아 갈 수 있음</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>매물의 평점과 별</h2>
+      <ul>
+        <li><b>별점</b>: 스팀 이용자 리뷰의 긍정 비율을 별 5개로 환산합니다. 92%면 별 4.6개입니다.</li>
+        <li><b>리뷰 수</b>: 리뷰가 적을수록 평점 자체를 덜 믿을 만합니다. 수천 개 이상이면 안정적입니다.</li>
+        <li><b>메타</b>: 메타크리틱 평론가 점수(100점 만점).</li>
+        <li><b>딜점수</b>: CheapShark가 가격 · 할인율 · 평점을 합쳐 매긴 0–10점 가성비 점수.</li>
+        <li><b>신뢰도</b>: 그 매물을 파는 스토어의 점수입니다. 실시간 매물은 공식 · 인증 스토어만 다루므로 모두 A 이상입니다.</li>
+      </ul>
+      <h2>데이터 범위</h2>
+      <ul>
+        <li><b>실시간 매물</b>: CheapShark 공개 API에서 Steam, GOG, Epic, Humble, Fanatical 등 공식 · 인증 PC 게임 스토어의 현재 가격을 그 자리에서 불러옵니다.</li>
+        <li><b>마켓 전체</b>: 키 마켓, 기프트카드, 구독, 계정 · 아이템 거래, 스킨 마켓, 종합몰은 사이트마다 자동 수집을 막고 있어서 각 사이트 검색 결과로 바로 연결합니다.</li>
+        <li><b>원화 가격</b>: 달러 가격에 실시간 환율(open.er-api.com)을 곱한 추정치입니다. 실제 결제 금액은 지역 가격 · 수수료에 따라 다릅니다.</li>
+        <li><b>제외한 곳</b>: 정산 사고 · 폐업 이력이 있는 곳(티몬 · 위메프 등), 도난 계정 유통으로 알려진 곳, SNS · 이메일 계정을 대량으로 파는 곳.</li>
+      </ul>
+      <h2>사기 전에 확인할 것</h2>
+      <ul>
+        <li>키의 <b>지역 제한</b>(Global / EU / KR 등)이 내 계정 지역에서 활성화되는지.</li>
+        <li>마켓형 사이트는 판매자 평점 · 판매 건수, 그리고 구매자 보호 옵션.</li>
+        <li>계정 · 구독 공유는 서비스 약관 위반일 수 있고, 정지 · 회수돼도 보상받기 어렵습니다.</li>
+        <li>결제는 반드시 사이트 안의 결제 수단으로만. 메신저 직거래 · 선입금 요구는 거절하세요.</li>
+      </ul>
+    </article>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>가격 데이터: CheapShark API · 환율: open.er-api.com · 이용자 별점: Trustpilot. 매물레이더는 어떤 판매처와도 제휴하지 않습니다. 가격과 재고는 판매처에서 최종 확인하세요.</p>
+</footer>
+
+<script>
+(() => {
+'use strict';
+
+/* ================= 설정 ================= */
+const API = 'https://www.cheapshark.com/api/1.0';
+const CS_ORIGIN = 'https://www.cheapshark.com';
+const PROXY = 'https://api.allorigins.win/raw?url=';
+const PAGE = 60;            // CheapShark 최대 페이지 크기
+const SEARCH_PAGES = 5;     // 검색 시 최대 300개 매물
+const FALLBACK_RATE = 1400; // 환율을 못 불러올 때 쓰는 추정치
+
+/* ================= 마켓 목록 =================
+   [이름, 도메인, 지역, 신뢰도, 검색 주소({q}=검색어) 또는 0, 검색용 태그, 방문 주소(선택)] */
+const CATS = {
+  store:     { label: '공식 스토어' },
+  reseller:  { label: '공인 리셀러' },
+  compare:   { label: '가격비교' },
+  keymarket: { label: '키 마켓' },
+  gift:      { label: '기프트카드·충전' },
+  vendor:    { label: '공식 구독·충전', vendor: true },
+  software:  { label: '소프트웨어 키' },
+  skins:     { label: '스킨·아이템 마켓' },
+  share:     { label: '구독 공유' },
+  p2p:       { label: '계정·아이템 거래' },
+  mall:      { label: '종합몰·중고' },
+};
+const REGIONS = { GLOBAL: '글로벌', KR: '한국', US: '미국', EU: '유럽', UK: '영국', DE: '독일', FR: '프랑스', NL: '네덜란드', PL: '폴란드', RU: '러시아', TR: '튀르키예', CN: '중국', JP: '일본', TW: '대만', SEA: '동남아', ASIA: '아시아', IN: '인도', BR: '브라질', LATAM: '중남미', ME: '중동', AU: '호주' };
+
+const RAW = {
+  store: [
+    ['Steam', 'store.steampowered.com', 'GLOBAL', 99, 'https://store.steampowered.com/search/?term={q}&sort_by=Price_ASC', '스팀 게임 pc'],
+    ['GOG', 'gog.com', 'GLOBAL', 97, 'https://www.gog.com/en/games?query={q}&order=asc:price', '게임 pc drm-free'],
+    ['Epic Games Store', 'store.epicgames.com', 'GLOBAL', 97, 'https://store.epicgames.com/en-US/browse?q={q}&sortBy=currentPrice&sortDir=ASC', '에픽 게임 무료 pc'],
+    ['PlayStation Store', 'store.playstation.com', 'GLOBAL', 98, 'https://store.playstation.com/en-us/search/{q}', '플스 ps5 ps4 psn 플레이스테이션'],
+    ['Xbox Store', 'xbox.com', 'GLOBAL', 98, 'https://www.xbox.com/en-US/search/results?q={q}', '엑스박스 xbox 게임'],
+    ['Microsoft Store', 'apps.microsoft.com', 'GLOBAL', 98, 'https://apps.microsoft.com/search?query={q}', '마이크로소프트 윈도우 앱'],
+    ['Nintendo eShop', 'nintendo.com', 'GLOBAL', 98, 'https://www.nintendo.com/us/search/#q={q}', '닌텐도 스위치 eshop'],
+    ['Ubisoft Store', 'store.ubisoft.com', 'GLOBAL', 96, 'https://store.ubisoft.com/us/search?q={q}', '유비소프트 어쌔신크리드'],
+    ['EA', 'ea.com', 'GLOBAL', 96, 0, 'ea 피파 fc 심즈 배틀필드'],
+    ['Battle.net Shop', 'shop.battle.net', 'GLOBAL', 97, 0, '블리자드 배틀넷 디아블로 오버워치 와우'],
+    ['Rockstar Store', 'store.rockstargames.com', 'GLOBAL', 96, 0, '락스타 gta 레데리'],
+    ['Square Enix Store', 'store.na.square-enix-games.com', 'GLOBAL', 95, 0, '스퀘어에닉스 파이널판타지 드퀘'],
+    ['itch.io', 'itch.io', 'GLOBAL', 92, 'https://itch.io/search?q={q}', '인디 게임'],
+    ['Google Play', 'play.google.com', 'GLOBAL', 98, 'https://play.google.com/store/search?q={q}&c=apps', '구글 플레이 앱 모바일 안드로이드'],
+    ['App Store', 'apps.apple.com', 'GLOBAL', 98, 0, '애플 앱스토어 아이폰 ios'],
+    ['Meta Quest Store', 'meta.com', 'GLOBAL', 95, 0, '메타 퀘스트 vr'],
+    ['STOVE 스토어', 'store.onstove.com', 'KR', 94, 0, '스토브 스마일게이트 게임'],
+    ['DMM GAMES', 'games.dmm.com', 'JP', 92, 0, '일본 게임'],
+    ['WeGame', 'wegame.com.cn', 'CN', 90, 0, '텐센트 중국 게임'],
+    ['Legacy Games', 'legacygames.com', 'US', 86, 0, '캐주얼 게임'],
+    ['ZOOM Platform', 'zoom-platform.com', 'US', 84, 0, '고전 게임 drm-free'],
+  ],
+  reseller: [
+    ['Humble Bundle', 'humblebundle.com', 'GLOBAL', 94, 'https://www.humblebundle.com/store/search?search={q}', '험블 번들 게임 키'],
+    ['Fanatical', 'fanatical.com', 'GLOBAL', 92, 'https://www.fanatical.com/en/search?search={q}', '번들 게임 키'],
+    ['Green Man Gaming', 'greenmangaming.com', 'GLOBAL', 92, 'https://www.greenmangaming.com/search?query={q}', 'gmg 게임 키'],
+    ['Gamesplanet', 'us.gamesplanet.com', 'GLOBAL', 91, 'https://us.gamesplanet.com/search?query={q}', '게임 키'],
+    ['GamersGate', 'gamersgate.com', 'GLOBAL', 89, 0, '게임 키'],
+    ['다이렉트게임즈', 'directg.net', 'KR', 88, 0, '게임 키 한국 정식 유통'],
+    ['Nuuvem', 'nuuvem.com', 'BR', 88, 0, '게임 키 브라질'],
+    ['WinGameStore', 'wingamestore.com', 'US', 87, 0, '게임 키'],
+    ['DLGamer', 'dlgamer.com', 'EU', 87, 0, '게임 키'],
+    ['Voidu', 'voidu.com', 'EU', 86, 0, '게임 키'],
+    ['IndieGala', 'indiegala.com', 'GLOBAL', 86, 0, '인디 번들 게임 키'],
+    ['2Game', '2game.com', 'GLOBAL', 86, 0, '게임 키'],
+    ['Gamesload', 'gamesload.com', 'DE', 86, 0, '게임 키'],
+    ['Startselect', 'startselect.com', 'EU', 86, 0, '게임 키 기프트카드'],
+    ['GAME', 'game.co.uk', 'UK', 86, 0, '게임 영국'],
+    ['GameBillet', 'gamebillet.com', 'GLOBAL', 85, 0, '게임 키'],
+    ['AllYouPlay', 'allyouplay.com', 'EU', 85, 0, '게임 키'],
+    ['Electronic First', 'electronicfirst.com', 'UK', 85, 0, '게임 키'],
+    ['ShopTo', 'shopto.net', 'UK', 85, 0, '게임 키'],
+    ['Noctre', 'noctre.com', 'EU', 84, 0, '게임 키'],
+    ['DreamGame', 'dreamgame.com', 'EU', 84, 0, '게임 키'],
+    ['Gamesrocket', 'gamesrocket.com', 'DE', 84, 0, '게임 키'],
+    ['Fireflower Games', 'fireflowergames.com', 'EU', 84, 0, '게임 키'],
+    ['Play-Asia', 'play-asia.com', 'ASIA', 84, 'https://www.play-asia.com/search/{q}', '아시아판 게임 기프트카드'],
+    ['YUPLAY', 'yuplay.com', 'GLOBAL', 83, 0, '게임 키'],
+    ['JoyBuggy', 'joybuggy.com', 'GLOBAL', 83, 0, '게임 키'],
+    ['Instant Gaming', 'instant-gaming.com', 'EU', 82, 'https://www.instant-gaming.com/en/search/?q={q}', '인겜 인스턴트게이밍 게임 키'],
+    ['Loaded (구 CDKeys)', 'loaded.com', 'UK', 80, 0, 'cdkeys 씨디키 게임 키 기프트카드'],
+    ['365games', '365games.co.uk', 'UK', 80, 0, '게임 키'],
+  ],
+  compare: [
+    ['SteamDB', 'steamdb.info', 'GLOBAL', 95, 'https://steamdb.info/search/?a=app&q={q}', '스팀 가격 이력 역대최저'],
+    ['IsThereAnyDeal', 'isthereanydeal.com', 'GLOBAL', 92, 'https://isthereanydeal.com/search/?q={q}', '게임 가격 추적 역대최저'],
+    ['네이버쇼핑', 'shopping.naver.com', 'KR', 92, 'https://search.shopping.naver.com/search/all?query={q}&sort=price_asc', '가격비교 스마트스토어 상품권'],
+    ['GG.deals', 'gg.deals', 'GLOBAL', 90, 'https://gg.deals/games/?title={q}', '게임 키 최저가 비교'],
+    ['CheapShark', 'cheapshark.com', 'GLOBAL', 90, 0, '게임 할인 비교'],
+    ['다나와', 'danawa.com', 'KR', 90, 'https://search.danawa.com/dsearch.php?query={q}', '가격비교'],
+    ['Google 쇼핑', 'shopping.google.com', 'GLOBAL', 90, 'https://www.google.com/search?tbm=shop&q={q}', '가격비교 구글'],
+    ['AllKeyShop', 'allkeyshop.com', 'GLOBAL', 88, 0, '키 최저가 비교'],
+    ['에누리', 'enuri.com', 'KR', 88, 'https://www.enuri.com/search.jsp?keyword={q}', '가격비교'],
+    ['PSPrices', 'psprices.com', 'GLOBAL', 88, 0, '플스 가격 이력 ps5 ps4'],
+    ['Deku Deals', 'dekudeals.com', 'GLOBAL', 88, 'https://www.dekudeals.com/search?q={q}', '닌텐도 스위치 가격'],
+    ['idealo', 'idealo.de', 'DE', 88, 'https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q={q}', '가격비교 독일'],
+    ['Kakaku.com', 'kakaku.com', 'JP', 88, 0, '가격비교 일본'],
+    ['PriceRunner', 'pricerunner.com', 'UK', 86, 0, '가격비교 영국'],
+    ['Keyforsteam', 'keyforsteam.de', 'EU', 84, 0, '키 가격비교'],
+    ['DLCompare', 'dlcompare.com', 'EU', 84, 0, '키 가격비교'],
+    ['XB Deals', 'xbdeals.net', 'GLOBAL', 84, 0, '엑스박스 가격'],
+    ['GoCDKeys', 'gocdkeys.com', 'GLOBAL', 80, 0, '키 가격비교'],
+  ],
+  keymarket: [
+    ['Eneba', 'eneba.com', 'GLOBAL', 72, 'https://www.eneba.com/store/all?text={q}', '에네바 키 마켓 게임 기프트카드 구독'],
+    ['CJS CD Keys', 'cjs-cdkeys.com', 'UK', 70, 0, '게임 키'],
+    ['MMOGA', 'mmoga.com', 'EU', 68, 'https://www.mmoga.com/advanced_search.php?keywords={q}', '게임 키 골드'],
+    ['Kinguin', 'kinguin.net', 'GLOBAL', 66, 'https://www.kinguin.net/listing?phrase={q}', '킨구인 키 마켓 게임 소프트웨어'],
+    ['GAMIVO', 'gamivo.com', 'GLOBAL', 66, 'https://www.gamivo.com/search/{q}', '게미보 키 마켓'],
+    ['K4G', 'k4g.com', 'GLOBAL', 64, 0, '키 마켓'],
+    ['HRK Game', 'hrkgame.com', 'GLOBAL', 64, 0, '키 마켓'],
+    ['Driffle', 'driffle.com', 'GLOBAL', 63, 0, '키 마켓'],
+    ['G2A', 'g2a.com', 'GLOBAL', 62, 'https://www.g2a.com/search?query={q}', '지투에이 키 마켓 게임 기프트카드 구독'],
+    ['MTCGAME', 'mtcgame.com', 'TR', 62, 0, '기프트카드 게임 키'],
+    ['Royal CD Keys', 'royalcdkeys.com', 'GLOBAL', 60, 0, '게임 소프트웨어 키'],
+    ['Gameseal', 'gameseal.com', 'GLOBAL', 60, 0, '키 마켓'],
+    ['Steambuy', 'steambuy.com', 'RU', 60, 0, '게임 키'],
+    ['Zaka-zaka', 'zaka-zaka.com', 'RU', 60, 0, '게임 키'],
+    ['Steampay', 'steampay.com', 'RU', 60, 0, '게임 키'],
+    ['G2Play', 'g2play.net', 'GLOBAL', 58, 0, '키 마켓'],
+    ['Gamesdeal', 'gamesdeal.com', 'GLOBAL', 58, 0, '게임 키'],
+    ['Kupikod', 'kupikod.com', 'RU', 58, 0, '기프트카드 충전'],
+    ['Igromagaz', 'igromagaz.ru', 'RU', 58, 0, '게임 키'],
+    ['SCDKey', 'scdkey.com', 'GLOBAL', 55, 0, '게임 키 소프트웨어'],
+    ['Difmark', 'difmark.com', 'GLOBAL', 55, 0, '키 마켓'],
+    ['Plati.market', 'plati.market', 'RU', 50, 'https://plati.market/search/{q}', '디지털 상품 마켓 계정 구독'],
+    ['GGSel', 'ggsel.net', 'RU', 50, 0, '디지털 상품 마켓'],
+  ],
+  gift: [
+    ['카카오톡 선물하기', 'gift.kakao.com', 'KR', 96, 0, '기프티콘 선물 상품권'],
+    ['컬쳐랜드', 'cultureland.co.kr', 'KR', 92, 0, '문화상품권 상품권 충전'],
+    ['Razer Gold', 'gold.razer.com', 'GLOBAL', 92, 0, '레이저골드 충전'],
+    ['Paysafecard', 'paysafecard.com', 'EU', 92, 0, '선불 바우처'],
+    ['기프티쇼', 'giftishow.com', 'KR', 90, 0, '모바일 상품권 기프티콘'],
+    ['북앤라이프', 'booknlife.com', 'KR', 88, 0, '도서문화상품권 상품권'],
+    ['Codashop', 'codashop.com', 'GLOBAL', 88, 0, '코다샵 게임 충전 다이아'],
+    ['MyCard', 'mycard520.com', 'TW', 88, 0, '대만 충전'],
+    ['Recharge.com', 'recharge.com', 'GLOBAL', 86, 0, '기프트카드 충전'],
+    ['Bitrefill', 'bitrefill.com', 'GLOBAL', 85, 0, '기프트카드 암호화폐'],
+    ['Dundle', 'dundle.com', 'GLOBAL', 84, 0, '기프트카드 psn 스팀 구글'],
+    ['GiftCardMall', 'giftcardmall.com', 'US', 84, 0, '기프트카드'],
+    ['Giftcards.com', 'giftcards.com', 'US', 84, 0, '기프트카드'],
+    ['Prezzee', 'prezzee.com', 'GLOBAL', 84, 0, '기프트카드'],
+    ['UniPin', 'unipin.com', 'SEA', 84, 0, '게임 충전'],
+    ['SEAGM', 'seagm.com', 'SEA', 82, 0, '충전 기프트카드 동남아'],
+    ['Gift Card Granny', 'giftcardgranny.com', 'US', 80, 0, '기프트카드'],
+    ['Gyft', 'gyft.com', 'US', 80, 0, '기프트카드'],
+    ['eGifter', 'egifter.com', 'US', 80, 0, '기프트카드'],
+    ['GameCardsDirect', 'gamecardsdirect.com', 'EU', 80, 0, '게임 카드 충전'],
+    ['Duniagames', 'duniagames.co.id', 'SEA', 80, 0, '게임 충전'],
+    ['Raise', 'raise.com', 'US', 78, 0, '기프트카드 할인'],
+    ['CardCash', 'cardcash.com', 'US', 78, 0, '기프트카드 할인'],
+    ['OffGamers', 'offgamers.com', 'GLOBAL', 78, 0, '충전 기프트카드'],
+    ['Coinsbee', 'coinsbee.com', 'GLOBAL', 75, 0, '기프트카드 암호화폐'],
+    ['Lapakgaming', 'lapakgaming.com', 'SEA', 72, 0, '게임 충전'],
+    ['Jollymax', 'jollymax.com', 'GLOBAL', 72, 0, '게임 충전'],
+    ['Smile.one', 'smile.one', 'GLOBAL', 72, 0, '게임 충전'],
+    ['LootBar', 'lootbar.gg', 'GLOBAL', 70, 0, '게임 충전 원신'],
+    ['Itemku', 'itemku.com', 'SEA', 68, 0, '게임 충전 아이템'],
+  ],
+  vendor: [
+    ['Netflix', 'netflix.com', 'GLOBAL', 98, 0, '넷플릭스 ott 영상', 'https://www.netflix.com/signup/planform'],
+    ['Disney+', 'disneyplus.com', 'GLOBAL', 98, 0, '디즈니플러스 디즈니 ott'],
+    ['YouTube Premium', 'youtube.com', 'GLOBAL', 98, 0, '유튜브 프리미엄 유튜브뮤직', 'https://www.youtube.com/premium'],
+    ['Apple TV', 'tv.apple.com', 'GLOBAL', 98, 0, '애플tv 애플티비 ott'],
+    ['Prime Video', 'primevideo.com', 'GLOBAL', 97, 0, '아마존 프라임 비디오 ott'],
+    ['HBO Max', 'hbomax.com', 'GLOBAL', 97, 0, 'hbo 맥스 max ott'],
+    ['Paramount+', 'paramountplus.com', 'GLOBAL', 96, 0, '파라마운트 ott'],
+    ['Hulu', 'hulu.com', 'US', 96, 0, '훌루 ott'],
+    ['Peacock', 'peacocktv.com', 'US', 95, 0, '피콕 ott'],
+    ['Crunchyroll', 'crunchyroll.com', 'GLOBAL', 95, 0, '크런치롤 애니'],
+    ['TVING', 'tving.com', 'KR', 96, 0, '티빙 ott'],
+    ['웨이브', 'wavve.com', 'KR', 95, 0, 'wavve ott'],
+    ['쿠팡플레이', 'coupangplay.com', 'KR', 95, 0, '쿠팡 ott'],
+    ['왓챠', 'watcha.com', 'KR', 94, 0, 'watcha ott'],
+    ['라프텔', 'laftel.net', 'KR', 94, 0, 'laftel 애니'],
+    ['Spotify', 'spotify.com', 'GLOBAL', 98, 0, '스포티파이 음악', 'https://www.spotify.com/premium/'],
+    ['Apple Music', 'music.apple.com', 'GLOBAL', 98, 0, '애플뮤직 음악'],
+    ['Tidal', 'tidal.com', 'GLOBAL', 94, 0, '타이달 음악'],
+    ['Deezer', 'deezer.com', 'GLOBAL', 94, 0, '디저 음악'],
+    ['멜론', 'melon.com', 'KR', 96, 0, 'melon 음악'],
+    ['지니뮤직', 'genie.co.kr', 'KR', 95, 0, 'genie 지니 음악'],
+    ['FLO', 'music-flo.com', 'KR', 95, 0, '플로 음악'],
+    ['VIBE', 'vibe.naver.com', 'KR', 95, 0, '바이브 네이버 음악'],
+    ['벅스', 'bugs.co.kr', 'KR', 94, 0, 'bugs 음악'],
+    ['Xbox Game Pass', 'xbox.com', 'GLOBAL', 98, 0, '게임패스 엑스박스 구독', 'https://www.xbox.com/xbox-game-pass'],
+    ['PlayStation Plus', 'playstation.com', 'GLOBAL', 98, 0, '플스플러스 ps plus psn 구독', 'https://www.playstation.com/ps-plus/'],
+    ['Nintendo Switch Online', 'nintendo.com', 'GLOBAL', 98, 0, '닌텐도 온라인 구독', 'https://www.nintendo.com/us/switch/online/'],
+    ['EA Play', 'ea.com', 'GLOBAL', 96, 0, 'ea 플레이 구독', 'https://www.ea.com/ea-play'],
+    ['Ubisoft+', 'ubisoft.com', 'GLOBAL', 96, 0, '유비소프트 플러스 구독', 'https://www.ubisoft.com/en-us/ubisoft-plus'],
+    ['GeForce NOW', 'nvidia.com', 'GLOBAL', 97, 0, '지포스나우 클라우드 게임', 'https://www.nvidia.com/en-us/geforce-now/'],
+    ['Discord Nitro', 'discord.com', 'GLOBAL', 97, 0, '디스코드 니트로', 'https://discord.com/nitro'],
+    ['Minecraft', 'minecraft.net', 'GLOBAL', 98, 0, '마인크래프트 마크 자바'],
+    ['Roblox', 'roblox.com', 'GLOBAL', 97, 0, '로블록스 로벅스 robux', 'https://www.roblox.com/upgrades/robux'],
+    ['넥슨', 'nexon.com', 'KR', 95, 0, '넥슨캐시 메이플 던파 피파'],
+    ['넷마블', 'netmarble.com', 'KR', 94, 0, '넷마블 캐시'],
+    ['PLAYNC', 'plaync.com', 'KR', 94, 0, '엔씨 리니지 nc'],
+    ['카카오게임즈', 'kakaogames.com', 'KR', 94, 0, '카카오 게임'],
+    ['HoYoverse 충전', 'topup.hoyoverse.com', 'GLOBAL', 94, 0, '원신 스타레일 젠레스 호요버스 충전'],
+    ['Midasbuy', 'midasbuy.com', 'GLOBAL', 93, 0, '배그 pubg uc 충전 미다스바이'],
+    ['Garena', 'garena.com', 'SEA', 92, 0, '가레나 프리파이어 충전'],
+    ['Microsoft 365', 'microsoft.com', 'GLOBAL', 99, 0, '오피스 office 엑셀 워드 마이크로소프트', 'https://www.microsoft.com/microsoft-365'],
+    ['Adobe Creative Cloud', 'adobe.com', 'GLOBAL', 99, 0, '어도비 포토샵 프리미어 일러스트', 'https://www.adobe.com/creativecloud/plans.html'],
+    ['Autodesk', 'autodesk.com', 'GLOBAL', 98, 0, '오토캐드 오토데스크'],
+    ['JetBrains', 'jetbrains.com', 'GLOBAL', 98, 0, '젯브레인 인텔리제이 파이참', 'https://www.jetbrains.com/store/'],
+    ['ChatGPT', 'openai.com', 'GLOBAL', 97, 0, '챗gpt 챗지피티 오픈ai 플러스', 'https://openai.com/chatgpt/pricing/'],
+    ['Claude', 'claude.com', 'GLOBAL', 97, 0, '클로드 앤트로픽 anthropic', 'https://claude.com/pricing'],
+    ['Google One', 'one.google.com', 'GLOBAL', 98, 0, '구글원 제미나이 gemini 저장공간'],
+    ['GitHub Copilot', 'github.com', 'GLOBAL', 98, 0, '깃허브 코파일럿', 'https://github.com/features/copilot'],
+    ['Midjourney', 'midjourney.com', 'GLOBAL', 94, 0, '미드저니 ai 그림'],
+    ['Canva', 'canva.com', 'GLOBAL', 97, 0, '캔바 디자인'],
+    ['Notion', 'notion.com', 'GLOBAL', 97, 0, '노션'],
+    ['Dropbox', 'dropbox.com', 'GLOBAL', 98, 0, '드롭박스 클라우드'],
+    ['1Password', '1password.com', 'GLOBAL', 97, 0, '원패스워드 비밀번호'],
+    ['Bitwarden', 'bitwarden.com', 'GLOBAL', 97, 0, '비트워든 비밀번호'],
+    ['Grammarly', 'grammarly.com', 'GLOBAL', 95, 0, '그래머리 영어'],
+    ['Duolingo', 'duolingo.com', 'GLOBAL', 96, 0, '듀오링고 슈퍼'],
+    ['Setapp', 'setapp.com', 'GLOBAL', 93, 0, '맥 앱 구독'],
+    ['Parallels', 'parallels.com', 'GLOBAL', 95, 0, '패러렐즈 맥'],
+    ['NordVPN', 'nordvpn.com', 'GLOBAL', 94, 0, '노드vpn vpn'],
+    ['ExpressVPN', 'expressvpn.com', 'GLOBAL', 94, 0, '익스프레스vpn vpn'],
+    ['Surfshark', 'surfshark.com', 'GLOBAL', 93, 0, '서프샤크 vpn'],
+    ['Proton', 'proton.me', 'GLOBAL', 96, 0, '프로톤 vpn 메일'],
+    ['Norton', 'norton.com', 'GLOBAL', 95, 0, '노턴 백신'],
+    ['Bitdefender', 'bitdefender.com', 'GLOBAL', 95, 0, '비트디펜더 백신'],
+    ['ESET', 'eset.com', 'GLOBAL', 95, 0, '이셋 백신'],
+    ['Malwarebytes', 'malwarebytes.com', 'GLOBAL', 95, 0, '멀웨어바이트 백신'],
+    ['McAfee', 'mcafee.com', 'GLOBAL', 94, 0, '맥아피 백신'],
+    ['Kaspersky', 'kaspersky.com', 'GLOBAL', 93, 0, '카스퍼스키 백신'],
+    ['한컴오피스', 'hancom.com', 'KR', 96, 0, '한글 hwp 한컴'],
+    ['V3 (안랩)', 'ahnlab.com', 'KR', 96, 0, '안랩 v3 백신'],
+    ['알약', 'estsecurity.com', 'KR', 95, 0, '이스트시큐리티 백신'],
+    ['네이버플러스 멤버십', 'nid.naver.com', 'KR', 97, 0, '네이버 멤버십 구독', 'https://nid.naver.com/membership/join'],
+    ['밀리의 서재', 'millie.co.kr', 'KR', 95, 0, '전자책 독서 구독'],
+    ['리디', 'ridibooks.com', 'KR', 95, 0, '리디북스 리디셀렉트 전자책'],
+    ['Audible', 'audible.com', 'GLOBAL', 97, 0, '오더블 오디오북'],
+    ['Everand (Scribd)', 'scribd.com', 'GLOBAL', 94, 0, '스크리브드 전자책'],
+    ['Twitch', 'twitch.tv', 'GLOBAL', 96, 0, '트위치 구독 터보'],
+    ['치지직', 'chzzk.naver.com', 'KR', 95, 0, '네이버 스트리밍 구독'],
+    ['SOOP', 'sooplive.co.kr', 'KR', 94, 0, '숲 아프리카tv 별풍선'],
+  ],
+  software: [
+    ['Softwarekeep', 'softwarekeep.com', 'US', 72, 0, '오피스 윈도우 소프트웨어 키'],
+    ['Mr Key Shop', 'mrkeyshop.com', 'EU', 64, 0, '윈도우 오피스 키'],
+    ['Lizengo', 'lizengo.de', 'DE', 58, 0, '소프트웨어 키 윈도우 오피스'],
+    ['Godeal24', 'godeal24.com', 'GLOBAL', 52, 0, '윈도우 오피스 키'],
+    ['VIP-SCDKey', 'vip-scdkey.com', 'GLOBAL', 50, 0, '윈도우 오피스 키'],
+    ['URCDKey', 'urcdkey.com', 'GLOBAL', 50, 0, '윈도우 오피스 키'],
+    ['Supercdk', 'supercdk.com', 'GLOBAL', 45, 0, '윈도우 오피스 키'],
+  ],
+  skins: [
+    ['Steam 커뮤니티 장터', 'steamcommunity.com/market', 'GLOBAL', 97, 'https://steamcommunity.com/market/search?q={q}', '스팀 장터 스킨 아이템 카드'],
+    ['Skinport', 'skinport.com', 'GLOBAL', 78, 'https://skinport.com/market?search={q}&sort=price&order=asc', 'cs2 스킨'],
+    ['CSFloat', 'csfloat.com', 'GLOBAL', 76, 0, 'cs2 스킨'],
+    ['DMarket', 'dmarket.com', 'GLOBAL', 72, 0, '스킨 아이템'],
+    ['SkinBaron', 'skinbaron.de', 'EU', 72, 0, '스킨'],
+    ['BitSkins', 'bitskins.com', 'GLOBAL', 70, 0, '스킨'],
+    ['CS.MONEY', 'cs.money', 'GLOBAL', 70, 0, 'cs2 스킨 트레이드'],
+    ['BUFF163', 'buff.163.com', 'CN', 70, 0, 'cs2 도타 스킨 넷이즈'],
+    ['悠悠有品 Youpin', 'youpin898.com', 'CN', 66, 0, 'cs2 스킨'],
+    ['Tradeit.gg', 'tradeit.gg', 'GLOBAL', 66, 0, '스킨 트레이드'],
+    ['Waxpeer', 'waxpeer.com', 'GLOBAL', 66, 0, '스킨'],
+    ['Market.CSGO', 'market.csgo.com', 'GLOBAL', 66, 0, 'cs2 스킨'],
+    ['Lis-Skins', 'lis-skins.com', 'GLOBAL', 64, 0, '스킨'],
+    ['GamerPay', 'gamerpay.gg', 'EU', 64, 0, '스킨'],
+    ['ShadowPay', 'shadowpay.com', 'GLOBAL', 62, 0, '스킨'],
+    ['C5GAME', 'c5game.com', 'CN', 62, 0, 'cs2 스킨'],
+    ['Loot.Farm', 'loot.farm', 'GLOBAL', 60, 0, '스킨 트레이드'],
+    ['SkinsMonkey', 'skinsmonkey.com', 'GLOBAL', 60, 0, '스킨 트레이드'],
+    ['Swap.gg', 'swap.gg', 'GLOBAL', 60, 0, '스킨 트레이드'],
+    ['Mannco.store', 'mannco.store', 'GLOBAL', 60, 0, 'tf2 스킨'],
+  ],
+  share: [
+    ['피클플러스', 'pickle.plus', 'KR', 68, 0, 'ott 파티 공유 넷플릭스 디즈니 티빙'],
+    ['링키드', 'linkid.pw', 'KR', 60, 0, 'ott 파티 공유 넷플릭스'],
+    ['Together Price', 'togetherprice.com', 'EU', 58, 0, '구독 공유'],
+    ['Spliiit', 'spliiit.com', 'EU', 58, 0, '구독 공유'],
+    ['Sharesub', 'sharesub.com', 'EU', 56, 0, '구독 공유'],
+    ['GamsGo', 'gamsgo.com', 'GLOBAL', 50, 0, '구독 공유 넷플릭스 스포티파이'],
+  ],
+  p2p: [
+    ['아이템베이', 'itembay.com', 'KR', 58, 0, '게임 아이템 계정 거래 리니지 메이플'],
+    ['아이템매니아', 'itemmania.com', 'KR', 58, 0, '게임 아이템 계정 거래'],
+    ['PlayerAuctions', 'playerauctions.com', 'GLOBAL', 55, 0, '계정 골드 아이템 거래'],
+    ['Gameflip', 'gameflip.com', 'US', 55, 0, '계정 아이템 기프트카드 거래'],
+    ['8591 寶物交易', '8591.com.tw', 'TW', 55, 0, '대만 아이템 계정'],
+    ['G2G', 'g2g.com', 'GLOBAL', 52, 0, '계정 골드 아이템 거래'],
+    ['Eldorado.gg', 'eldorado.gg', 'GLOBAL', 52, 0, '계정 아이템 거래'],
+    ['바로템', 'barotem.com', 'KR', 50, 0, '게임 아이템 거래'],
+    ['GameTrade', 'gametrade.jp', 'JP', 48, 0, '일본 계정'],
+    ['FunPay', 'funpay.com', 'RU', 45, 0, '계정 아이템 거래'],
+    ['iGV', 'igv.com', 'GLOBAL', 45, 0, '골드 아이템 계정'],
+    ['U7BUY', 'u7buy.com', 'GLOBAL', 45, 0, '골드 아이템 계정'],
+    ['MMOGAH', 'mmogah.com', 'GLOBAL', 45, 0, '골드 아이템'],
+    ['ZeusX', 'zeusx.com', 'SEA', 45, 0, '계정 아이템'],
+    ['Mulefactory', 'mulefactory.com', 'GLOBAL', 45, 0, '디아블로 아이템'],
+    ['GameClub', 'gameclub.jp', 'JP', 45, 0, '일본 계정'],
+    ['DD373', 'dd373.com', 'CN', 45, 0, '중국 아이템 계정'],
+    ['5173', '5173.com', 'CN', 45, 0, '중국 아이템 계정'],
+    ['交易猫', 'jiaoyimao.com', 'CN', 45, 0, '중국 계정'],
+    ['PlayerUp', 'playerup.com', 'GLOBAL', 42, 0, '계정 거래'],
+    ['Playerok', 'playerok.com', 'RU', 42, 0, '계정 아이템'],
+    ['RMT.club', 'rmt.club', 'JP', 42, 0, '일본 계정 rmt'],
+    ['EpicNPC', 'epicnpc.com', 'GLOBAL', 40, 0, '계정 거래 포럼'],
+    ['U4GM', 'u4gm.com', 'GLOBAL', 40, 0, '골드 아이템'],
+    ['Z2U', 'z2u.com', 'GLOBAL', 38, 0, '계정 아이템 거래'],
+  ],
+  mall: [
+    ['Amazon', 'amazon.com', 'US', 92, 'https://www.amazon.com/s?k={q}&s=price-asc-rank', '아마존 기프트카드 디지털 코드'],
+    ['Amazon 일본', 'amazon.co.jp', 'JP', 92, 'https://www.amazon.co.jp/s?k={q}&s=price-asc-rank', '아마존 재팬'],
+    ['Amazon UK', 'amazon.co.uk', 'UK', 92, 'https://www.amazon.co.uk/s?k={q}&s=price-asc-rank', '아마존 영국'],
+    ['Amazon 독일', 'amazon.de', 'DE', 92, 'https://www.amazon.de/s?k={q}&s=price-asc-rank', '아마존 독일'],
+    ['Best Buy', 'bestbuy.com', 'US', 92, 'https://www.bestbuy.com/site/searchpage.jsp?st={q}', '베스트바이 디지털 코드'],
+    ['Walmart', 'walmart.com', 'US', 90, 'https://www.walmart.com/search?q={q}&sort=price_low', '월마트 기프트카드'],
+    ['Target', 'target.com', 'US', 90, 'https://www.target.com/s?searchTerm={q}', '타겟 기프트카드'],
+    ['Costco', 'costco.com', 'US', 90, 'https://www.costco.com/CatalogSearch?keyword={q}', '코스트코 기프트카드'],
+    ['쿠팡', 'coupang.com', 'KR', 90, 'https://www.coupang.com/np/search?q={q}&sorter=salePriceAsc', '쿠팡 상품권 기프트카드'],
+    ['GameStop', 'gamestop.com', 'US', 88, 'https://www.gamestop.com/search/?q={q}', '게임스탑 디지털'],
+    ['Newegg', 'newegg.com', 'US', 88, 'https://www.newegg.com/p/pl?d={q}&Order=1', '뉴에그 디지털 키'],
+    ['SSG.COM', 'ssg.com', 'KR', 88, 'https://www.ssg.com/search.ssg?target=all&query={q}', '신세계 쓱 상품권'],
+    ['Rakuten', 'rakuten.co.jp', 'JP', 88, 'https://search.rakuten.co.jp/search/mall/{q}/?s=2', '라쿠텐 일본'],
+    ['MediaMarkt', 'mediamarkt.de', 'DE', 88, 'https://www.mediamarkt.de/de/search.html?query={q}', '미디어마크트 독일'],
+    ['Currys', 'currys.co.uk', 'UK', 88, 0, '영국 가전'],
+    ['JB Hi-Fi', 'jbhifi.com.au', 'AU', 88, 'https://www.jbhifi.com.au/search?query={q}', '호주'],
+    ['11번가', '11st.co.kr', 'KR', 86, 'https://search.11st.co.kr/Search.tmall?kwd={q}', '상품권 기프트카드'],
+    ['G마켓', 'gmarket.co.kr', 'KR', 86, 'https://browse.gmarket.co.kr/search?keyword={q}', '지마켓 상품권'],
+    ['롯데ON', 'lotteon.com', 'KR', 86, 0, '롯데온'],
+    ['GS SHOP', 'gsshop.com', 'KR', 86, 0, '지에스샵'],
+    ['Yahoo!ショッピング', 'shopping.yahoo.co.jp', 'JP', 86, 'https://shopping.yahoo.co.jp/search?p={q}', '야후 쇼핑 일본'],
+    ['bol.com', 'bol.com', 'NL', 86, 'https://www.bol.com/nl/nl/s/?searchtext={q}', '네덜란드'],
+    ['Fnac', 'fnac.com', 'FR', 86, 0, '프랑스'],
+    ['EB Games', 'ebgames.com.au', 'AU', 86, 0, '호주 게임'],
+    ['옥션', 'auction.co.kr', 'KR', 85, 'https://browse.auction.co.kr/search?keyword={q}', '옥션 상품권'],
+    ['Flipkart', 'flipkart.com', 'IN', 84, 'https://www.flipkart.com/search?q={q}', '플립카트 인도'],
+    ['JD.com', 'jd.com', 'CN', 82, 'https://search.jd.com/Search?keyword={q}', '징동 중국'],
+    ['Tmall', 'tmall.com', 'CN', 82, 0, '티몰 중국'],
+    ['Allegro', 'allegro.pl', 'PL', 82, 'https://allegro.pl/listing?string={q}', '알레그로 폴란드'],
+    ['eBay', 'ebay.com', 'GLOBAL', 80, 'https://www.ebay.com/sch/i.html?_nkw={q}&_sop=15', '이베이 디지털 코드'],
+    ['Noon', 'noon.com', 'ME', 80, 0, '중동'],
+    ['Cdiscount', 'cdiscount.com', 'FR', 80, 0, '프랑스'],
+    ['Coolshop', 'coolshop.com', 'EU', 80, 0, '북유럽'],
+    ['Mercado Libre', 'mercadolibre.com', 'LATAM', 78, 0, '메르카도리브레 중남미'],
+    ['Ozon', 'ozon.ru', 'RU', 78, 'https://www.ozon.ru/search/?text={q}', '오존 러시아'],
+    ['Qoo10', 'qoo10.com', 'SEA', 72, 0, '큐텐'],
+    ['Shopee', 'shopee.sg', 'SEA', 72, 0, '쇼피 동남아'],
+    ['Lazada', 'lazada.com', 'SEA', 72, 0, '라자다 동남아'],
+    ['Tokopedia', 'tokopedia.com', 'SEA', 72, 0, '토코피디아 인도네시아'],
+    ['Yahoo!オークション', 'auctions.yahoo.co.jp', 'JP', 70, 'https://auctions.yahoo.co.jp/search/search?p={q}', '야후 옥션 일본'],
+    ['メルカリ Mercari', 'jp.mercari.com', 'JP', 70, 'https://jp.mercari.com/search?keyword={q}&sort=price&order=asc', '메루카리 일본 중고'],
+    ['Taobao', 'taobao.com', 'CN', 70, 'https://s.taobao.com/search?q={q}', '타오바오 중국'],
+    ['Mercari US', 'mercari.com', 'US', 68, 0, '메르카리 미국 중고'],
+    ['번개장터', 'bunjang.co.kr', 'KR', 66, 'https://m.bunjang.co.kr/search/products?q={q}&order=price_asc', '번장 중고 번개페이'],
+    ['AliExpress', 'aliexpress.com', 'GLOBAL', 65, 'https://www.aliexpress.com/wholesale?SearchText={q}&SortType=price_asc', '알리 알리익스프레스'],
+    ['露天拍賣 Ruten', 'ruten.com.tw', 'TW', 65, 0, '대만 경매'],
+    ['당근', 'daangn.com', 'KR', 62, 0, '당근마켓 중고'],
+    ['Leboncoin', 'leboncoin.fr', 'FR', 62, 'https://www.leboncoin.fr/recherche?text={q}', '프랑스 중고'],
+    ['Carousell', 'carousell.com', 'SEA', 62, 0, '캐로셀 중고'],
+    ['Avito', 'avito.ru', 'RU', 60, 0, '러시아 중고'],
+    ['Kleinanzeigen', 'kleinanzeigen.de', 'DE', 60, 0, '독일 중고'],
+    ['Temu', 'temu.com', 'GLOBAL', 58, 0, '테무'],
+    ['중고나라', 'joongna.com', 'KR', 58, 0, '중고'],
+    ['OLX', 'olx.com', 'GLOBAL', 55, 0, '중고'],
+  ],
+};
+
+const MARKETS = [];
+for (const [cat, rows] of Object.entries(RAW)) {
+  for (const [name, domain, region, score, search, tags, url] of rows) {
+    MARKETS.push({ cat, name, domain, region, score, search, tags: tags || '', url: url || 'https://' + domain });
+  }
+}
+
+/* 한글 게임명 → 영문 (실시간 매물 검색용) */
+const ALIAS = [
+  ['엘든링', 'elden ring'], ['사이버펑크', 'cyberpunk'], ['배틀그라운드', 'pubg'], ['배그', 'pubg'],
+  ['위쳐', 'witcher'], ['레드데드', 'red dead'], ['레데리', 'red dead redemption'], ['지티에이', 'grand theft auto'], ['gta', 'grand theft auto'],
+  ['발더스게이트', "baldur's gate"], ['스타듀밸리', 'stardew valley'], ['몬스터헌터', 'monster hunter'], ['몬헌', 'monster hunter'],
+  ['호그와트', 'hogwarts legacy'], ['다크소울', 'dark souls'], ['세키로', 'sekiro'], ['폴아웃', 'fallout'], ['스카이림', 'skyrim'],
+  ['엘더스크롤', 'elder scrolls'], ['문명', 'civilization'], ['테라리아', 'terraria'], ['할로우나이트', 'hollow knight'],
+  ['하데스', 'hades'], ['데스스트랜딩', 'death stranding'], ['갓오브워', 'god of war'], ['스파이더맨', 'spider-man'],
+  ['호라이즌', 'horizon'], ['라스트오브어스', 'last of us'], ['레지던트이블', 'resident evil'], ['바이오하자드', 'resident evil'],
+  ['철권', 'tekken'], ['스트리트파이터', 'street fighter'], ['파이널판타지', 'final fantasy'], ['드래곤퀘스트', 'dragon quest'],
+  ['페르소나', 'persona'], ['용과같이', 'like a dragon'], ['어쌔신크리드', "assassin's creed"], ['파크라이', 'far cry'],
+  ['콜오브듀티', 'call of duty'], ['배틀필드', 'battlefield'], ['심즈', 'sims'], ['포르자', 'forza'], ['잇테이크투', 'it takes two'],
+  ['팰월드', 'palworld'], ['발헤임', 'valheim'], ['디아블로', 'diablo'], ['오버워치', 'overwatch'], ['검은신화', 'black myth'],
+  ['오공', 'black myth wukong'], ['스텔라블레이드', 'stellar blade'], ['p의거짓', 'lies of p'], ['데이브더다이버', 'dave the diver'],
+  ['워해머', 'warhammer'], ['토탈워', 'total war'], ['헬다이버즈', 'helldivers'], ['디트로이트', 'detroit'],
+  ['노맨즈스카이', "no man's sky"], ['서브노티카', 'subnautica'], ['컵헤드', 'cuphead'], ['셀레스트', 'celeste'],
+  ['언더테일', 'undertale'], ['뱀파이어서바이버', 'vampire survivors'], ['슬레이더스파이어', 'slay the spire'],
+  ['데드바이데이라이트', 'dead by daylight'], ['레인보우식스', 'rainbow six'], ['포탈', 'portal'], ['하프라이프', 'half-life'],
+  ['바이오쇼크', 'bioshock'], ['보더랜드', 'borderlands'], ['툼레이더', 'tomb raider'], ['메탈기어', 'metal gear'],
+  ['니어', 'nier'], ['둠', 'doom'], ['스타필드', 'starfield'], ['매스이펙트', 'mass effect'], ['데드스페이스', 'dead space'],
+  ['아머드코어', 'armored core'], ['킹덤컴', 'kingdom come'], ['마비노기', 'mabinogi'], ['로스트아크', 'lost ark'],
+].sort((a, b) => b[0].length - a[0].length);
+
+/* CheapShark 스토어 신뢰도 (모두 공식·인증 판매처) */
+const STORE_TRUST = {
+  'steam': 99, 'gog': 97, 'epic games store': 97, 'blizzard shop': 97, 'battle.net': 97, 'origin': 96, 'ea app': 96,
+  'uplay': 96, 'ubisoft store': 96, 'humble store': 94, 'humble bundle': 94, 'fanatical': 92, 'greenmangaming': 92,
+  'green man gaming': 92, 'gamesplanet': 91, 'gamersgate': 89, 'wingamestore': 87, 'dlgamer': 87, 'voidu': 86,
+  'indiegala': 86, 'indiegala store': 86, '2game': 86, 'gamesload': 86, 'gamebillet': 85, 'allyouplay': 85,
+  'noctre': 84, 'dreamgame': 84, 'gamesrocket': 84,
+};
+const STORE_NAME_FIX = { 'GreenManGaming': 'Green Man Gaming', 'Uplay': 'Ubisoft Store', 'Origin': 'EA' };
+const FALLBACK_STORES = {
+  1: 'Steam', 2: 'GamersGate', 3: 'GreenManGaming', 7: 'GOG', 8: 'Origin', 11: 'Humble Store', 13: 'Uplay',
+  15: 'Fanatical', 21: 'WinGameStore', 23: 'GameBillet', 24: 'Voidu', 25: 'Epic Games Store', 27: 'Gamesplanet',
+  28: 'Gamesload', 29: '2Game', 30: 'IndieGala', 31: 'Blizzard Shop', 33: 'DLGamer', 34: 'Noctre', 35: 'DreamGame',
+};
+const RATING_KO = {
+  'Overwhelmingly Positive': '압도적 긍정', 'Very Positive': '매우 긍정적', 'Positive': '긍정적', 'Mostly Positive': '대체로 긍정적',
+  'Mixed': '복합적', 'Mostly Negative': '대체로 부정적', 'Negative': '부정적', 'Very Negative': '매우 부정적',
+  'Overwhelmingly Negative': '압도적 부정',
+};
+
+/* ================= 상태 ================= */
+const prefs = {
+  get(k, d) { try { const v = localStorage.getItem('mr.' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('mr.' + k, JSON.stringify(v)); } catch (e) { /* 저장 불가 환경 */ } },
+};
+const S = {
+  q: '', apiQ: '', mode: 'cheap', sort: 'price-asc', good: prefs.get('good', false), official: prefs.get('official', false),
+  cur: prefs.get('cur', 'KRW'), page: 0, deals: [], seen: new Set(), loading: false, done: false, error: '', token: 0,
+  tab: 'deals', mcat: 'all', msort: 'trust-desc', mregion: 'all',
+};
+let STORES = {};
+let RATE = FALLBACK_RATE, RATE_LIVE = false;
+
+/* ================= 유틸 ================= */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = new Intl.NumberFormat('ko-KR');
+const compact = new Intl.NumberFormat('ko-KR', { notation: 'compact', maximumFractionDigits: 1 });
+const norm = (s) => String(s || '').toLowerCase().replace(/[\s'’:.\-·]/g, '');
+
+function tierOf(score) {
+  if (score >= 90) return { g: 'S', label: '매우 높음', cls: 't-s' };
+  if (score >= 80) return { g: 'A', label: '높음', cls: 't-a' };
+  if (score >= 65) return { g: 'B', label: '보통', cls: 't-b' };
+  if (score >= 50) return { g: 'C', label: '주의', cls: 't-c' };
+  return { g: 'D', label: '위험', cls: 't-d' };
+}
+function trustBadge(score) {
+  const t = tierOf(score);
+  return `<span class="trust ${t.cls}" title="신뢰도 ${score}/100"><span class="sc">${score}</span>신뢰도 ${t.label}</span>`;
+}
+function starsHTML(v5, label) {
+  const v = Math.max(0, Math.min(5, v5));
+  return `<span class="stars" style="--v:${v.toFixed(2)}" role="img" aria-label="${esc(label || `별 5개 중 ${v.toFixed(1)}개`)}"></span>`;
+}
+function krw(usd) { return '₩' + fmt.format(Math.round(usd * RATE / 10) * 10); }
+function usdStr(usd) { return '$' + usd.toFixed(2); }
+function money(usd) { return usd === 0 ? '무료' : (S.cur === 'KRW' ? krw(usd) : usdStr(usd)); }
+function moneyAlt(usd) { return usd === 0 ? '' : (S.cur === 'KRW' ? usdStr(usd) : krw(usd)); }
+function ago(ts) {
+  if (!ts) return '';
+  const d = Math.floor((Date.now() / 1000 - ts) / 86400);
+  if (d <= 0) return '오늘 가격 변동';
+  if (d < 31) return `${d}일 전 가격 변동`;
+  if (d < 365) return `${Math.floor(d / 30)}개월 전 가격 변동`;
+  return `${Math.floor(d / 365)}년 전 가격 변동`;
+}
+function rootDomain(host) {
+  const h = host.split('/')[0].replace(/^www\./, '');
+  const parts = h.split('.');
+  const two = /^(co|com|or|ne|ac|go)\.[a-z]{2}$/.test(parts.slice(-2).join('.'));
+  return parts.slice(two ? -3 : -2).join('.');
+}
+function toApiQuery(q) {
+  const raw = q.trim();
+  const squashed = raw.toLowerCase().replace(/\s+/g, '');
+  for (const [ko, en] of ALIAS) {
+    if (squashed.includes(ko)) {
+      return squashed.replace(ko, ' ' + en + ' ').replace(/[가-힣]+/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+  }
+  return raw;
+}
+
+async function fetchJSON(url) {
+  const once = async (u) => {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 15000);
+    try {
+      const r = await fetch(u, { signal: ctl.signal });
+      if (r.status === 429) { const e = new Error('요청이 많아 잠시 막혔어요. 1분 뒤 다시 시도하세요.'); e.final = true; throw e; }
+      if (!r.ok) throw new Error('서버 응답 ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(timer); }
+  };
+  try { return await once(url); }
+  catch (e) {
+    if (e.final) throw e;
+    try { return await once(PROXY + encodeURIComponent(url)); }
+    catch (e2) { throw new Error(e2.final ? e2.message : '가격 서버에 연결하지 못했어요.'); }
+  }
+}
+
+/* ================= 데이터 ================= */
+async function loadStores() {
+  try {
+    const list = await fetchJSON(API + '/stores');
+    for (const s of list) {
+      const name = STORE_NAME_FIX[s.storeName] || s.storeName;
+      STORES[s.storeID] = { name, icon: s.images && s.images.icon ? CS_ORIGIN + s.images.icon : '', active: +s.isActive === 1 };
+    }
+  } catch (e) {
+    for (const [id, n] of Object.entries(FALLBACK_STORES)) {
+      STORES[id] = { name: STORE_NAME_FIX[n] || n, icon: `${CS_ORIGIN}/img/stores/icons/${id - 1}.png`, active: true };
+    }
+  }
+}
+async function loadRate() {
+  try {
+    const j = await fetchJSON('https://open.er-api.com/v6/latest/USD');
+    if (j && j.rates && j.rates.KRW) { RATE = j.rates.KRW; RATE_LIVE = true; }
+  } catch (e) { /* 추정 환율 유지 */ }
+}
+function trustFor(name) {
+  const k = String(name || '').toLowerCase();
+  return STORE_TRUST[k] ?? 85;
+}
+function toDeal(x) {
+  const st = STORES[x.storeID] || { name: FALLBACK_STORES[x.storeID] || ('스토어 #' + x.storeID), icon: '' };
+  return {
+    id: x.dealID, gameID: x.gameID, title: x.title, thumb: x.thumb,
+    storeID: x.storeID, store: st.name, icon: st.icon, trust: trustFor(st.name),
+    price: +x.salePrice || 0, normal: +x.normalPrice || 0, savings: +x.savings || 0,
+    rating: +x.steamRatingPercent || 0, ratingCount: +x.steamRatingCount || 0, ratingText: x.steamRatingText || '',
+    meta: +x.metacriticScore || 0, dealRating: +x.dealRating || 0, appID: x.steamAppID, changed: +x.lastChange || 0,
+  };
+}
+function dealParams(page) {
+  const p = new URLSearchParams({ pageSize: PAGE, pageNumber: page, sortBy: 'Price' });
+  if (S.apiQ) { p.set('title', S.apiQ); p.set('desc', '0'); }
+  else if (S.mode === 'pricey') { p.set('desc', '1'); }
+  else { p.set('desc', '0'); p.set('onSale', '1'); }
+  if (S.good) p.set('steamRating', '80');
+  return p;
+}
+
+async function loadDeals(reset) {
+  if (reset) { S.page = 0; S.deals = []; S.seen = new Set(); S.done = false; S.error = ''; }
+  if (S.done) return;
+  const token = ++S.token;
+  S.loading = true; renderDeals();
+  try {
+    const pages = S.apiQ ? SEARCH_PAGES : 1;
+    for (let i = 0; i < pages; i++) {
+      const rows = await fetchJSON(API + '/deals?' + dealParams(S.page));
+      if (token !== S.token) return;
+      for (const r of rows) if (!S.seen.has(r.dealID)) { S.seen.add(r.dealID); S.deals.push(toDeal(r)); }
+      S.page++;
+      if (rows.length < PAGE) { S.done = true; break; }
+      if (S.apiQ) renderDeals();
+    }
+    if (S.apiQ) S.done = true;
+    setLive('on');
+  } catch (e) {
+    if (token !== S.token) return;
+    S.error = e.message || '가격을 불러오지 못했어요.';
+    setLive('err');
+  } finally {
+    if (token === S.token) { S.loading = false; renderDeals(); }
+  }
+}
+
+/* ================= 렌더: 매물 ================= */
+const SORTS = {
+  'price-asc': (a, b) => a.price - b.price || b.trust - a.trust || b.rating - a.rating,
+  'price-desc': (a, b) => b.price - a.price || b.trust - a.trust || b.rating - a.rating,
+  'rating': (a, b) => b.rating - a.rating || b.ratingCount - a.ratingCount || a.price - b.price,
+  'trust': (a, b) => b.trust - a.trust || a.price - b.price,
+  'savings': (a, b) => b.savings - a.savings || a.price - b.price,
+};
+
+function visibleDeals() {
+  let items = S.deals.slice();
+  if (S.official) items = items.filter((d) => d.trust >= 95);
+  return items.sort(SORTS[S.sort] || SORTS['price-asc']);
+}
+
+function dealHTML(d, i, isLowest) {
+  const r5 = d.rating / 20;
+  const href = `${CS_ORIGIN}/redirect?dealID=${encodeURIComponent(d.id)}`;
+  const steam = d.appID ? `https://store.steampowered.com/app/${encodeURIComponent(d.appID)}` : '';
+  const rating = d.ratingCount
+    ? `${starsHTML(r5, `스팀 평점 별 5개 중 ${r5.toFixed(1)}개`)}<b>${r5.toFixed(1)}</b><span>${esc(RATING_KO[d.ratingText] || d.ratingText)} ${d.rating}%</span><span>리뷰 ${compact.format(d.ratingCount)}개</span>`
+    : `${starsHTML(0, '평점 없음')}<span>평점 없음</span>`;
+  return `<li class="deal">
+    <a class="thumb" href="${href}" target="_blank" rel="noopener"><img src="${esc(d.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer"><span class="rank">${i + 1}</span></a>
+    <div class="main">
+      <div class="title"><a href="${href}" target="_blank" rel="noopener">${esc(d.title)}</a></div>
+      <div class="store">${d.icon ? `<img src="${esc(d.icon)}" alt="" loading="lazy">` : ''}<span class="nm">${esc(d.store)}</span>${trustBadge(d.trust)}</div>
+      <div class="rate">${rating}${d.meta ? `<span class="meta" title="메타크리틱">메타 ${d.meta}</span>` : ''}<span class="dr" title="CheapShark 딜점수">딜점수 ${d.dealRating.toFixed(1)}/10</span>${steam ? `<a href="${steam}" target="_blank" rel="noopener">리뷰 보기</a>` : ''}</div>
+    </div>
+    <div class="price">
+      ${d.savings >= 1 ? `<span class="cut">-${Math.round(d.savings)}%</span>` : ''}
+      <b class="now${d.price === 0 ? ' free' : ''}">${money(d.price)}</b>
+      <span class="alt">${moneyAlt(d.price)}${d.normal > d.price ? ` <s>${money(d.normal)}</s>` : ''}</span>
+      ${isLowest ? '<span class="lowest">이 게임 최저가</span>' : ''}
+      <span class="ago">${ago(d.changed)}</span>
+      <a class="buy" href="${href}" target="_blank" rel="noopener">구매하러 가기</a>
+    </div>
+  </li>`;
+}
+
+function renderDeals() {
+  const list = $('#dealList');
+  const items = visibleDeals();
+  const searching = !!S.q;
+
+  $('#modeSeg').hidden = searching;
+  for (const b of $('#modeSeg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode));
+  $('#sort').value = S.sort;
+  $('#fGood').setAttribute('aria-pressed', String(S.good));
+  $('#fOfficial').setAttribute('aria-pressed', String(S.official));
+  $('#fCur').setAttribute('aria-pressed', String(S.cur === 'USD'));
+  $('#fCur').textContent = S.cur === 'KRW' ? '₩ 원화' : '$ 달러';
+  $('#nDeals').textContent = S.deals.length ? items.length : '';
+
+  // 요약
+  const sum = $('#dealSummary');
+  if (items.length) {
+    const byPrice = items.slice().sort(SORTS['price-asc']);
+    const lo = byPrice[0], hi = byPrice[byPrice.length - 1];
+    const stores = new Set(items.map((d) => d.store)).size;
+    const head = searching
+      ? `<span class="big">‘${esc(S.q)}’ 매물 ${fmt.format(items.length)}개</span>`
+      : `<span class="big">${S.mode === 'cheap' ? '지금 가장 싼 할인 매물' : '지금 가장 비싼 매물'} ${fmt.format(items.length)}개</span>`;
+    sum.innerHTML = `${head}
+      <span>최저 <b class="lo">${money(lo.price)}</b> · ${esc(lo.store)}</span>
+      <span>최고 <b class="hi">${money(hi.price)}</b> · ${esc(hi.store)}</span>
+      <span>스토어 <b>${stores}</b>곳</span>
+      ${searching && S.apiQ !== S.q ? `<span>검색어 변환: <b>${esc(S.apiQ)}</b></span>` : ''}`;
+    sum.hidden = false;
+  } else {
+    sum.hidden = true;
+  }
+
+  // 목록
+  if (items.length) {
+    const minBy = new Map(), countBy = new Map();
+    for (const d of items) {
+      countBy.set(d.gameID, (countBy.get(d.gameID) || 0) + 1);
+      if (!minBy.has(d.gameID) || d.price < minBy.get(d.gameID)) minBy.set(d.gameID, d.price);
+    }
+    list.innerHTML = items.map((d, i) => dealHTML(d, i, countBy.get(d.gameID) > 1 && d.price === minBy.get(d.gameID))).join('')
+      + (S.loading ? '<li class="skel"></li>' : '');
+  } else if (S.loading) {
+    list.innerHTML = '<li class="skel"></li><li class="skel"></li><li class="skel"></li><li class="skel"></li>';
+  } else if (S.error) {
+    list.innerHTML = `<li class="state"><strong>실시간 가격을 불러오지 못했어요</strong><span>${esc(S.error)} 네트워크를 확인하고 다시 시도하세요. 그동안 ‘마켓 전체’ 탭에서 각 사이트를 바로 검색할 수 있어요.</span><button type="button" class="btn" data-act="retry">다시 시도</button></li>`;
+  } else if (searching) {
+    list.innerHTML = `<li class="state"><strong>‘${esc(S.q)}’ 실시간 매물이 없어요</strong><span>실시간 가격은 PC 게임 키만 다룹니다. 구독 · 계정 · 기프트카드는 마켓 탭에서 한 번에 찾아보세요. 게임이라면 영문 제목으로도 검색해 보세요.</span><button type="button" class="btn" data-act="markets">마켓 ${MARKETS.length}곳에서 찾기</button></li>`;
+  } else {
+    list.innerHTML = '<li class="state"><strong>조건에 맞는 매물이 없어요</strong><span>필터를 풀어 보세요.</span></li>';
+  }
+
+  $('#moreBtn').hidden = searching || S.done || S.loading || !!S.error || !S.deals.length;
+  $('#dealNote').innerHTML = `실시간 가격: CheapShark에 연결된 공식 · 인증 PC 게임 스토어 ${Object.values(STORES).filter((s) => s.active).length || '20여'}곳.
+    ${searching ? `검색 결과는 <b>싼 매물이 맨 위, 비싼 매물이 맨 아래</b>입니다 (최대 ${SEARCH_PAGES * PAGE}개).` : ''}
+    원화는 ${RATE_LIVE ? `실시간 환율 1달러 = ${fmt.format(Math.round(RATE))}원` : `추정 환율 1달러 = ${fmt.format(RATE)}원`} 기준 환산값입니다.
+    계정 · 구독 · 기프트카드는 <a href="#markets" data-act="markets">마켓 전체 ${MARKETS.length}곳</a>에서 검색하세요.`;
+}
+
+function setLive(state) {
+  const el = $('#live');
+  el.dataset.state = state;
+  $('#liveText').textContent = state === 'on' ? '실시간' : state === 'err' ? '연결 실패' : '연결 중';
+}
+
+/* ================= 렌더: 마켓 ================= */
+function marketMatches(m, terms) {
+  if (!terms.length) return false;
+  const hay = norm(m.name + ' ' + m.tags + ' ' + m.domain);
+  return terms.some((t) => hay.includes(t));
+}
+function queryTerms() {
+  const terms = new Set();
+  for (const part of (S.q + ' ' + (S.apiQ !== S.q ? S.apiQ : '')).split(/\s+/)) {
+    const t = norm(part);
+    if (t.length >= 2) terms.add(t);
+  }
+  if (S.q && norm(S.q).length >= 2) terms.add(norm(S.q));
+  return [...terms];
+}
+function marketQuery(m) {
+  // 한글 게임명을 영문으로 바꾼 경우, 해외 마켓에는 영문 제목으로 검색
+  return m.region === 'KR' ? S.q : (S.apiQ || S.q);
+}
+function searchUrl(m) {
+  if (!S.q) return m.url;
+  const q = marketQuery(m);
+  if (m.search) return m.search.replace('{q}', encodeURIComponent(q));
+  return 'https://www.google.com/search?q=' + encodeURIComponent(`site:${m.domain} ${q}`);
+}
+
+function renderMarkets() {
+  const terms = queryTerms();
+  const searching = !!S.q;
+  let pool = MARKETS.map((m) => ({ m, hit: marketMatches(m, terms) }));
+  if (searching) pool = pool.filter((r) => r.hit || !CATS[r.m.cat].vendor);
+  if (S.mregion !== 'all') pool = pool.filter((r) => r.m.region === S.mregion);
+
+  // 분류 칩
+  const counts = {};
+  for (const r of pool) counts[r.m.cat] = (counts[r.m.cat] || 0) + 1;
+  const chip = (key, label, n) => `<button type="button" class="chip" data-cat="${key}" aria-pressed="${S.mcat === key}">${label}<span class="n">${n}</span></button>`;
+  $('#catChips').innerHTML = chip('all', '전체', pool.length)
+    + Object.entries(CATS).filter(([k]) => counts[k]).map(([k, c]) => chip(k, c.label, counts[k])).join('');
+
+  let rows = S.mcat === 'all' ? pool : pool.filter((r) => r.m.cat === S.mcat);
+  const order = {
+    'trust-desc': (a, b) => b.m.score - a.m.score || a.m.name.localeCompare(b.m.name),
+    'trust-asc': (a, b) => a.m.score - b.m.score || a.m.name.localeCompare(b.m.name),
+    'name': (a, b) => a.m.name.localeCompare(b.m.name, 'ko'),
+  }[S.msort];
+  rows.sort((a, b) => (b.hit - a.hit) || order(a, b));
+
+  const hits = rows.filter((r) => r.hit).length;
+  const avg = rows.length ? Math.round(rows.reduce((s, r) => s + r.m.score, 0) / rows.length) : 0;
+  $('#mkSummary').innerHTML = searching
+    ? `<span class="big">‘${esc(S.q)}’ 찾을 곳 ${fmt.format(rows.length)}곳</span>${hits ? `<span>이름이 일치하는 곳 <b>${hits}</b>곳을 맨 위에 표시</span>` : ''}<span>평균 신뢰도 <b>${avg}</b></span>`
+    : `<span class="big">마켓 ${fmt.format(MARKETS.length)}곳</span><span>표시 <b>${fmt.format(rows.length)}</b>곳</span><span>평균 신뢰도 <b>${avg}</b></span><span>검색어를 넣으면 각 마켓 검색 결과로 바로 이동</span>`;
+  $('#nMarkets').textContent = rows.length;
+
+  $('#mkList').innerHTML = rows.map(({ m, hit }) => {
+    const t = tierOf(m.score);
+    const vendor = CATS[m.cat].vendor;
+    const primary = searching && !vendor
+      ? `<a class="pri" href="${esc(searchUrl(m))}" target="_blank" rel="noopener">‘${esc(marketQuery(m))}’ 검색${m.search ? '' : ' (Google)'}</a><a href="${esc(m.url)}" target="_blank" rel="noopener">방문</a>`
+      : `<a class="pri" href="${esc(m.url)}" target="_blank" rel="noopener">${vendor ? '공식 요금 보기' : '방문'}</a>`;
+    return `<li class="mk${hit && searching ? ' hit' : ''}">
+      <div class="hd"><span class="nm">${esc(m.name)}</span><span class="cat">${CATS[m.cat].label}</span><span class="rg">${REGIONS[m.region] || m.region}</span></div>
+      <div class="dm">${esc(m.domain)}</div>
+      <div class="tr ${t.cls}">${starsHTML(m.score / 20, `신뢰도 별 5개 중 ${(m.score / 20).toFixed(1)}개`)}${trustBadge(m.score)}<span class="meter" aria-hidden="true"><i style="width:${m.score}%"></i></span></div>
+      <div class="act">${primary}<a href="https://www.trustpilot.com/review/${esc(rootDomain(m.domain))}" target="_blank" rel="noopener">이용자 별점</a></div>
+    </li>`;
+  }).join('') || '<li class="state"><strong>조건에 맞는 마켓이 없어요</strong><span>분류나 지역 필터를 바꿔 보세요.</span></li>';
+}
+
+/* ================= 탭 · 이벤트 ================= */
+const TABS = ['deals', 'markets', 'guide'];
+function showTab(name, push) {
+  if (!TABS.includes(name)) name = 'deals';
+  S.tab = name;
+  for (const t of TABS) {
+    $('#tab-' + t).setAttribute('aria-selected', String(t === name));
+    $('#panel-' + t).hidden = t !== name;
+  }
+  if (push) history.replaceState(null, '', location.pathname + location.search + (name === 'deals' ? '' : '#' + name));
+}
+
+function runSearch(q) {
+  S.q = q.trim();
+  S.apiQ = S.q ? toApiQuery(S.q) : '';
+  S.sort = S.q ? 'price-asc' : (S.mode === 'pricey' ? 'price-desc' : 'price-asc');
+  $('#q').value = S.q;
+  $('#clearQ').hidden = !S.q;
+  const params = S.q ? '?q=' + encodeURIComponent(S.q) : '';
+  history.replaceState(null, '', location.pathname + params + location.hash);
+  renderMarkets();
+  loadDeals(true);
+}
+
+function bind() {
+  $('#searchForm').addEventListener('submit', (e) => { e.preventDefault(); $('#q').blur(); runSearch($('#q').value); });
+  $('#q').addEventListener('input', () => { $('#clearQ').hidden = !$('#q').value; });
+  $('#clearQ').addEventListener('click', () => { $('#q').value = ''; runSearch(''); $('#q').focus(); });
+  for (const t of TABS) $('#tab-' + t).addEventListener('click', () => { showTab(t, true); window.scrollTo({ top: 0 }); });
+  $('#modeSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-mode]'); if (!b || b.dataset.mode === S.mode) return;
+    S.mode = b.dataset.mode; S.sort = S.mode === 'pricey' ? 'price-desc' : 'price-asc'; loadDeals(true);
+  });
+  $('#sort').addEventListener('change', (e) => { S.sort = e.target.value; renderDeals(); });
+  $('#fGood').addEventListener('click', () => { S.good = !S.good; prefs.set('good', S.good); loadDeals(true); });
+  $('#fOfficial').addEventListener('click', () => { S.official = !S.official; prefs.set('official', S.official); renderDeals(); });
+  $('#fCur').addEventListener('click', () => { S.cur = S.cur === 'KRW' ? 'USD' : 'KRW'; prefs.set('cur', S.cur); renderDeals(); });
+  $('#moreBtn').addEventListener('click', () => loadDeals(false));
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-act]'); if (!a) return;
+    if (a.dataset.act === 'retry') { e.preventDefault(); loadDeals(true); }
+    if (a.dataset.act === 'markets') { e.preventDefault(); showTab('markets', true); window.scrollTo({ top: 0 }); }
+  });
+  $('#catChips').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-cat]'); if (!b) return; S.mcat = b.dataset.cat; renderMarkets();
+  });
+  $('#mkSort').addEventListener('change', (e) => { S.msort = e.target.value; renderMarkets(); });
+  $('#mkRegion').addEventListener('change', (e) => { S.mregion = e.target.value; renderMarkets(); });
+  window.addEventListener('hashchange', () => showTab(location.hash.slice(1), false));
+}
+
+async function init() {
+  const used = [...new Set(MARKETS.map((m) => m.region))].sort((a, b) => (REGIONS[a] || a).localeCompare(REGIONS[b] || b, 'ko'));
+  $('#mkRegion').innerHTML = '<option value="all">모든 지역</option>' + used.map((r) => `<option value="${r}">${REGIONS[r] || r}</option>`).join('');
+  bind();
+  showTab(location.hash.slice(1), false);
+  const q0 = new URLSearchParams(location.search).get('q') || '';
+  S.q = q0.trim(); S.apiQ = S.q ? toApiQuery(S.q) : '';
+  $('#q').value = S.q; $('#clearQ').hidden = !S.q;
+  renderMarkets();
+  S.loading = true; renderDeals();
+  await Promise.all([loadStores(), loadRate()]);
+  S.loading = false;
+  loadDeals(true);
+}
+
+init();
+})();
+</script>
+</body>
+</html>
