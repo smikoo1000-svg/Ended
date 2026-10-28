@@ -53,3 +53,41 @@ def test_collect_demo_end_to_end(tmp_path):
     cfg = {"settings": {"per_site_delay": 0}, "rates": {"KRW": 1}, "sources": [{"name": "d", "type": "demo"}]}
     res = asyncio.run(collector.collect(con, cfg, ["Netflix"]))
     assert res["total"] > 0 and res["new_ids"]
+
+
+def test_normalize_titles():
+    from app.normalize import parse
+    a = parse("넷플릭스 프리미엄 4K 12개월 (정식)")
+    assert (a.brand, a.tier, a.months, a.key) == ("netflix", "premium", 12, "netflix|premium|12m")
+    b = parse("ChatGPT Plus 1 Year account")
+    assert (b.brand, b.tier, b.months) == ("chatgpt", "plus", 12)
+    assert parse("Windows 11 Pro lifetime key").key == "windows|pro|life"
+    assert parse("product review").tier is None      # "pro" must not match inside "product"
+    assert parse("random thing").key is None
+
+
+def test_duration_is_not_a_price_difference():
+    rows = [dict(price_krw=p, product_key=k, duration_months=m, unit_price_krw=p / m, seller_rating=4.5, seller_reviews=100)
+            for p, k, m in [(10000, "netflix|premium|1m", 1), (11000, "netflix|premium|1m", 1), (12000, "netflix|premium|1m", 1),
+                            (100000, "netflix|premium|12m", 12)]]
+    s = score_listings(rows)
+    assert s[3]["score"] < 150 and s[0]["group_size"] == 3 and s[3]["group_size"] == 1
+
+
+def test_history_and_auth(tmp_path, monkeypatch):
+    monkeypatch.setenv("ENDED_DB", str(tmp_path / "a.db"))
+    monkeypatch.setenv("ADMIN_TOKEN", "s3cret")
+    import importlib
+    from fastapi.testclient import TestClient
+    import app.db, app.main
+    importlib.reload(app.db); m = importlib.reload(app.main)
+    c = TestClient(m.app)
+    assert c.post("/api/watches", json={"keyword": "x"}).status_code == 401
+    assert c.post("/api/watches", json={"keyword": "x"}, headers={"X-Admin-Token": "s3cret"}).status_code == 200
+    assert c.get("/healthz").json() == {"ok": True}
+    ts = collector.now()
+    collector.upsert(m.con, "s", Offer("1", "Netflix Premium 1개월", "https://x.test", 9000), {"KRW": 1}, ts)
+    collector.snapshot(m.con, ts); m.con.commit()
+    h = c.get("/api/history", params={"product_key": "netflix|premium|1m"}).json()
+    assert h and h[0]["min_price_krw"] == 9000
+    assert c.get("/api/listings/1/history").json()[0]["price_krw"] == 9000

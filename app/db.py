@@ -1,7 +1,8 @@
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path("ended.db")
+DB_PATH = Path(os.getenv("ENDED_DB", "ended.db"))
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS listings (
@@ -19,6 +20,10 @@ CREATE TABLE IF NOT EXISTS listings (
     seller_sales INTEGER,    -- completed sales count, NULL if unknown
     seller_reviews INTEGER,  -- number of reviews behind seller_rating, NULL if unknown
     stock INTEGER,
+    brand TEXT,              -- normalized service, e.g. netflix
+    product_key TEXT,        -- brand|tier|duration, comparable listings share it
+    duration_months REAL,
+    unit_price_krw REAL,     -- price per month when duration is known, else price
     first_seen TEXT NOT NULL,
     last_seen TEXT NOT NULL,
     active INTEGER NOT NULL DEFAULT 1,
@@ -30,6 +35,14 @@ CREATE TABLE IF NOT EXISTS price_history (
     ts TEXT NOT NULL,
     price_krw REAL NOT NULL
 );
+CREATE TABLE IF NOT EXISTS market_snapshots (
+    product_key TEXT NOT NULL,
+    ts TEXT NOT NULL,
+    min_price_krw REAL NOT NULL,
+    median_price_krw REAL NOT NULL,
+    n INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_snap ON market_snapshots(product_key, ts);
 CREATE TABLE IF NOT EXISTS watches (
     id INTEGER PRIMARY KEY,
     keyword TEXT NOT NULL,
@@ -61,4 +74,10 @@ def connect(path=None) -> sqlite3.Connection:
     con = sqlite3.connect(str(path or DB_PATH), check_same_thread=False)
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)
+    cols = {r[1] for r in con.execute("PRAGMA table_info(listings)")}
+    for col, typ in (("seller_reviews", "INTEGER"), ("brand", "TEXT"), ("product_key", "TEXT"),
+                     ("duration_months", "REAL"), ("unit_price_krw", "REAL")):
+        if col not in cols:  # databases created by earlier versions
+            con.execute(f"ALTER TABLE listings ADD COLUMN {col} {typ}")
+    con.execute("CREATE INDEX IF NOT EXISTS idx_listings_pk ON listings(product_key)")
     return con

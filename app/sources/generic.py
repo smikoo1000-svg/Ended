@@ -3,7 +3,8 @@
 type: html -> CSS selectors; type: json -> dotted paths into the response.
 """
 import re
-from urllib.parse import quote_plus, urljoin
+from urllib.parse import quote_plus, urljoin, urlsplit
+from urllib.robotparser import RobotFileParser
 
 from bs4 import BeautifulSoup
 
@@ -37,10 +38,27 @@ class GenericSource(Source):
     def __init__(self, cfg: dict):
         self.cfg = cfg
         self.name = cfg["name"]
+        self._robots = None
+
+    async def _allowed(self, client, url: str) -> bool:
+        if not self.cfg.get("respect_robots", True):
+            return True
+        if self._robots is None:
+            parts = urlsplit(url)
+            rp = RobotFileParser()
+            try:
+                r = await client.get(f"{parts.scheme}://{parts.netloc}/robots.txt")
+                rp.parse(r.text.splitlines() if r.status_code == 200 else [])
+            except Exception:
+                rp.parse([])  # robots.txt unreachable -> allow
+            self._robots = rp
+        return self._robots.can_fetch("EndedPriceBot", url)
 
     async def search(self, client, query: str) -> list[Offer]:
         c = self.cfg
         url = c["search_url"].replace("{query}", quote_plus(query))
+        if not await self._allowed(client, url):
+            raise PermissionError("blocked by robots.txt (set respect_robots: false only if you have permission)")
         resp = await client.get(url, headers=c.get("headers"))
         resp.raise_for_status()
         if c.get("type", "html") == "json":

@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import httpx
 import yaml
 
+from . import normalize
 from .sources.demo import DemoSource
 from .sources.generic import GenericSource
 
@@ -32,25 +33,42 @@ def build_sources(cfg: dict):
 def upsert(con, source: str, offer, rates: dict, ts: str):
     """Returns (listing_id, is_new, price_dropped)."""
     price_krw = round(offer.price * rates.get(offer.currency, 1), 0)
+    prod = normalize.parse(offer.title)
+    unit = normalize.unit_price(price_krw, prod)
     row = con.execute("SELECT id, price_krw FROM listings WHERE source=? AND ext_id=?",
                       (source, offer.ext_id)).fetchone()
     if row is None:
         cur = con.execute(
             """INSERT INTO listings(source, ext_id, title, url, category, price_krw, orig_price, currency,
-               seller, seller_rating, seller_sales, seller_reviews, stock, first_seen, last_seen)
-               VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+               seller, seller_rating, seller_sales, seller_reviews, stock, brand, product_key,
+               duration_months, unit_price_krw, first_seen, last_seen)
+               VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
             (source, offer.ext_id, offer.title, offer.url, offer.category, price_krw, offer.price,
-             offer.currency, offer.seller, offer.seller_rating, offer.seller_sales, offer.seller_reviews, offer.stock, ts, ts))
+             offer.currency, offer.seller, offer.seller_rating, offer.seller_sales, offer.seller_reviews, offer.stock,
+             prod.brand, prod.key, prod.months, unit, ts, ts))
         con.execute("INSERT INTO price_history VALUES(?,?,?)", (cur.lastrowid, ts, price_krw))
         return cur.lastrowid, True, False
     dropped = price_krw < row["price_krw"]
     if price_krw != row["price_krw"]:
         con.execute("INSERT INTO price_history VALUES(?,?,?)", (row["id"], ts, price_krw))
     con.execute("""UPDATE listings SET title=?, url=?, price_krw=?, orig_price=?, seller_rating=?,
-                   seller_sales=?, seller_reviews=?, stock=?, last_seen=?, active=1 WHERE id=?""",
+                   seller_sales=?, seller_reviews=?, stock=?, brand=?, product_key=?, duration_months=?,
+                   unit_price_krw=?, last_seen=?, active=1 WHERE id=?""",
                 (offer.title, offer.url, price_krw, offer.price, offer.seller_rating,
-                 offer.seller_sales, offer.seller_reviews, offer.stock, ts, row["id"]))
+                 offer.seller_sales, offer.seller_reviews, offer.stock,
+                 prod.brand, prod.key, prod.months, unit, ts, row["id"]))
     return row["id"], False, dropped
+
+
+def snapshot(con, ts: str):
+    """Record min/median price per product_key so price trends can be charted."""
+    import statistics
+    groups = {}
+    for r in con.execute("SELECT product_key, price_krw FROM listings WHERE active=1 AND product_key IS NOT NULL"):
+        groups.setdefault(r["product_key"], []).append(r["price_krw"])
+    for pk, prices in groups.items():
+        con.execute("INSERT INTO market_snapshots VALUES(?,?,?,?,?)",
+                    (pk, ts, min(prices), statistics.median(prices), len(prices)))
 
 
 async def _run_source(src, client, queries, delay, sem):
@@ -90,5 +108,6 @@ async def collect(con, cfg: dict, queries: list[str]) -> dict:
     # anything not refreshed for 3 intervals is considered gone (sold out / removed)
     cutoff = datetime.fromtimestamp(time.time() - 3 * st.get("interval_seconds", 300), timezone.utc)
     con.execute("UPDATE listings SET active=0 WHERE last_seen < ?", (cutoff.isoformat(timespec="seconds"),))
+    snapshot(con, run_ts)
     con.commit()
     return {"new_ids": new_ids, "run_ts": run_ts, "total": total}
