@@ -4,11 +4,20 @@ rates:
   USD: 1400
   EUR: 1500
   JPY: 9.5
+  # 아래는 기프트카드 액면가 대비 터무니없는 가격을 걸러내는 용도의 대략값입니다. 필요하면 수정하세요.
+  GBP: 1800
+  TRY: 33
+  PLN: 350
+  BRL: 250
+  SAR: 370
+  AED: 380
+  CAD: 1000
+  AUD: 920
 
 # 수집 설정
 settings:
   interval_seconds: 300      # 전체 수집 주기
-  per_site_delay: 0.2        # 같은 사이트 연속 요청 간 최소 간격(초) - 서버에 부담 주지 않기
+  per_site_delay: 2.0        # 같은 사이트 연속 요청 간 최소 간격(초) - 서버에 부담 주지 않기
   concurrency: 8
   queries: []                # 비워두면 알림 규칙(watch)의 키워드를 사용
 
@@ -17,6 +26,32 @@ sources:
   - {name: demo-a, type: demo, base_price: 9000}
   - {name: demo-b, type: demo, base_price: 11000}
   - {name: demo-c, type: demo, base_price: 8000}
+
+  # --- 실제 사이트 (접속·robots.txt·응답 구조 검증 완료) ---
+  # Gameflip: 문서화된 공개 API (https://gameflip.github.io/gfapi/). 가격은 센트(USD),
+  # seller_rating_score 는 긍정 비율(0..1) -> 5점 만점으로 환산, seller_ratings 는 평가 수.
+  - name: gameflip
+    type: json
+    search_url: "https://production-gameflip.fingershock.com/api/v1/listing?term={query}&status=onsale&limit=100"
+    currency: USD
+    price_divisor: 100
+    rating_multiplier: 5
+    items_path: "data"
+    require: [is_in_stock]
+    fields: {id: id, title: name, link: "https://gameflip.com/item/{id}", price: price, rating: seller_rating_score, reviews: seller_ratings}
+
+  # Kinguin: 사이트 프론트가 쓰는 검색 엔드포인트. robots.txt 의 Crawl-Delay: 2 를 지키도록 delay 2초.
+  # 가격은 센트(EUR) - 상품 페이지의 "amount":1274,"currency":"EUR" 와 대조해 확인.
+  # 검색 응답에는 판매자 평점/리뷰가 없어서 이 사이트 신뢰도는 보수적으로 계산됩니다.
+  - name: kinguin
+    type: json
+    delay: 2.0
+    search_url: "https://www.kinguin.net/services/library/api/v1/products/search?phrase={query}&size=50"
+    currency: EUR
+    price_divisor: 100
+    items_path: "_embedded.products"
+    require: [active, visible]
+    fields: {id: id, title: name, link: "https://www.kinguin.net/category/{externalId}/{attributes.urlKey}", price: price.calculated, seller: seller.name}
 
   # --- 실제 사이트 추가 예시 (HTML) ---
   # 사이트의 robots.txt / 이용약관을 확인하고, 공식 API·제휴 피드가 있으면 그쪽을 우선 사용하세요.

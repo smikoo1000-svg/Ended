@@ -12,6 +12,7 @@ from .sources.generic import GenericSource
 
 log = logging.getLogger("collector")
 UA = "Mozilla/5.0 (compatible; EndedPriceBot/0.1)"
+MAX_FACE_MULTIPLE = 10  # priced above 10x face value = placeholder price, not a real offer (overpriced real ones stay)
 
 
 def now() -> str:
@@ -34,6 +35,8 @@ def upsert(con, source: str, offer, rates: dict, ts: str):
     """Returns (listing_id, is_new, price_dropped)."""
     price_krw = round(offer.price * rates.get(offer.currency, 1), 0)
     prod = normalize.parse(offer.title)
+    if prod.face and prod.face[0] in rates and price_krw > MAX_FACE_MULTIPLE * prod.face[1] * rates[prod.face[0]]:
+        return None, False, False  # e.g. a 400 TRY card listed at 10,499 EUR: placeholder price, not a real offer
     unit = normalize.unit_price(price_krw, prod)
     row = con.execute("SELECT id, price_krw FROM listings WHERE source=? AND ext_id=?",
                       (source, offer.ext_id)).fetchone()
@@ -71,7 +74,8 @@ def snapshot(con, ts: str):
                     (pk, ts, min(prices), statistics.median(prices), len(prices)))
 
 
-async def _run_source(src, client, queries, delay, sem):
+async def _run_source(src, client, queries, default_delay, sem):
+    delay = getattr(src, "delay", None) or default_delay
     offers, err = [], None
     async with sem:
         for q in queries:
@@ -100,6 +104,8 @@ async def collect(con, cfg: dict, queries: list[str]) -> dict:
     for name, offers, err in results:
         for o in offers:
             lid, is_new, _ = upsert(con, name, o, rates, run_ts)
+            if lid is None:
+                continue
             if is_new:
                 new_ids.append(lid)
         total += len(offers)

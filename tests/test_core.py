@@ -91,3 +91,20 @@ def test_history_and_auth(tmp_path, monkeypatch):
     h = c.get("/api/history", params={"product_key": "netflix|premium|1m"}).json()
     assert h and h[0]["min_price_krw"] == 9000
     assert c.get("/api/listings/1/history").json()[0]["price_krw"] == 9000
+
+
+def test_gift_card_face_value():
+    from app.normalize import parse
+    assert parse("Netflix TRY 150 Gift Card TR").key == "netflix|giftcard|TRY150"
+    assert parse("Netflix 100 USD").key == "netflix|giftcard|USD100"
+    assert parse("$50.00 USD Netflix Gift Card").key == "netflix|giftcard|USD50"
+    assert parse("Netflix Gift Card BRL 55,90 BR").face == ("BRL", 55.9)
+    assert parse("Netflix Premium 1개월").key == "netflix|premium|1m"   # duration wins, no face value
+
+
+def test_bogus_price_is_dropped(tmp_path):
+    con = db.connect(tmp_path / "t.db")
+    rates = {"KRW": 1, "EUR": 1500, "TRY": 33}
+    ok = collector.upsert(con, "s", Offer("1", "Netflix TRY 150 Gift Card", "https://x.test", 12.74, "EUR"), rates, collector.now())
+    bad = collector.upsert(con, "s", Offer("2", "Netflix TRY 400 Gift Card", "https://x.test", 10499, "EUR"), rates, collector.now())
+    assert ok[0] and bad[0] is None

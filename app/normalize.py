@@ -47,6 +47,33 @@ _DUR = [
 ]
 _LIFETIME = re.compile(r"평생|영구|lifetime|permanent", re.I)
 
+CURRENCIES = "USD|EUR|GBP|TRY|PLN|BRL|SAR|AED|JPY|KRW|CAD|AUD|CHF|SEK|NOK|DKK|MXN|INR"
+_SYMBOLS = {"$": "USD", "€": "EUR", "£": "GBP", "₩": "KRW", "¥": "JPY", "₺": "TRY", "zł": "PLN"}
+_AMT = r"(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:[.,]\d{1,2})?)"
+_FACE = [
+    re.compile(rf"(?<![a-z])({CURRENCIES})\s?{_AMT}(?!\d)", re.I),      # "TRY 150", "USD 25"
+    re.compile(rf"{_AMT}\s?({CURRENCIES})(?![a-z])", re.I),              # "100 USD"
+    re.compile(rf"([$€£₩¥₺])\s?{_AMT}"),                                 # "$50.00"
+]
+
+
+def _amount(txt: str) -> float:
+    if re.fullmatch(r"\d+,\d{1,2}", txt):      # decimal comma: "55,90"
+        txt = txt.replace(",", ".")
+    return float(txt.replace(",", ""))
+
+
+def parse_face_value(t: str):
+    """Gift-card denomination as (CURRENCY, amount), e.g. 'Netflix TRY 150 Gift Card' -> ('TRY', 150)."""
+    for i, rx in enumerate(_FACE):
+        m = rx.search(t)
+        if not m:
+            continue
+        a, b = m.groups()
+        cur, amt = (a, b) if i == 0 else ((b, a) if i == 1 else (_SYMBOLS[a], b))
+        return cur.upper(), _amount(amt)
+    return None
+
 
 @dataclass
 class Product:
@@ -55,11 +82,15 @@ class Product:
     kind: Optional[str]
     months: Optional[float]
     lifetime: bool
+    face: Optional[tuple] = None   # (currency, amount) for gift cards / top-ups
 
     @property
     def key(self) -> Optional[str]:
         if not self.brand:
             return None
+        if self.face and not self.months and not self.lifetime:
+            # denominations are different products: a 15 USD card and a 100 USD card are not comparable
+            return f"{self.brand}|giftcard|{self.face[0]}{self.face[1]:g}"
         dur = "life" if self.lifetime else (f"{self.months:g}m" if self.months else "?")
         return f"{self.brand}|{self.tier or '-'}|{dur}"
 
@@ -84,7 +115,9 @@ def parse(title: str) -> Product:
         if m:
             months = round(float(m.group(1)) * mult, 3)
             break
-    return Product(_first(t, BRANDS), _first(t, TIERS), _first(t, KINDS), months, bool(_LIFETIME.search(t)))
+    lifetime = bool(_LIFETIME.search(t))
+    face = None if (months or lifetime) else parse_face_value(title)
+    return Product(_first(t, BRANDS), _first(t, TIERS), _first(t, KINDS), months, lifetime, face)
 
 
 def unit_price(price_krw: float, p: Product) -> float:

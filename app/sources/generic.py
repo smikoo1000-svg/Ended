@@ -38,6 +38,7 @@ class GenericSource(Source):
     def __init__(self, cfg: dict):
         self.cfg = cfg
         self.name = cfg["name"]
+        self.delay = cfg.get("delay")
         self._robots = None
 
     async def _allowed(self, client, url: str) -> bool:
@@ -92,18 +93,28 @@ class GenericSource(Source):
         return out
 
     def _parse_json(self, data, base):
+        """Extra options: require (dotted paths that must be truthy), link as a template with
+        {dotted.path} placeholders, price_divisor (e.g. 100 for cents), rating_multiplier
+        (e.g. 5 when the site gives a 0..1 positive ratio)."""
         c, f = self.cfg, self.cfg["fields"]
+        div, mult = c.get("price_divisor", 1), c.get("rating_multiplier", 1)
         out = []
         for it in _dig(data, c.get("items_path", "")) or []:
-            title, link, price = _dig(it, f["title"]), _dig(it, f["link"]), _num(_dig(it, f["price"]))
+            if not all(_dig(it, p) for p in c.get("require", [])):
+                continue
+            title, price = _dig(it, f["title"]), _num(_dig(it, f["price"]))
+            link = re.sub(r"\{([^}]+)\}", lambda m: str(_dig(it, m.group(1)) or ""), f["link"]) \
+                if "{" in f["link"] else _dig(it, f["link"])
             if not (title and link and price):
                 continue
+            price = price / div
             link = urljoin(base, str(link))
             g = lambda k: _dig(it, f[k]) if k in f else None  # noqa: E731
+            rating = _num(g("rating"))
             out.append(Offer(
                 ext_id=str(g("id") or link), title=str(title), url=link, price=price,
                 currency=c.get("currency", "KRW"), category=c.get("category"),
-                seller=g("seller"), seller_rating=_num(g("rating")),
+                seller=g("seller"), seller_rating=rating * mult if rating is not None else None,
                 seller_sales=int(_num(g("sales")) or 0) or None,
                 seller_reviews=int(_num(g("reviews")) or 0) or None,
                 stock=int(_num(g("stock")) or 0) or None))
