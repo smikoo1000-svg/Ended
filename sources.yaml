@@ -1,0 +1,43 @@
+# 환율 (KRW 환산용). 필요하면 수정하세요.
+rates:
+  KRW: 1
+  USD: 1400
+  EUR: 1500
+  JPY: 9.5
+
+# 수집 설정
+settings:
+  interval_seconds: 300      # 전체 수집 주기
+  per_site_delay: 0.2        # 같은 사이트 연속 요청 간 최소 간격(초) - 서버에 부담 주지 않기
+  concurrency: 8
+  queries: []                # 비워두면 알림 규칙(watch)의 키워드를 사용
+
+sources:
+  # --- 데모 (실제 사이트 아님) ---
+  - {name: demo-a, type: demo, base_price: 9000}
+  - {name: demo-b, type: demo, base_price: 11000}
+  - {name: demo-c, type: demo, base_price: 8000}
+
+  # --- 실제 사이트 추가 예시 (HTML) ---
+  # 사이트의 robots.txt / 이용약관을 확인하고, 공식 API·제휴 피드가 있으면 그쪽을 우선 사용하세요.
+  # - name: example-market
+  #   type: html
+  #   search_url: "https://example.com/search?q={query}"
+  #   currency: KRW
+  #   selectors:
+  #     item: ".product-card"
+  #     title: ".title"
+  #     link: "a"            # href 자동 추출 (link 는 항상 href)
+  #     price: ".price"
+  #     seller: ".seller-name"
+  #     rating: ".seller-rating"
+  #     sales: ".seller-sales"      # 판매 건수 (선택)
+  #     reviews: ".review-count"    # 리뷰 개수 (선택)
+  #
+  # --- JSON API 예시 ---
+  # - name: example-api
+  #   type: json
+  #   search_url: "https://example.com/api/search?q={query}"
+  #   currency: USD
+  #   items_path: "data.items"
+  #   fields: {id: id, title: name, link: url, price: price, seller: seller.name, rating: seller.rating, reviews: seller.reviews, sales: seller.sold}
