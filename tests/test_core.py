@@ -127,3 +127,10 @@ def test_feed_source_parse_and_filter(monkeypatch):
     import pytest
     with pytest.raises(RuntimeError):
         expand_env("https://x.test/${NOPE_FEED}")
+
+
+def test_more_currencies_and_unknown_denomination():
+    from app.normalize import parse
+    assert parse("Netflix Gift Card 20000 COP CO").key == "netflix|giftcard|COP20000"
+    assert parse("Netflix 70,00 R$ (BRL - Brazil) Gift Card").face == ("BRL", 70.0)
+    assert parse("Netflix Gift Card").key is None            # denomination unknown -> not comparable

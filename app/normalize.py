@@ -47,7 +47,9 @@ _DUR = [
 ]
 _LIFETIME = re.compile(r"평생|영구|lifetime|permanent", re.I)
 
-CURRENCIES = "USD|EUR|GBP|TRY|PLN|BRL|SAR|AED|JPY|KRW|CAD|AUD|CHF|SEK|NOK|DKK|MXN|INR"
+CURRENCIES = ("USD|EUR|GBP|TRY|PLN|BRL|SAR|AED|JPY|KRW|CAD|AUD|CHF|SEK|NOK|DKK|MXN|INR|COP|CLP|ARS|PEN|ZAR|PHP|IDR|"
+              "THB|VND|NZD|RUB|UAH|CZK|HUF|RON|ILS|EGP|NGN|HKD|SGD|TWD|MYR")
+_GIFTCARD = re.compile(r"gift ?card|top-?up|기프트|상품권|충전", re.I)
 _SYMBOLS = {"$": "USD", "€": "EUR", "£": "GBP", "₩": "KRW", "¥": "JPY", "₺": "TRY", "zł": "PLN"}
 _AMT = r"(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:[.,]\d{1,2})?)"
 _FACE = [
@@ -65,6 +67,7 @@ def _amount(txt: str) -> float:
 
 def parse_face_value(t: str):
     """Gift-card denomination as (CURRENCY, amount), e.g. 'Netflix TRY 150 Gift Card' -> ('TRY', 150)."""
+    t = t.replace("R$", "BRL ")
     for i, rx in enumerate(_FACE):
         m = rx.search(t)
         if not m:
@@ -83,11 +86,14 @@ class Product:
     months: Optional[float]
     lifetime: bool
     face: Optional[tuple] = None   # (currency, amount) for gift cards / top-ups
+    giftcard: bool = False
 
     @property
     def key(self) -> Optional[str]:
         if not self.brand:
             return None
+        if self.giftcard and not self.face and not self.months and not self.lifetime:
+            return None  # denomination unknown: cards of different value must not be compared on price
         if self.face and not self.months and not self.lifetime:
             # denominations are different products: a 15 USD card and a 100 USD card are not comparable
             return f"{self.brand}|giftcard|{self.face[0]}{self.face[1]:g}"
@@ -117,7 +123,7 @@ def parse(title: str) -> Product:
             break
     lifetime = bool(_LIFETIME.search(t))
     face = None if (months or lifetime) else parse_face_value(title)
-    return Product(_first(t, BRANDS), _first(t, TIERS), _first(t, KINDS), months, lifetime, face)
+    return Product(_first(t, BRANDS), _first(t, TIERS), _first(t, KINDS), months, lifetime, face, bool(_GIFTCARD.search(t)))
 
 
 def unit_price(price_krw: float, p: Product) -> float:
