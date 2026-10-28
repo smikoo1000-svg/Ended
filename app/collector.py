@@ -8,6 +8,7 @@ import yaml
 
 from . import normalize
 from .sources.demo import DemoSource
+from .sources.feed import FeedSource
 from .sources.generic import GenericSource
 
 log = logging.getLogger("collector")
@@ -27,7 +28,8 @@ def load_config(path="sources.yaml") -> dict:
 def build_sources(cfg: dict):
     out = []
     for s in cfg.get("sources", []):
-        out.append(DemoSource(s) if s.get("type") == "demo" else GenericSource(s))
+        kind = s.get("type")
+        out.append(DemoSource(s) if kind == "demo" else FeedSource(s) if kind == "feed" else GenericSource(s))
     return out
 
 

@@ -4,6 +4,14 @@
 #  [보류]    odealo                                  -> robots.txt 가 /*/search/*, /market/offers/ 를 막음
 #  [차단]    g2g (Akamai Access Denied), z2u (Cloudflare 챌린지), playerauctions, playerup, igv,
 #            u7buy, gameboost (403), nashflare (503) -> 봇 차단. 우회하지 않음. 공식 API/제휴 문의 필요
+#
+#  정식 접근 경로 조사 결과 (우회 없이):
+#   g2a            Awin 제휴 프로그램 -> 상품 피드. https://www.awin.com/us/news-and-events/program-news/new-affiliate-program-g2a
+#   kinguin        Awin/CJ 등 제휴 + XML 피드·API (이미 공개 검색 API 로 연결됨. 판매자 평점은 제휴 피드/API 문의)
+#   playerauctions FlexOffers/affi.io 에 제휴 + 상품 피드 표기 (출처마다 상태 상이, 직접 확인 필요)
+#   z2u            자체 제휴 페이지 https://www.z2u.com/affiliate (API 는 미공개, support@z2u.com 문의)
+#   eldorado       자체 제휴 https://affiliates.eldorado.gg
+#   g2g, playerup, igv, u7buy, gameboost, nashflare -> 공개된 제휴/API 정보 못 찾음. 각 사이트 푸터의 Affiliate/Partner 링크나 고객센터 문의
 #  [미확인]  playertradehub (연결 오류), g2a (타임아웃)
 # 점검: python -m tools.probe_sites            (robots.txt, 차단 여부, 서버 렌더링 여부 확인)
 # 통과한 사이트만 sources.yaml 에 셀렉터를 채워 넣습니다.

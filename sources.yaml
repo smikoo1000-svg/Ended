@@ -53,6 +53,17 @@ sources:
     require: [active, visible]
     fields: {id: id, title: name, link: "https://www.kinguin.net/category/{externalId}/{attributes.urlKey}", price: price.calculated, seller: seller.name}
 
+  # --- 제휴(Affiliate) 상품 피드: 봇 차단 사이트를 정식으로 쓰는 방법 ---
+  # 1) 제휴 프로그램 가입 (G2A·Kinguin: Awin, PlayerAuctions: FlexOffers 등, Z2U: https://www.z2u.com/affiliate)
+  # 2) 피드 URL 을 환경변수에 넣기 (키가 들어있음):  export G2A_FEED_URL='https://...'
+  # 3) 아래 주석을 풀고 columns 를 피드의 헤더 이름에 맞추기 (Awin CSV 는 보통 아래와 같음)
+  # - name: g2a-feed
+  #   type: feed
+  #   url: "${G2A_FEED_URL}"
+  #   ttl: 3600                # 피드 다운로드 최소 간격(초)
+  #   currency: EUR
+  #   columns: {id: aw_product_id, title: product_name, link: aw_deep_link, price: search_price, currency: currency, category: category_name, stock: in_stock}
+
   # --- 실제 사이트 추가 예시 (HTML) ---
   # 사이트의 robots.txt / 이용약관을 확인하고, 공식 API·제휴 피드가 있으면 그쪽을 우선 사용하세요.
   # - name: example-market

@@ -108,3 +108,22 @@ def test_bogus_price_is_dropped(tmp_path):
     ok = collector.upsert(con, "s", Offer("1", "Netflix TRY 150 Gift Card", "https://x.test", 12.74, "EUR"), rates, collector.now())
     bad = collector.upsert(con, "s", Offer("2", "Netflix TRY 400 Gift Card", "https://x.test", 10499, "EUR"), rates, collector.now())
     assert ok[0] and bad[0] is None
+
+
+def test_feed_source_parse_and_filter(monkeypatch):
+    import gzip
+    from app.sources.feed import FeedSource, expand_env
+    csv_text = ("aw_product_id,product_name,aw_deep_link,search_price,currency,in_stock\n"
+                "1,Netflix Premium 1 Month,https://ex.test/1,9.99,EUR,1\n"
+                "2,Netflix Basic 1 Month,https://ex.test/2,4.50,EUR,0\n"
+                "3,Spotify Premium 12 Months,https://ex.test/3,\"39,90\",EUR,1\n")
+    src = FeedSource({"name": "f", "url": "x", "columns": {"id": "aw_product_id", "title": "product_name", "link": "aw_deep_link",
+                                                            "price": "search_price", "currency": "currency", "stock": "in_stock"}})
+    offers = src.parse(gzip.compress(csv_text.encode()))
+    assert [o.ext_id for o in offers] == ["1", "3"]            # out-of-stock row dropped, gzip handled
+    assert offers[0].price == 9.99 and offers[0].currency == "EUR"
+    assert offers[1].price == 39.9                              # decimal comma, not 3990
+    monkeypatch.delenv("NOPE_FEED", raising=False)
+    import pytest
+    with pytest.raises(RuntimeError):
+        expand_env("https://x.test/${NOPE_FEED}")

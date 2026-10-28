@@ -14,7 +14,10 @@ from .base import Offer, Source
 def _num(text):
     if text is None:
         return None
-    m = re.sub(r"[^\d.]", "", str(text).replace(",", ""))
+    s = re.sub(r"[^\d.,]", "", str(text))
+    if re.fullmatch(r"\d+,\d{1,2}", s):       # European decimal comma: "39,90" -> 39.90 ("9,900" stays 9900)
+        s = s.replace(",", ".")
+    m = re.sub(r"[^\d.]", "", s.replace(",", ""))
     try:
         return float(m) if m else None
     except ValueError:
